@@ -29,12 +29,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.tf_path = new System.Windows.Forms.TextBox();
+            this.btn_explorateur = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // tf_path
+            // 
+            this.tf_path.AllowDrop = true;
+            this.tf_path.Location = new System.Drawing.Point(44, 56);
+            this.tf_path.Name = "tf_path";
+            this.tf_path.Size = new System.Drawing.Size(513, 22);
+            this.tf_path.TabIndex = 0;
+            this.tf_path.DragDrop += new System.Windows.Forms.DragEventHandler(this.tf_path_DragDrop);
+            this.tf_path.DragEnter += new System.Windows.Forms.DragEventHandler(this.tf_path_DragEnter);
+            // 
+            // btn_explorateur
+            // 
+            this.btn_explorateur.Location = new System.Drawing.Point(564, 54);
+            this.btn_explorateur.Name = "btn_explorateur";
+            this.btn_explorateur.Size = new System.Drawing.Size(118, 23);
+            this.btn_explorateur.TabIndex = 1;
+            this.btn_explorateur.Text = "Explorateur";
+            this.btn_explorateur.UseVisualStyleBackColor = true;
+            this.btn_explorateur.Click += new System.EventHandler(this.btn_explorateur_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_explorateur);
+            this.Controls.Add(this.tf_path);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox tf_path;
+        private System.Windows.Forms.Button btn_explorateur;
     }
 }
