@@ -1,6 +1,6 @@
 ﻿namespace ProjetTags
 {
-    partial class Form1
+    partial class form_add
     {
         /// <summary>
         /// Required designer variable.
@@ -53,15 +53,15 @@
             this.btn_explorateur.UseVisualStyleBackColor = true;
             this.btn_explorateur.Click += new System.EventHandler(this.btn_explorateur_Click);
             // 
-            // Form1
+            // form_add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(789, 446);
             this.Controls.Add(this.btn_explorateur);
             this.Controls.Add(this.tf_path);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "form_add";
+            this.Text = "E-Tagger";
             this.ResumeLayout(false);
             this.PerformLayout();
 

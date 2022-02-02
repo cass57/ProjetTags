@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace ProjetTags
 {
-    public partial class Form1 : Form
+    public partial class form_add : Form
     {
-        public Form1()
+        public form_add()
         {
             InitializeComponent();
         }
@@ -35,13 +35,15 @@ namespace ProjetTags
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
+                //Filtre 
                 openFileDialog.Filter = "JPEG(*.jpg)|*.jpg|PDF Files(*.pdf)|*.pdf|Cassandra(*.jpg,pdf)|*.jpg;*.pdf";
+                //On commence sur le filtre double par défaut
                 openFileDialog.FilterIndex = 3;
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    //Get the path of specified file
+                    
                     tf_path.Text = openFileDialog.FileName;
                 }
             }
