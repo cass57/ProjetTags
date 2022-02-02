@@ -16,7 +16,7 @@ namespace ProjetTags
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new form_add());
+            Application.Run(new Form_main());
         }
     }
 }
