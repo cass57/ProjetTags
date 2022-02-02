@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProjetTags
 {
-    public partial class form_add : Form
+    public partial class FormAdd : Form
     {
-        public form_add()
+        public FormAdd()
         {
             InitializeComponent();
         }
@@ -36,7 +27,7 @@ namespace ProjetTags
             {
                 openFileDialog.InitialDirectory = "c:\\";
                 //Filtre 
-                openFileDialog.Filter = "JPEG(*.jpg)|*.jpg|PDF Files(*.pdf)|*.pdf|Cassandra(*.jpg,pdf)|*.jpg;*.pdf";
+                openFileDialog.Filter = @"JPEG(*.jpg)|*.jpg|PDF Files(*.pdf)|*.pdf|Cassandra(*.jpg,pdf)|*.jpg;*.pdf";
                 //On commence sur le filtre double par défaut
                 openFileDialog.FilterIndex = 3;
                 openFileDialog.RestoreDirectory = true;

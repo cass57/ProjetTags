@@ -1,6 +1,6 @@
 ﻿namespace ProjetTags
 {
-    partial class form_add
+    partial class FormAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@
             this.ClientSize = new System.Drawing.Size(789, 446);
             this.Controls.Add(this.btn_explorateur);
             this.Controls.Add(this.tf_path);
-            this.Name = "form_add";
+            this.Name = "FormAdd";
             this.Text = "E-Tagger";
             this.ResumeLayout(false);
             this.PerformLayout();

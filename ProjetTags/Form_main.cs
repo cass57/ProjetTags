@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace ProjetTags
 {
-    public partial class Form_main : Form
+    public partial class FormMain : Form
     {
-        public Form_main()
+        public FormMain()
         {
             InitializeComponent();
         }

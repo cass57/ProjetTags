@@ -1,6 +1,6 @@
 ﻿namespace ProjetTags
 {
-    partial class Form_main
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -260,7 +260,7 @@
             this.Controls.Add(this.panel_recherche);
             this.Controls.Add(this.panel_logoNom);
             this.Controls.Add(this.panel_arbo);
-            this.Name = "Form_main";
+            this.Name = "FormMain";
             this.Text = "E-Tagger";
             this.panel_arbo.ResumeLayout(false);
             this.panel_logoNom.ResumeLayout(false);
