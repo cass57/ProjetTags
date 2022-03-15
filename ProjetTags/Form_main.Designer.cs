@@ -1,4 +1,8 @@
-﻿namespace ProjetTags
+﻿using System;
+
+using MySql.Data.MySqlClient;
+
+namespace ProjetTags
 {
     partial class FormMain
     {
