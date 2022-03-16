@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace ProjetTags
@@ -11,6 +11,8 @@ namespace ProjetTags
         [STAThread]
         static void Main(string[] args)
         {
+            BDD.InitConnection();
+            /*BDD.InsertTag("1","essai", "rouge");*/
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
@@ -18,4 +20,4 @@ namespace ProjetTags
             
         }
     }
-}*/
+}

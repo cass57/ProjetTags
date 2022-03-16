@@ -22,7 +22,6 @@ namespace ProjetTags
             {
                 _commande.Connection = _connection;
                 _commande.Connection.Open();
-                Console.Write("Connection établie.");
             }
             catch (NullReferenceException e)
             {
@@ -31,41 +30,18 @@ namespace ProjetTags
             }
         }
 
-        public static void InsertTag()
+        /*public static void InsertTag(String argidt, String argnom, String argclr)
         {
-            _commandeLine = @"INSERT INTO tag
-                            (nom, clr)
-                            VALUES
-                            (@nom, @clr);";
+            _commandeLine = @"INSERT INTO tag (idt, nom, clr) VALUES (@argidt, @argnom, @argclr);";
 
             _commande.CommandText = _commandeLine;
-
-            _commande.Parameters.AddWithValue(@nom, inputNom);
-            _commande.Parameters.AddWithValue(@clr, inputClr);
+            
+            _commande.Parameters.AddWithValue(@argidt, 1);
+            _commande.Parameters.AddWithValue(@argnom, argnom);
+            _commande.Parameters.AddWithValue(@argclr, argclr);
 
             _commande.ExecuteNonQuery();
-        }
+        }*/
 
-        public static void Main(string[] args)
-        {
-            Console.Write("ici");
-            InitConnection();
-
-            try
-            {
-                Console.Write("MySQL version : " + _commande.Connection.ServerVersion);
-            }
-            finally
-            {
-                _commande.Connection.Close();
-                Console.Write("Connection terminée");
-            }
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
-        }
-        
-        
     }
 }
