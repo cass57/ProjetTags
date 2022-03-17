@@ -8,7 +8,6 @@ namespace ProjetTags
     {
         private static MySqlConnection _connection;
         private static MySqlCommand _commande;
-        private static string _commandeLine;
 
         public static void InitConnection()
         {
@@ -29,19 +28,6 @@ namespace ProjetTags
                 throw e;
             }
         }
-
-        /*public static void InsertTag(String argidt, String argnom, String argclr)
-        {
-            _commandeLine = @"INSERT INTO tag (idt, nom, clr) VALUES (@argidt, @argnom, @argclr);";
-
-            _commande.CommandText = _commandeLine;
-            
-            _commande.Parameters.AddWithValue(@argidt, 1);
-            _commande.Parameters.AddWithValue(@argnom, argnom);
-            _commande.Parameters.AddWithValue(@argclr, argclr);
-
-            _commande.ExecuteNonQuery();
-        }*/
 
     }
 }
