@@ -129,7 +129,7 @@ namespace ProjetTags
                 MySqlCommand cmd = new MySqlCommand();
 
                 String commandLine =
-                    @"UPDATE Tag SET nom = @nom, clr = @clr, idt_pere = @idt_pere WHERE idt_tag = @idt_tag;";
+                    @"UPDATE tag SET nom = @nom, clr = @clr, idt_pere = @idt_pere WHERE idt_tag = @idt_tag;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;

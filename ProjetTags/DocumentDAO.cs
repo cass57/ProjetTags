@@ -13,7 +13,26 @@ namespace ProjetTags
             try
             {
                 MySqlConnection co = BDD.get_Connection();
-                // Script select ?
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataReader reader;
+
+                String commandLine = @"SELECT * FROM document WHERE idt_doc = @idt_doc;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+                
+                cmd.Parameters.AddWithValue("@idt_doc", idt);
+
+                reader = cmd.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    int idt_doc = Int32.Parse(reader.GetString(0));
+                    String doc_path = reader.GetString(1);
+
+                    // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
+                    doc = new Document(idt_doc, doc_path);
+                }
             }
             catch (SqlException e)
             {
@@ -29,7 +48,18 @@ namespace ProjetTags
             try
             {
                 MySqlConnection co = BDD.get_Connection();
-                // Script insert ?
+                MySqlCommand cmd = new MySqlCommand();
+                
+                String commandLine = @"INSERT INTO document (doc_path) VALUES (@doc_path);";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+                
+                cmd.Parameters.AddWithValue("@doc_path", obj.getDoc_path());
+
+                // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_doc ?
+
+                cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
@@ -45,7 +75,18 @@ namespace ProjetTags
             try
             {
                 MySqlConnection co = BDD.get_Connection();
-                // Script update ?
+                MySqlCommand cmd = new MySqlCommand();
+
+                String commandLine =
+                    @"UPDATE document SET doc_path = @doc_path WHERE idt_doc = @idt_doc;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+
+                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
+                cmd.Parameters.AddWithValue("@doc_path", obj.getDoc_path());
+
+                cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
@@ -61,7 +102,16 @@ namespace ProjetTags
             try
             {
                 MySqlConnection co = BDD.get_Connection();
-                // Script delete ?
+                MySqlCommand cmd = new MySqlCommand();
+
+                String commandLine = @"DELETE FROM document WHERE idt_doc = @idt_doc;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+
+                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
+
+                cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
