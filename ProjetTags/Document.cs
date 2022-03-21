@@ -1,15 +1,15 @@
-﻿using System;
-
-namespace ProjetTags
+﻿namespace ProjetTags
 {
     public class Document
     {
+        private string doc_path;
         private int idt_doc;
-        private String doc_path;
-        
-        public Document() {}
 
-        public Document(int idt_doc, String doc_path)
+        public Document()
+        {
+        }
+
+        public Document(int idt_doc, string doc_path)
         {
             this.idt_doc = idt_doc;
             this.doc_path = doc_path;
@@ -17,27 +17,27 @@ namespace ProjetTags
 
         public int getIdt_doc()
         {
-            return this.idt_doc;
+            return idt_doc;
         }
 
         public void setIdt_doc(int i)
         {
-            this.idt_doc = i;
+            idt_doc = i;
         }
 
-        public String getDoc_path()
+        public string getDoc_path()
         {
-            return this.doc_path;
+            return doc_path;
         }
 
-        public void setDoc_path(String p)
+        public void setDoc_path(string p)
         {
-            this.doc_path = p;
+            doc_path = p;
         }
 
-        public String toString()
+        public string toString()
         {
-            return this.doc_path;
+            return doc_path;
         }
     }
 }

@@ -12,18 +12,15 @@ namespace ProjetTags
 
         private void tf_path_DragDrop(object sender, DragEventArgs e)
         {
-            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            string filePath = "";
-            for (int i = 0; i < fileList.Length; i++)
-            {
-                filePath += fileList[i];
-            }
+            var fileList = (string[]) e.Data.GetData(DataFormats.FileDrop, false);
+            var filePath = "";
+            for (var i = 0; i < fileList.Length; i++) filePath += fileList[i];
             tf_path.Text = filePath;
         }
 
         private void btn_explorateur_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            using (var openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
                 //Filtre 
@@ -32,24 +29,16 @@ namespace ProjetTags
                 openFileDialog.FilterIndex = 3;
                 openFileDialog.RestoreDirectory = true;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    
-                    tf_path.Text = openFileDialog.FileName;
-                }
+                if (openFileDialog.ShowDialog() == DialogResult.OK) tf_path.Text = openFileDialog.FileName;
             }
         }
 
         private void tf_path_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
                 e.Effect = DragDropEffects.Copy;
-            }
             else
-            {
                 e.Effect = DragDropEffects.None;
-            }
         }
     }
 }

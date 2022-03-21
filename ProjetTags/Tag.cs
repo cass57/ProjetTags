@@ -1,24 +1,24 @@
-﻿using System;
-
-namespace ProjetTags
+﻿namespace ProjetTags
 {
     public class Tag
     {
-        private int idt_tag;
-        private String nom;
-        private String clr;
+        private string clr;
         private int idt_pere;
+        private int idt_tag;
+        private string nom;
 
-        public Tag() {}
+        public Tag()
+        {
+        }
 
-        public Tag(int idt_tag, String nom, String clr)
+        public Tag(int idt_tag, string nom, string clr)
         {
             this.idt_tag = idt_tag;
             this.nom = nom;
             this.clr = clr;
         }
-        
-        public Tag(int idt_tag, String nom, String clr, int idt_pere)
+
+        public Tag(int idt_tag, string nom, string clr, int idt_pere)
         {
             this.idt_tag = idt_tag;
             this.nom = nom;
@@ -28,47 +28,47 @@ namespace ProjetTags
 
         public int getIdt_tag()
         {
-            return this.idt_tag;
+            return idt_tag;
         }
 
         public void setIdt_tag(int i)
         {
-            this.idt_tag = i;
+            idt_tag = i;
         }
 
-        public String getNom()
+        public string getNom()
         {
-            return this.nom;
+            return nom;
         }
 
-        public void setNom(String n)
+        public void setNom(string n)
         {
-            this.nom = n;
+            nom = n;
         }
 
-        public String getClr()
+        public string getClr()
         {
-            return this.clr;
+            return clr;
         }
 
-        public void setClr(String c)
+        public void setClr(string c)
         {
-            this.clr = c;
+            clr = c;
         }
 
         public int getIdt_pere()
         {
-            return this.idt_pere;
+            return idt_pere;
         }
 
         public void setIdt_pere(int p)
         {
-            this.idt_pere = p;
+            idt_pere = p;
         }
 
-        public String toString()
+        public string toString()
         {
-            return this.nom;
+            return nom;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace ProjetTags
@@ -9,11 +8,12 @@ namespace ProjetTags
         private static MySqlConnection _connection;
         private static MySqlCommand _commande;
 
-        public static void InitConnection()
+        private static void InitConnection()
         {
-            String connextionString = "SERVER=localhost; DATABASE=etagger; UID=root; PASSWORD=;";
 
-            _connection = new MySqlConnection(connextionString);
+            String connectionString = "SERVER=localhost; DATABASE=etagger; UID=root; PASSWORD=;";
+
+            _connection = new MySqlConnection(connectionString);
 
             _commande = new MySqlCommand();
 
@@ -27,7 +27,17 @@ namespace ProjetTags
                 Console.Write("Erreur : {0}", e.ToString());
                 throw e;
             }
+
         }
 
+        public static MySqlConnection get_Connection()
+        {
+            if (_connection == null)
+            {
+                InitConnection();
+            }
+
+            return _connection;
+        }
     }
 }

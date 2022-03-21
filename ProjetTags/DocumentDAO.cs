@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace ProjetTags
 {
     public class DocumentDAO : DAO<Document>
     {
-        public override Document select(int idt)
+        public override Document findByIdt(int idt)
         {
-            Document doc = new Document();
-            
+            var doc = new Document();
+
             try
             {
-                BDD.InitConnection();
+                MySqlConnection co = BDD.get_Connection();
                 // Script select ?
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e);
-                Console.WriteLine(System.Environment.StackTrace);
+                Console.WriteLine(Environment.StackTrace);
             }
 
             return doc;
@@ -27,13 +28,13 @@ namespace ProjetTags
         {
             try
             {
-                BDD.InitConnection();
+                MySqlConnection co = BDD.get_Connection();
                 // Script insert ?
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e);
-                Console.WriteLine(System.Environment.StackTrace);
+                Console.WriteLine(Environment.StackTrace);
             }
 
             return obj;
@@ -43,13 +44,13 @@ namespace ProjetTags
         {
             try
             {
-                BDD.InitConnection();
+                MySqlConnection co = BDD.get_Connection();
                 // Script update ?
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e);
-                Console.WriteLine(System.Environment.StackTrace);
+                Console.WriteLine(Environment.StackTrace);
             }
 
             return obj;
@@ -59,13 +60,13 @@ namespace ProjetTags
         {
             try
             {
-                BDD.InitConnection();
+                MySqlConnection co = BDD.get_Connection();
                 // Script delete ?
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e);
-                Console.WriteLine(System.Environment.StackTrace);
+                Console.WriteLine(Environment.StackTrace);
             }
         }
     }
