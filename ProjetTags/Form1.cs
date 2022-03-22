@@ -5,9 +5,11 @@ namespace ProjetTags
 {
     public partial class FormAdd : Form
     {
+        private DocumentDAO dao;
         public FormAdd()
         {
             InitializeComponent();
+            dao = new DocumentDAO();
         }
 
         private void tf_path_DragDrop(object sender, DragEventArgs e)
@@ -39,6 +41,14 @@ namespace ProjetTags
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.None;
+        }
+
+        private void btn_valider_Click(object sender, EventArgs e)
+        {
+            String path = tf_path.Text;
+            Document doc = new Document(path);
+            dao.insert(doc);
+            Hide();
         }
     }
 }

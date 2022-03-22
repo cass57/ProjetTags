@@ -39,6 +39,8 @@ namespace ProjetTags
                     // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
                     tag = new Tag(idt_tag, nom, clr, idt_pere);
                 }
+                
+                reader.Close();
             }
             catch (SqlException e)
             {

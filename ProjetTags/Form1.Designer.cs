@@ -40,41 +40,57 @@ namespace ProjetTags
         {
             this.tf_path = new System.Windows.Forms.TextBox();
             this.btn_explorateur = new System.Windows.Forms.Button();
+            this.btn_valider = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tf_path
             // 
             this.tf_path.AllowDrop = true;
-            this.tf_path.Location = new System.Drawing.Point(44, 56);
+            this.tf_path.Location = new System.Drawing.Point(33, 46);
+            this.tf_path.Margin = new System.Windows.Forms.Padding(2);
             this.tf_path.Name = "tf_path";
-            this.tf_path.Size = new System.Drawing.Size(513, 22);
+            this.tf_path.Size = new System.Drawing.Size(386, 20);
             this.tf_path.TabIndex = 0;
             this.tf_path.DragDrop += new System.Windows.Forms.DragEventHandler(this.tf_path_DragDrop);
             this.tf_path.DragEnter += new System.Windows.Forms.DragEventHandler(this.tf_path_DragEnter);
             // 
             // btn_explorateur
             // 
-            this.btn_explorateur.Location = new System.Drawing.Point(564, 54);
+            this.btn_explorateur.Location = new System.Drawing.Point(423, 44);
+            this.btn_explorateur.Margin = new System.Windows.Forms.Padding(2);
             this.btn_explorateur.Name = "btn_explorateur";
-            this.btn_explorateur.Size = new System.Drawing.Size(118, 23);
+            this.btn_explorateur.Size = new System.Drawing.Size(88, 19);
             this.btn_explorateur.TabIndex = 1;
             this.btn_explorateur.Text = "Explorateur";
             this.btn_explorateur.UseVisualStyleBackColor = true;
             this.btn_explorateur.Click += new System.EventHandler(this.btn_explorateur_Click);
             // 
-            // form_add
+            // btn_valider
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.btn_valider.Location = new System.Drawing.Point(478, 313);
+            this.btn_valider.Name = "btn_valider";
+            this.btn_valider.Size = new System.Drawing.Size(96, 25);
+            this.btn_valider.TabIndex = 2;
+            this.btn_valider.Text = "Valider";
+            this.btn_valider.UseVisualStyleBackColor = true;
+            this.btn_valider.Click += new System.EventHandler(this.btn_valider_Click);
+            // 
+            // FormAdd
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 446);
+            this.ClientSize = new System.Drawing.Size(592, 362);
+            this.Controls.Add(this.btn_valider);
             this.Controls.Add(this.btn_explorateur);
             this.Controls.Add(this.tf_path);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormAdd";
             this.Text = "E-Tagger";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.Button btn_valider;
 
         #endregion
 

@@ -1,4 +1,6 @@
-﻿namespace ProjetTags
+﻿using System;
+
+namespace ProjetTags
 {
     public class Document
     {
@@ -12,6 +14,11 @@
         public Document(int idt_doc, string doc_path)
         {
             this.idt_doc = idt_doc;
+            this.doc_path = doc_path;
+        }
+        
+        public Document(string doc_path)
+        {
             this.doc_path = doc_path;
         }
 
@@ -35,9 +42,10 @@
             doc_path = p;
         }
 
-        public string toString()
+        public override string ToString()
         {
-            return doc_path;
+            String[] nom = doc_path.Split('\\');
+            return nom[nom.Length-1];
         }
     }
 }

@@ -1,11 +1,50 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 
 namespace ProjetTags
 {
     public class DocumentDAO : DAO<Document>
     {
+        public List<Document> allDoc()
+        {
+            List<Document> docs = new List<Document>();
+            try
+            {
+                MySqlConnection co = BDD.get_Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataReader reader;
+                
+                String commandLine = @"SELECT * FROM document;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+                
+                reader = cmd.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    int idt_doc = Int32.Parse(reader.GetString(0));
+                    String doc_path = reader.GetString(1);
+
+                    Document newDoc = new Document(idt_doc, doc_path);
+
+                    docs.Add(newDoc);
+                }
+                
+                reader.Close();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine(Environment.StackTrace);
+            }
+
+            return docs;
+        }
         public override Document findByIdt(int idt)
         {
             var doc = new Document();
@@ -33,6 +72,8 @@ namespace ProjetTags
                     // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
                     doc = new Document(idt_doc, doc_path);
                 }
+                
+                reader.Close();
             }
             catch (SqlException e)
             {

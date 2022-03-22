@@ -12,12 +12,12 @@ namespace ProjetTags
         [STAThread]
         private static void Main(string[] args)
         {
-            MySqlConnection co = BDD.get_Connection();
+           
             Tag tag = new Tag(4, "NouveauAuto", "ffffff", 1);
             TagDAO dao = new TagDAO();
             //dao.insertSansPere(tag);
             /*BDD.InsertTag("1","essai", "rouge");*/
-            dao.insert(tag);
+            ///**/dao.insert(tag);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
