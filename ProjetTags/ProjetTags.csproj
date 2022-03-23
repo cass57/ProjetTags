@@ -119,6 +119,7 @@
             <DependentUpon>Form_main.cs</DependentUpon>
         </Compile>
         <Compile Include="Lien.cs" />
+        <Compile Include="LienDAO.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="TagDAO.cs" />

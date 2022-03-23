@@ -50,9 +50,11 @@ namespace ProjetTags
             this.panel_resultatRecherche = new System.Windows.Forms.Panel();
             this.listBox_doc = new System.Windows.Forms.ListBox();
             this.panel_apercu = new System.Windows.Forms.Panel();
+            this.WebBrowser_affichageDoc = new System.Windows.Forms.WebBrowser();
             this.panel_tags = new System.Windows.Forms.Panel();
             this.listBox_tags = new System.Windows.Forms.ListBox();
             this.btn_Deldoc = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel_arbo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox_droite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox_arriere)).BeginInit();
@@ -63,6 +65,7 @@ namespace ProjetTags
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
             this.panel_recherche.SuspendLayout();
             this.panel_resultatRecherche.SuspendLayout();
+            this.panel_apercu.SuspendLayout();
             this.panel_tags.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,7 +196,7 @@ namespace ProjetTags
             this.radioButton_ou.Location = new System.Drawing.Point(346, 24);
             this.radioButton_ou.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton_ou.Name = "radioButton_ou";
-            this.radioButton_ou.Size = new System.Drawing.Size(41, 17);
+            this.radioButton_ou.Size = new System.Drawing.Size(54, 26);
             this.radioButton_ou.TabIndex = 3;
             this.radioButton_ou.TabStop = true;
             this.radioButton_ou.Text = "OU";
@@ -205,7 +208,7 @@ namespace ProjetTags
             this.radioButton_et.Location = new System.Drawing.Point(306, 24);
             this.radioButton_et.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton_et.Name = "radioButton_et";
-            this.radioButton_et.Size = new System.Drawing.Size(39, 17);
+            this.radioButton_et.Size = new System.Drawing.Size(52, 26);
             this.radioButton_et.TabIndex = 2;
             this.radioButton_et.TabStop = true;
             this.radioButton_et.Text = "ET";
@@ -250,11 +253,21 @@ namespace ProjetTags
             // 
             // panel_apercu
             // 
+            this.panel_apercu.Controls.Add(this.WebBrowser_affichageDoc);
             this.panel_apercu.Location = new System.Drawing.Point(622, 15);
             this.panel_apercu.Margin = new System.Windows.Forms.Padding(2);
             this.panel_apercu.Name = "panel_apercu";
             this.panel_apercu.Size = new System.Drawing.Size(175, 224);
             this.panel_apercu.TabIndex = 9;
+            // 
+            // WebBrowser_affichageDoc
+            // 
+            this.WebBrowser_affichageDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WebBrowser_affichageDoc.Location = new System.Drawing.Point(0, 0);
+            this.WebBrowser_affichageDoc.MinimumSize = new System.Drawing.Size(20, 20);
+            this.WebBrowser_affichageDoc.Name = "WebBrowser_affichageDoc";
+            this.WebBrowser_affichageDoc.Size = new System.Drawing.Size(175, 224);
+            this.WebBrowser_affichageDoc.TabIndex = 0;
             // 
             // panel_tags
             // 
@@ -285,11 +298,22 @@ namespace ProjetTags
             this.btn_Deldoc.UseVisualStyleBackColor = true;
             this.btn_Deldoc.Click += new System.EventHandler(this.btn_Deldoc_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(718, 250);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(78, 22);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Ouvrir";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 440);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(807, 437);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_Deldoc);
             this.Controls.Add(this.panel_tags);
             this.Controls.Add(this.panel_apercu);
@@ -297,9 +321,9 @@ namespace ProjetTags
             this.Controls.Add(this.panel_recherche);
             this.Controls.Add(this.panel_logoNom);
             this.Controls.Add(this.panel_arbo);
+            this.Location = new System.Drawing.Point(15, 15);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormMain";
-            this.Text = "E-Tagger";
             this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.panel_arbo.ResumeLayout(false);
@@ -313,9 +337,14 @@ namespace ProjetTags
             this.panel_recherche.ResumeLayout(false);
             this.panel_recherche.PerformLayout();
             this.panel_resultatRecherche.ResumeLayout(false);
+            this.panel_apercu.ResumeLayout(false);
             this.panel_tags.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button button1;
+
+        private System.Windows.Forms.WebBrowser WebBrowser_affichageDoc;
 
         private System.Windows.Forms.Button btn_Deldoc;
 
