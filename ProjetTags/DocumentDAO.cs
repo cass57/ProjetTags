@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 
 namespace ProjetTags
 {

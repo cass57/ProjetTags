@@ -11,6 +11,7 @@ namespace ProjetTags
         private DocumentDAO dao;
         private LienDAO daoLien;
         private TagDAO daoTag;
+
         public FormMain()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace ProjetTags
             {
                 listBox_doc.Items.Add(doc);
             }
-            
+
             //Remplissage tag
             treeView_tags.Nodes.Clear();
             IDictionary<int, List<Tag>> tags = daoTag.allTag();
@@ -46,18 +47,16 @@ namespace ProjetTags
                     {
                         treeView_tags.Nodes.Add(new TagNode(entry.Value[i]));
                     }
-                    
                 }
                 else
                 {
-                    TreeNode[] noeudCourant =  treeView_tags.Nodes.Find(entry.Key.ToString(), true);
+                    TreeNode[] noeudCourant = treeView_tags.Nodes.Find(entry.Key.ToString(), true);
                     for (int i = 0; i < entry.Value.Count; i++)
                     {
                         noeudCourant[0].Nodes.Add(new TagNode(entry.Value[i]));
                     }
                 }
             }
-            
         }
 
         private void pictureBox_DelDoc_Click(object sender, EventArgs e)
@@ -65,7 +64,6 @@ namespace ProjetTags
             Document doc = (Document) listBox_doc.SelectedItem;
             dao.delete(doc);
             listBox_doc.Items.Remove(doc);
-
         }
 
         private void listBox_doc_SelectedIndexChanged(object sender, EventArgs e)
@@ -108,6 +106,31 @@ namespace ProjetTags
             Document doc = (Document) listBox_doc.SelectedItem;
             System.Diagnostics.Process.Start(doc.getDoc_path());
             WebBrowser_affichageDoc.Navigate("");
+        }
+
+        private void textBox_recherche_TextChanged(object sender, EventArgs e)
+        {
+            //TODO : Sortir les méthodes chargementTreeView,chargementListBox
+            FormMain_Load(sender, e);
+            ListBox box = new ListBox();
+            string filter = textBox_recherche.Text.ToString();
+            var itemList = listBox_doc.Items;
+            if (itemList.Count > 0)
+            {
+                foreach (var nom in itemList)
+                {
+                    if (nom.ToString().ToLower().Contains(filter.ToLower()))
+                    {
+                        box.Items.Add(nom);
+                    }
+                }
+
+                listBox_doc.Items.Clear();
+                foreach (var doc in box.Items)
+                {
+                    listBox_doc.Items.Add(doc);
+                }
+            }
         }
     }
 }

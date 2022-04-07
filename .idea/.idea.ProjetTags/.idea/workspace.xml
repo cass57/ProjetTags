@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a2d6986-0910-4b65-b932-28645e17225c" name="Changes" comment="affichage tag du doc">
-      <change afterPath="$PROJECT_DIR$/ProjetTags/TagNode.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetTags/packages.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetTags/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetTags/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetTags/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetTags/Form_main.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/Form_main.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetTags/Form_main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/Form_main.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetTags/ProjetTags.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/ProjetTags.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetTags/TagDAO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/TagDAO.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,16 +27,16 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/ProjetTags/Form1.Designer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/13dbc81533d84edc819ac50a274c07355a42f8/15/9646de5d/TextBoxBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.Designer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetTags/Document.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetTags/DAO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetTags/TagDAO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetTags/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/25794883d61c4360940bf3559a67fdad15c600/41/3321f3ab/MySqlCommand.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/Form1.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/TagDAO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/Document.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/DAO.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -43,12 +45,15 @@
     <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectId" id="26hAsOtdbbIzk39FQWSkvTJFuq8" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -91,6 +96,7 @@
       <workItem from="1648038729639" duration="10622000" />
       <workItem from="1648049721756" duration="558000" />
       <workItem from="1649330959836" duration="4328000" />
+      <workItem from="1649337956457" duration="4458000" />
     </task>
     <task id="LOCAL-00001" summary="Requête dans TagDAO">
       <created>1647873293313</created>
@@ -174,6 +180,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Requête dans TagDAO" />
     <MESSAGE value="Requête dans DocumentDAO" />
@@ -190,27 +197,13 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetTags/LienDAO.cs</url>
           <line>45</line>
-          <properties documentPath="C:\Users\v1911\RiderProjects\ProjetTags\ProjetTags\LienDAO.cs" initialLine="45" containingFunctionPresentation="method 'allTagDoc'">
-            <startOffsets>
-              <option value="1556" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1571" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\v1911\RiderProjects\ProjetTags\ProjetTags\LienDAO.cs" initialLine="45" containingFunctionPresentation="method 'allTagDoc'" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetTags/LienDAO.cs</url>
           <line>42</line>
-          <properties documentPath="C:\Users\v1911\RiderProjects\ProjetTags\ProjetTags\LienDAO.cs" initialLine="42" containingFunctionPresentation="method 'allTagDoc'">
-            <startOffsets>
-              <option value="1487" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1504" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\v1911\RiderProjects\ProjetTags\ProjetTags\LienDAO.cs" initialLine="42" containingFunctionPresentation="method 'allTagDoc'" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
