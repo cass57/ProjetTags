@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
+
 
 namespace ProjetTags
 {
@@ -144,13 +144,19 @@ namespace ProjetTags
             {
                 MySqlConnection co = BDD.get_Connection();
                 MySqlCommand cmd = new MySqlCommand();
+                
+                String commandLine1 = @"DELETE FROM liaison WHERE idt_doc = @idt_doc;";
+                
+                cmd.Connection = co;
+                cmd.CommandText = commandLine1;
+
+                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
+                cmd.ExecuteNonQuery();
 
                 String commandLine = @"DELETE FROM document WHERE idt_doc = @idt_doc;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
-
-                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
 
                 cmd.ExecuteNonQuery();
             }

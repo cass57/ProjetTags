@@ -4,11 +4,9 @@
     <projectFile>ProjetTags/ProjetTags.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a2d6986-0910-4b65-b932-28645e17225c" name="Changes" comment="affichage tag du doc">
-      <change afterPath="$PROJECT_DIR$/ProjetTags/TagNode.cs" afterDir="false" />
+    <list default="true" id="7a2d6986-0910-4b65-b932-28645e17225c" name="Changes" comment="récupération tree view">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetTags/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetTags/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetTags/Form_main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/Form_main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetTags/ProjetTags.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/ProjetTags.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetTags/TagDAO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/TagDAO.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +26,7 @@
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form1.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Document.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/v1911/RiderProjects/ProjetTags/ProjetTags/Form_main.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/DAO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -54,6 +53,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -90,7 +90,7 @@
       <workItem from="1648038329840" duration="333000" />
       <workItem from="1648038729639" duration="10622000" />
       <workItem from="1648049721756" duration="558000" />
-      <workItem from="1649330959836" duration="4328000" />
+      <workItem from="1649330959836" duration="5788000" />
     </task>
     <task id="LOCAL-00001" summary="Requête dans TagDAO">
       <created>1647873293313</created>
@@ -141,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649334120197</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="récupération tree view">
+      <created>1649337830691</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1649337830691</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +189,8 @@
     <MESSAGE value="commit manquant" />
     <MESSAGE value="commit merge" />
     <MESSAGE value="affichage tag du doc" />
-    <option name="LAST_COMMIT_MESSAGE" value="affichage tag du doc" />
+    <MESSAGE value="récupération tree view" />
+    <option name="LAST_COMMIT_MESSAGE" value="récupération tree view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
