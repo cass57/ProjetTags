@@ -219,12 +219,18 @@ namespace ProjetTags
                 MySqlConnection co = BDD.get_Connection();
                 MySqlCommand cmd = new MySqlCommand();
 
+                String commandLine1 = @"DELETE FROM liaison WHERE idt_tag = @idt_tag;";
+                
+                cmd.Connection = co;
+                cmd.CommandText = commandLine1;
+
+                cmd.Parameters.AddWithValue("@idt_tag", obj.getIdt_tag());
+                cmd.ExecuteNonQuery();
+                
                 String commandLine = @"DELETE FROM tag WHERE idt_tag = @idt_tag;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
-
-                cmd.Parameters.AddWithValue("@idt_tag", obj.getIdt_tag());
 
                 cmd.ExecuteNonQuery();
             }

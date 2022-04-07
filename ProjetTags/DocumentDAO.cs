@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
+
 namespace ProjetTags
 {
     public class DocumentDAO : DAO<Document>
