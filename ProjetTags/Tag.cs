@@ -65,8 +65,8 @@
         {
             idt_pere = p;
         }
-
-        public string toString()
+        
+        public override string ToString()
         {
             return nom;
         }

@@ -13,6 +13,7 @@ namespace ProjetTags
         {
             InitializeComponent();
             dao = new DocumentDAO();
+            daoLien = new LienDAO();
         }
 
         private void btn_ajoutFichier_Click(object sender, EventArgs e)
@@ -46,18 +47,18 @@ namespace ProjetTags
             if (listBox_doc.SelectedItem != null)
             {
                 btn_Deldoc.Enabled = true;
-                button1.Enabled = true;
+                btn_OuvrirDoc.Enabled = true;
                 Document doc = (Document) listBox_doc.SelectedItem;
-                //WebBrowser_affichageDoc.Navigate(doc.getDoc_path());
-                
+                WebBrowser_affichageDoc.Navigate(doc.getDoc_path());
+
                 // TODO : debug affichage des tags d'un doc??
-                /*listBox_tags.Items.Clear();
-                var tags = daoLien.allTagDoc(doc);
+                listBox_tags.Items.Clear();
+                List<Tag> tags = daoLien.allTagDoc(doc);
 
                 foreach (var tag in tags)
                 {
                     listBox_tags.Items.Add(tag);
-                }*/
+                }
             }
         }
 
@@ -67,8 +68,8 @@ namespace ProjetTags
             dao.delete(doc);
             listBox_doc.Items.Remove(doc);
             btn_Deldoc.Enabled = false;
-            button1.Enabled = false;
-            //WebBrowser_affichageDoc.Navigate("");
+            btn_OuvrirDoc.Enabled = false;
+            WebBrowser_affichageDoc.Navigate("");
         }
 
         private void FormMain_Activated(object sender, EventArgs e)
@@ -80,7 +81,7 @@ namespace ProjetTags
         {
             Document doc = (Document) listBox_doc.SelectedItem;
             System.Diagnostics.Process.Start(doc.getDoc_path());
-            //WebBrowser_affichageDoc.Navigate("");
+            WebBrowser_affichageDoc.Navigate("");
         }
     }
 }

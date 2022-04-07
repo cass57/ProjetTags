@@ -6,6 +6,7 @@ namespace ProjetTags
 {
     public class TagDAO : DAO<Tag>
     {
+        
         /// <summary>
         /// Infos d'un tag par son identifiant
         /// </summary>
