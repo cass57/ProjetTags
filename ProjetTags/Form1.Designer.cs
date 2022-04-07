@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 namespace ProjetTags
 {
 
-    partial class FormAdd
+    partial class FormAddDoc
     {
         /// <summary>
         /// Required designer variable.
@@ -84,7 +84,7 @@ namespace ProjetTags
             this.Controls.Add(this.btn_explorateur);
             this.Controls.Add(this.tf_path);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "FormAdd";
+            this.Name = "FormAddDoc";
             this.Text = "E-Tagger";
             this.ResumeLayout(false);
             this.PerformLayout();

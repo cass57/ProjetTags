@@ -123,6 +123,7 @@ namespace ProjetTags
             this.pictureBox_addTag.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_addTag.TabIndex = 0;
             this.pictureBox_addTag.TabStop = false;
+            this.pictureBox_addTag.Click += new System.EventHandler(this.pictureBox_addTag_Click);
             // 
             // pictureBox_gauche
             // 

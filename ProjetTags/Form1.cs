@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace ProjetTags
 {
-    public partial class FormAdd : Form
+    public partial class FormAddDoc : Form
     {
         private DocumentDAO dao;
-        public FormAdd()
+        public FormAddDoc()
         {
             InitializeComponent();
             dao = new DocumentDAO();

@@ -21,7 +21,7 @@ namespace ProjetTags
 
         private void btn_ajoutFichier_Click(object sender, EventArgs e)
         {
-            FormAdd doc = new FormAdd();
+            FormAddDoc doc = new FormAddDoc();
             doc.Show();
         }
 
@@ -34,6 +34,7 @@ namespace ProjetTags
             {
                 listBox_doc.Items.Add(doc);
             }
+            
             
             //Remplissage tag
             treeView_tags.Nodes.Clear();
@@ -108,6 +109,12 @@ namespace ProjetTags
             Document doc = (Document) listBox_doc.SelectedItem;
             System.Diagnostics.Process.Start(doc.getDoc_path());
             WebBrowser_affichageDoc.Navigate("");
+        }
+
+        private void pictureBox_addTag_Click(object sender, EventArgs e)
+        {
+            FormAddTag tag = new FormAddTag();
+            tag.Show();
         }
     }
 }
