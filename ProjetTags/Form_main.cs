@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ProjetTags
@@ -9,11 +10,13 @@ namespace ProjetTags
     {
         private DocumentDAO dao;
         private LienDAO daoLien;
+        private TagDAO daoTag;
         public FormMain()
         {
             InitializeComponent();
             dao = new DocumentDAO();
             daoLien = new LienDAO();
+            daoTag = new TagDAO();
         }
 
         private void btn_ajoutFichier_Click(object sender, EventArgs e)
@@ -30,6 +33,29 @@ namespace ProjetTags
             foreach (var doc in docs)
             {
                 listBox_doc.Items.Add(doc);
+            }
+            
+            //Remplissage tag
+            treeView_tags.Nodes.Clear();
+            IDictionary<int, List<Tag>> tags = daoTag.allTag();
+            foreach (KeyValuePair<int, List<Tag>> entry in tags.OrderBy(key => key.Key))
+            {
+                if (entry.Key == 0)
+                {
+                    for (int i = 0; i < entry.Value.Count; i++)
+                    {
+                        treeView_tags.Nodes.Add(new TagNode(entry.Value[i]));
+                    }
+                    
+                }
+                else
+                {
+                    TreeNode[] noeudCourant =  treeView_tags.Nodes.Find(entry.Key.ToString(), true);
+                    for (int i = 0; i < entry.Value.Count; i++)
+                    {
+                        noeudCourant[0].Nodes.Add(new TagNode(entry.Value[i]));
+                    }
+                }
             }
             
         }

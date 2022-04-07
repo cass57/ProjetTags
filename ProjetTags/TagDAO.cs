@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
@@ -6,6 +7,59 @@ namespace ProjetTags
 {
     public class TagDAO : DAO<Tag>
     {
+        public IDictionary<int,List<Tag>> allTag()
+        {
+            IDictionary<int, List<Tag>> tags = new Dictionary<int, List<Tag>>();
+            try
+            {
+                MySqlConnection co = BDD.get_Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataReader reader;
+                
+                String commandLine = @"SELECT * FROM tag;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+                
+                reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    int idt_tag = Int32.Parse(reader.GetString(0));
+                    String nom = reader.GetString(1);
+                    String clr = reader.GetString(2);
+                    int idt_pere = 0;
+                    if (!reader.IsDBNull(3))
+                    {
+                        idt_pere = Int32.Parse(reader.GetString(3));
+                    }
+                    Tag newTag = new Tag(idt_tag, nom, clr,idt_pere);
+
+                    if (tags.ContainsKey(idt_pere))
+                    {
+                        List<Tag> Enfants = new List<Tag>();
+                        Enfants = tags[idt_pere];
+                        Enfants.Add(newTag);
+                        tags[idt_pere] = Enfants;
+                    }
+                    else
+                    {
+                        List<Tag> noms = new List<Tag>();
+                        noms.Add(newTag);
+                        tags.Add(idt_pere,noms);
+                    }
+                }
+                
+                reader.Close();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine(Environment.StackTrace);
+            }
+
+            return tags;
+        }
+        
         
         /// <summary>
         /// Infos d'un tag par son identifiant
