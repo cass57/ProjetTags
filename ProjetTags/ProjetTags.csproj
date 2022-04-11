@@ -55,12 +55,12 @@
         </Reference>
         <Reference Include="mscorlib" />
         <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
-          <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
-          <Private>True</Private>
+            <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+            <Private>True</Private>
         </Reference>
         <Reference Include="MySQLConnection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\MySQLConnection.1.0.1\lib\MySQLConnection.dll</HintPath>
-          <Private>True</Private>
+            <HintPath>..\packages\MySQLConnection.1.0.1\lib\MySQLConnection.dll</HintPath>
+            <Private>True</Private>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
@@ -117,10 +117,10 @@
             <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
         <Compile Include="FormAddTag.cs">
-          <SubType>Form</SubType>
+            <SubType>Form</SubType>
         </Compile>
         <Compile Include="FormAddTag.Designer.cs">
-          <DependentUpon>FormAddTag.cs</DependentUpon>
+            <DependentUpon>FormAddTag.cs</DependentUpon>
         </Compile>
         <Compile Include="Form_main.cs">
             <SubType>Form</SubType>
@@ -139,7 +139,7 @@
             <DependentUpon>Form1.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="FormAddTag.resx">
-          <DependentUpon>FormAddTag.cs</DependentUpon>
+            <DependentUpon>FormAddTag.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Form_main.resx">
             <DependentUpon>Form_main.cs</DependentUpon>

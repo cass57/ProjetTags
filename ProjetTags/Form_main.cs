@@ -77,8 +77,7 @@ namespace ProjetTags
                 btn_OuvrirDoc.Enabled = true;
                 Document doc = (Document) listBox_doc.SelectedItem;
                 WebBrowser_affichageDoc.Navigate(doc.getDoc_path());
-
-                // TODO : debug affichage des tags d'un doc??
+                
                 listBox_tags.Items.Clear();
                 List<Tag> tags = daoLien.allTagDoc(doc);
 
@@ -139,6 +138,31 @@ namespace ProjetTags
                 {
                     listBox_doc.Items.Add(doc);
                 }
+            }
+        }
+
+        private void pictureBox_DelTag_Click(object sender, EventArgs e)
+        {
+            string message = "Veuillez saisir le nom du tag";
+            string caption = "Impossible de continuer";
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result;
+
+            TagNode node = (TagNode) treeView_tags.SelectedNode;
+            
+            if (node == null)
+            {
+                message = "Veuillez sélectionner un tag à supprimer";
+                caption = "Impossible de continuer";
+                buttons = MessageBoxButtons.OK;
+
+                result = MessageBox.Show(message, caption, buttons);
+            }
+            else
+            {
+                // TODO : supprimer aussi les fils  
+                // daoTag.delete(node.getTag());
+                FormMain_Load(sender, e);
             }
         }
     }

@@ -2,7 +2,6 @@
 {
     public abstract class DAO<T>
     {
-
         /// <summary>Permet de retourver un objet par son identifiant</summary>
         /// <param name="idt">identifiant de l'objet</param>
         /// <returns>l'objet</returns>
