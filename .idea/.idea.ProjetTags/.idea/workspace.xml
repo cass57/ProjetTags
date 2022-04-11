@@ -4,6 +4,7 @@
     <projectFile>ProjetTags/ProjetTags.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="7a2d6986-0910-4b65-b932-28645e17225c" name="Changes" comment="affichage tag du doc">
       <change afterPath="$PROJECT_DIR$/ProjetTags/packages.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetTags/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetTags/.idea/workspace.xml" afterDir="false" />
@@ -13,6 +14,9 @@
       <change beforePath="$PROJECT_DIR$/ProjetTags/Form_main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/Form_main.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetTags/ProjetTags.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetTags/ProjetTags.csproj" afterDir="false" />
     </list>
+=======
+    <list default="true" id="7a2d6986-0910-4b65-b932-28645e17225c" name="Changes" comment="" />
+>>>>>>> 5b6a9f9 (fichier manquant)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,10 +33,17 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/13dbc81533d84edc819ac50a274c07355a42f8/15/9646de5d/TextBoxBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.Designer.cs" root0="FORCE_HIGHLIGHTING" />
+<<<<<<< HEAD
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form1.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.cs" root0="FORCE_HIGHLIGHTING" />
+=======
+    <setting file="file://$PROJECT_DIR$/ProjetTags/Document.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/DAO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/Form_main.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" root0="FORCE_HIGHLIGHTING" />
+>>>>>>> 5b6a9f9 (fichier manquant)
     <setting file="file://$PROJECT_DIR$/ProjetTags/TagDAO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/DocumentDAO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetTags/Document.cs" root0="FORCE_HIGHLIGHTING" />
@@ -42,7 +53,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="SWEA" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="26hAsOtdbbIzk39FQWSkvTJFuq8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
