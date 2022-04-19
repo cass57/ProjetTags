@@ -122,6 +122,12 @@
         <Compile Include="FormAddTag.Designer.cs">
             <DependentUpon>FormAddTag.cs</DependentUpon>
         </Compile>
+        <Compile Include="FormUpdateTag.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="FormUpdateTag.Designer.cs">
+          <DependentUpon>FormUpdateTag.cs</DependentUpon>
+        </Compile>
         <Compile Include="Form_main.cs">
             <SubType>Form</SubType>
         </Compile>
@@ -140,6 +146,9 @@
         </EmbeddedResource>
         <EmbeddedResource Include="FormAddTag.resx">
             <DependentUpon>FormAddTag.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="FormUpdateTag.resx">
+          <DependentUpon>FormUpdateTag.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Form_main.resx">
             <DependentUpon>Form_main.cs</DependentUpon>

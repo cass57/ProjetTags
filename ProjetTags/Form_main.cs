@@ -165,5 +165,12 @@ namespace ProjetTags
                 FormMain_Load(sender, e);
             }
         }
+
+        private void treeView_tags_DoubleClick(object sender, EventArgs e)
+        {
+            TagNode tagAModif = (TagNode) treeView_tags.SelectedNode;
+            FormUpdateTag tag = new FormUpdateTag(tagAModif);
+            tag.Show();
+        }
     }
 }

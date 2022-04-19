@@ -235,6 +235,7 @@ namespace ProjetTags
                 cmd.Parameters.AddWithValue("@clr", obj.getClr());
                 cmd.Parameters.AddWithValue("@nom", obj.getNom());
                 // TODO : ça marche pas quand idt_pere est nul car getIdt_pere renvoie 0 ???
+                // TODO : Pour l'instant j'ai créé une méthode pour update quand ya pas de père -> pas ouf
                 cmd.Parameters.AddWithValue("@idt_pere", obj.getIdt_pere());
 
                 cmd.ExecuteNonQuery();
@@ -248,6 +249,35 @@ namespace ProjetTags
             return obj;
         }
 
+        public Tag updateSansPere(Tag obj)
+        {
+            try
+            {
+                MySqlConnection co = BDD.get_Connection();
+                MySqlCommand cmd = new MySqlCommand();
+
+                String commandLine =
+                    @"UPDATE tag SET nom = @nom, clr = @clr WHERE idt_tag = @idt_tag;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+
+                cmd.Parameters.AddWithValue("@idt_tag", obj.getIdt_tag());
+                cmd.Parameters.AddWithValue("@clr", obj.getClr());
+                cmd.Parameters.AddWithValue("@nom", obj.getNom());
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine(Environment.StackTrace);
+            }
+
+            return obj;
+        }
+
+        
         /// <summary>
         /// Delete le tag
         /// </summary>
