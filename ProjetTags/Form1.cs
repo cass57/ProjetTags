@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace ProjetTags
 {
     public partial class FormAddDoc : Form
     {
-        private DocumentDAO dao;
+        private DocumentDAO docDao;
+        private TagDAO tagDao;
+        private LienDAO lienDao;
+
         public FormAddDoc()
         {
             InitializeComponent();
-            dao = new DocumentDAO();
+            docDao = new DocumentDAO();
+            tagDao = new TagDAO();
+            lienDao = new LienDAO();
         }
 
         private void tf_path_DragDrop(object sender, DragEventArgs e)
@@ -47,8 +54,29 @@ namespace ProjetTags
         {
             String path = tf_path.Text;
             Document doc = new Document(path);
-            dao.insert(doc);
+            docDao.insert(doc);
+            foreach (var itemChecked in Clist_tags.CheckedItems)
+            {
+                var tag = (Tag) itemChecked;
+                Tag currentTag = new Tag(tag.getIdt_tag(), tag.getNom(), tag.getClr(), tag.getIdt_pere());
+                Lien lien = new Lien(currentTag.getIdt_tag(), docDao.lastIdt_doc());
+                lienDao.insert(lien);
+            }
+
             Hide();
+        }
+
+        private void btn_addTag_Click(object sender, EventArgs e)
+        {
+            FormAddTag tag = new FormAddTag();
+            tag.Show();
+        }
+
+        private void FormAddDoc_Activated(object sender, EventArgs e)
+        {
+            List<Tag> tags = tagDao.allListTag();
+            Clist_tags.ValueMember = null;
+            Clist_tags.DataSource = tags;
         }
     }
 }

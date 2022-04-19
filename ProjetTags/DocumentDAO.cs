@@ -45,6 +45,38 @@ namespace ProjetTags
 
             return docs;
         }
+        
+        public int lastIdt_doc()
+        {
+            int idtDoc = 0;
+            try
+            {
+                MySqlConnection co = BDD.get_Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataReader reader;
+                
+                String commandLine = @"SELECT MAX(idt_doc) FROM document;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+                
+                reader = cmd.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    idtDoc = Int32.Parse(reader.GetString(0));
+                }
+                
+                reader.Close();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine(Environment.StackTrace);
+            }
+
+            return idtDoc;
+        }
         public override Document findByIdt(int idt)
         {
             var doc = new Document();
