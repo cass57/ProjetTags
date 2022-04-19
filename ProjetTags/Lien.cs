@@ -2,37 +2,23 @@
 {
     public class Lien
     {
-        private int idt_doc;
-        private int idt_tag;
+        private int _idtDoc;
+        private int _idtTag;
 
-        public Lien()
+        public Lien() {}
+
+        public Lien(int idtTag, int idtDoc)
         {
+            _idtTag = idtTag;
+            _idtDoc = idtDoc;
         }
 
-        public Lien(int idt_tag, int idt_doc)
-        {
-            this.idt_tag = idt_tag;
-            this.idt_doc = idt_doc;
-        }
+        public int getIdt_tag() => _idtTag;
 
-        public int getIdt_tag()
-        {
-            return idt_tag;
-        }
+        public void setIdt_tag(int i) => _idtTag = i;
 
-        public void setIdt_tag(int i)
-        {
-            idt_tag = i;
-        }
+        public int getIdt_doc() => _idtDoc;
 
-        public int getIdt_doc()
-        {
-            return idt_doc;
-        }
-
-        public void setIdt_doc(int i)
-        {
-            idt_doc = i;
-        }
+        public void setIdt_doc(int i) => _idtDoc = i;
     }
 }

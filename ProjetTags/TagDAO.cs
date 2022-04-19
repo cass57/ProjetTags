@@ -60,6 +60,46 @@ namespace ProjetTags
             return tags;
         }
         
+        public List<Tag> allListTag()
+        {
+            List<Tag> tags = new List<Tag>();
+            try
+            {
+                MySqlConnection co = BDD.get_Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataReader reader;
+                
+                String commandLine = @"SELECT * FROM tag;";
+
+                cmd.Connection = co;
+                cmd.CommandText = commandLine;
+                
+                reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    int idt_tag = Int32.Parse(reader.GetString(0));
+                    String nom = reader.GetString(1);
+                    String clr = reader.GetString(2);
+                    int idt_pere = 0;
+                    if (!reader.IsDBNull(3))
+                    {
+                        idt_pere = Int32.Parse(reader.GetString(3));
+                    }
+                    Tag newTag = new Tag(idt_tag, nom, clr,idt_pere);
+                    tags.Add(newTag);
+                }
+                
+                reader.Close();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine(Environment.StackTrace);
+            }
+
+            return tags;
+        }
+        
         
         /// <summary>
         /// Infos d'un tag par son identifiant
