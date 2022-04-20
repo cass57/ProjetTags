@@ -11,7 +11,7 @@ namespace ProjetTags
         {
             InitializeComponent();
             daoTag = new TagDAO();
-            this.tag = tagAModif.getTag();
+            tag = tagAModif.getTag();
         }
         
 

@@ -77,7 +77,7 @@ namespace ProjetTags
                 btn_Deldoc.Enabled = true;
                 btn_OuvrirDoc.Enabled = true;
                 Document doc = (Document) listBox_doc.SelectedItem;
-                WebBrowser_affichageDoc.Navigate(doc.getDoc_path());
+                webBrowser_affichageDoc.Navigate(doc.getDoc_path());
                 
                 listBox_tags.Items.Clear();
                 List<Tag> tags = daoLien.allTagDoc(doc);
@@ -96,7 +96,7 @@ namespace ProjetTags
             listBox_doc.Items.Remove(doc);
             btn_Deldoc.Enabled = false;
             btn_OuvrirDoc.Enabled = false;
-            WebBrowser_affichageDoc.Navigate("");
+            webBrowser_affichageDoc.Navigate("");
         }
 
         private void FormMain_Activated(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace ProjetTags
         {
             Document doc = (Document) listBox_doc.SelectedItem;
             System.Diagnostics.Process.Start(doc.getDoc_path());
-            WebBrowser_affichageDoc.Navigate("");
+            webBrowser_affichageDoc.Navigate("");
         }
 
         private void pictureBox_addTag_Click(object sender, EventArgs e)
