@@ -90,6 +90,7 @@ namespace ProjetTags
             this.treeView_tags.Name = "treeView_tags";
             this.treeView_tags.Size = new System.Drawing.Size(209, 387);
             this.treeView_tags.TabIndex = 5;
+            this.treeView_tags.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_tags_AfterSelect);
             this.treeView_tags.DoubleClick += new System.EventHandler(this.treeView_tags_DoubleClick);
             // 
             // pictureBox_droite

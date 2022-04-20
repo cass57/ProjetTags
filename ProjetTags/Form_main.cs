@@ -17,6 +17,7 @@ namespace ProjetTags
             dao = new DocumentDAO();
             daoLien = new LienDAO();
             daoTag = new TagDAO();
+            treeView_tags.TabStop = false;
         }
 
         private void btn_ajoutFichier_Click(object sender, EventArgs e)
@@ -27,6 +28,7 @@ namespace ProjetTags
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            
             listBox_doc.Items.Clear();
             List<Document> docs = dao.allDoc();
 
@@ -66,7 +68,6 @@ namespace ProjetTags
             Document doc = (Document) listBox_doc.SelectedItem;
             dao.delete(doc);
             listBox_doc.Items.Remove(doc);
-
         }
 
         private void listBox_doc_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,18 +122,28 @@ namespace ProjetTags
             //TODO : Sortir les méthodes chargementTreeView,chargementListBox
             FormMain_Load(sender, e);
             ListBox box = new ListBox();
-            string filter = textBox_recherche.Text.ToString();
+            List<Tag> tags = new List<Tag>();
+            string filter = textBox_recherche.Text;
             var itemList = listBox_doc.Items;
             if (itemList.Count > 0)
             {
                 foreach (var nom in itemList)
                 {
+                    Document doc = (Document) nom;
+                    tags = daoLien.allTagDoc(doc);
                     if (nom.ToString().ToLower().Contains(filter.ToLower()))
                     {
                         box.Items.Add(nom);
                     }
+                    //TODO : filtrer sur les fils aussi + fix le problème lorsque l'on réduit la fenêtre
+                    foreach (var tag in tags)
+                    {
+                        if (tag.getNom() == filter)
+                        {
+                            box.Items.Add(nom);
+                        }
+                    }
                 }
-
                 listBox_doc.Items.Clear();
                 foreach (var doc in box.Items)
                 {
@@ -171,6 +182,12 @@ namespace ProjetTags
             TagNode tagAModif = (TagNode) treeView_tags.SelectedNode;
             FormUpdateTag tag = new FormUpdateTag(tagAModif);
             tag.Show();
+        }
+
+        private void treeView_tags_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            string filter = treeView_tags.SelectedNode.Text;
+            textBox_recherche.Text = filter;
         }
     }
 }
