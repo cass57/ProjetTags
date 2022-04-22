@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -47,7 +48,23 @@ namespace ProjetTags
                 {
                     for (int i = 0; i < entry.Value.Count; i++)
                     {
-                        treeView_tags.Nodes.Add(new TagNode(entry.Value[i]));
+                        TagNode tagNode = new TagNode(entry.Value[i]);
+                        treeView_tags.Nodes.Add(tagNode);
+                        ContextMenuStrip tagMenu = new ContextMenuStrip();
+                        ToolStripMenuItem modifLabel = new ToolStripMenuItem();
+                        modifLabel.Text = "Modifier";
+                        modifLabel.Click += modifTag;
+                        ToolStripMenuItem suppLabel = new ToolStripMenuItem();
+                        suppLabel.Text = "Supprimer";
+                        suppLabel.Click += supprimerTag;
+                        ToolStripMenuItem deplLabel = new ToolStripMenuItem();
+                        deplLabel.Text = "Tout déployer";
+                        deplLabel.Click += toutDeployer;
+                        ToolStripMenuItem addLabel = new ToolStripMenuItem();
+                        addLabel.Text = "Ajouter un nouveau tag";
+                        addLabel.Click += nouveauTag;
+                        tagMenu.Items.AddRange(new ToolStripItem[]{modifLabel, suppLabel, deplLabel, addLabel});
+                        tagNode.ContextMenuStrip = tagMenu;
                     }
                     
                 }
@@ -56,7 +73,23 @@ namespace ProjetTags
                     TreeNode[] noeudCourant =  treeView_tags.Nodes.Find(entry.Key.ToString(), true);
                     for (int i = 0; i < entry.Value.Count; i++)
                     {
-                        noeudCourant[0].Nodes.Add(new TagNode(entry.Value[i]));
+                        TagNode tagNode = new TagNode(entry.Value[i]);
+                        noeudCourant[0].Nodes.Add(tagNode);
+                        ContextMenuStrip tagMenu = new ContextMenuStrip();
+                        ToolStripMenuItem modifLabel = new ToolStripMenuItem();
+                        modifLabel.Text = "Modifier";
+                        modifLabel.Click += modifTag;
+                        ToolStripMenuItem suppLabel = new ToolStripMenuItem();
+                        suppLabel.Text = "Supprimer";
+                        suppLabel.Click += supprimerTag;
+                        ToolStripMenuItem deplLabel = new ToolStripMenuItem();
+                        deplLabel.Text = "Tout déployer";
+                        deplLabel.Click += toutDeployer;
+                        ToolStripMenuItem addLabel = new ToolStripMenuItem();
+                        addLabel.Text = "Ajouter un nouveau tag";
+                        addLabel.Click += nouveauTag;
+                        tagMenu.Items.AddRange(new ToolStripItem[]{modifLabel, suppLabel, deplLabel, addLabel});
+                        tagNode.ContextMenuStrip = tagMenu;
                     }
                 }
             }
@@ -109,12 +142,6 @@ namespace ProjetTags
             Document doc = (Document) listBox_doc.SelectedItem;
             System.Diagnostics.Process.Start(doc.getDoc_path());
             webBrowser_affichageDoc.Navigate("");
-        }
-
-        private void pictureBox_addTag_Click(object sender, EventArgs e)
-        {
-            FormAddTag tag = new FormAddTag();
-            tag.Show();
         }
 
         private void textBox_recherche_TextChanged(object sender, EventArgs e)
@@ -177,17 +204,39 @@ namespace ProjetTags
             }
         }
 
-        private void treeView_tags_DoubleClick(object sender, EventArgs e)
+        private void modifTag(Object sender, System.EventArgs e)
         {
             TagNode tagAModif = (TagNode) treeView_tags.SelectedNode;
             FormUpdateTag tag = new FormUpdateTag(tagAModif);
             tag.Show();
         }
 
-        private void treeView_tags_AfterSelect(object sender, TreeViewEventArgs e)
+        private void selectTag(object sender, EventArgs e)
         {
             string filter = treeView_tags.SelectedNode.Text;
             textBox_recherche.Text = filter;
+        }
+
+        private void supprimerTag(Object sender, EventArgs e)
+        {
+            TagNode node = (TagNode) treeView_tags.SelectedNode;
+            daoTag.delete(node.getTag());
+        }
+
+        private void treeView_tags_DoubleClick(object sender, EventArgs e)
+        { 
+            selectTag(sender, e);
+        }
+
+        private void toutDeployer(object sender, EventArgs e)
+        {
+            treeView_tags.ExpandAll();
+        }
+
+        private void nouveauTag(object sender, EventArgs e)
+        {
+            FormAddTag tag = new FormAddTag();
+            tag.Show();
         }
     }
 }
