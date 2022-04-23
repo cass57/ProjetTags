@@ -35,6 +35,7 @@ namespace ProjetTags
 
             foreach (var doc in docs)
             {
+                
                 listBox_doc.Items.Add(doc);
             }
 
@@ -57,13 +58,7 @@ namespace ProjetTags
                         ToolStripMenuItem suppLabel = new ToolStripMenuItem();
                         suppLabel.Text = "Supprimer";
                         suppLabel.Click += supprimerTag;
-                        ToolStripMenuItem deplLabel = new ToolStripMenuItem();
-                        deplLabel.Text = "Tout déployer";
-                        deplLabel.Click += toutDeployer;
-                        ToolStripMenuItem addLabel = new ToolStripMenuItem();
-                        addLabel.Text = "Ajouter un nouveau tag";
-                        addLabel.Click += nouveauTag;
-                        tagMenu.Items.AddRange(new ToolStripItem[] {modifLabel, suppLabel, deplLabel, addLabel});
+                        tagMenu.Items.AddRange(new ToolStripItem[] {modifLabel, suppLabel});
                         tagNode.ContextMenuStrip = tagMenu;
                     }
                 }
@@ -81,13 +76,7 @@ namespace ProjetTags
                         ToolStripMenuItem suppLabel = new ToolStripMenuItem();
                         suppLabel.Text = "Supprimer";
                         suppLabel.Click += supprimerTag;
-                        ToolStripMenuItem deplLabel = new ToolStripMenuItem();
-                        deplLabel.Text = "Tout déployer";
-                        deplLabel.Click += toutDeployer;
-                        ToolStripMenuItem addLabel = new ToolStripMenuItem();
-                        addLabel.Text = "Ajouter un nouveau tag";
-                        addLabel.Click += nouveauTag;
-                        tagMenu.Items.AddRange(new ToolStripItem[] {modifLabel, suppLabel, deplLabel, addLabel});
+                        tagMenu.Items.AddRange(new ToolStripItem[] {modifLabel, suppLabel});
                         tagNode.ContextMenuStrip = tagMenu;
                     }
                 }
@@ -227,15 +216,24 @@ namespace ProjetTags
             selectTag(sender, e);
         }
 
-        private void toutDeployer(object sender, EventArgs e)
+        private void panel_arbo_Paint(object sender, PaintEventArgs e)
         {
-            treeView_tags.ExpandAll();
+            throw new System.NotImplementedException();
         }
 
-        private void nouveauTag(object sender, EventArgs e)
+        private void listBox_doc_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
             FormAddTag tag = new FormAddTag();
             tag.Show();
         }
+        
     }
 }
