@@ -12,6 +12,7 @@ namespace ProjetTags
         private DocumentDAO dao;
         private LienDAO daoLien;
         private TagDAO daoTag;
+
         public FormMain()
         {
             InitializeComponent();
@@ -29,7 +30,6 @@ namespace ProjetTags
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
             listBox_doc.Items.Clear();
             List<Document> docs = dao.allDoc();
 
@@ -37,8 +37,8 @@ namespace ProjetTags
             {
                 listBox_doc.Items.Add(doc);
             }
-            
-            
+
+
             //Remplissage tag
             treeView_tags.Nodes.Clear();
             IDictionary<int, List<Tag>> tags = daoTag.allTag();
@@ -63,14 +63,13 @@ namespace ProjetTags
                         ToolStripMenuItem addLabel = new ToolStripMenuItem();
                         addLabel.Text = "Ajouter un nouveau tag";
                         addLabel.Click += nouveauTag;
-                        tagMenu.Items.AddRange(new ToolStripItem[]{modifLabel, suppLabel, deplLabel, addLabel});
+                        tagMenu.Items.AddRange(new ToolStripItem[] {modifLabel, suppLabel, deplLabel, addLabel});
                         tagNode.ContextMenuStrip = tagMenu;
                     }
-                    
                 }
                 else
                 {
-                    TreeNode[] noeudCourant =  treeView_tags.Nodes.Find(entry.Key.ToString(), true);
+                    TreeNode[] noeudCourant = treeView_tags.Nodes.Find(entry.Key.ToString(), true);
                     for (int i = 0; i < entry.Value.Count; i++)
                     {
                         TagNode tagNode = new TagNode(entry.Value[i]);
@@ -88,12 +87,11 @@ namespace ProjetTags
                         ToolStripMenuItem addLabel = new ToolStripMenuItem();
                         addLabel.Text = "Ajouter un nouveau tag";
                         addLabel.Click += nouveauTag;
-                        tagMenu.Items.AddRange(new ToolStripItem[]{modifLabel, suppLabel, deplLabel, addLabel});
+                        tagMenu.Items.AddRange(new ToolStripItem[] {modifLabel, suppLabel, deplLabel, addLabel});
                         tagNode.ContextMenuStrip = tagMenu;
                     }
                 }
             }
-            
         }
 
         private void pictureBox_DelDoc_Click(object sender, EventArgs e)
@@ -111,7 +109,7 @@ namespace ProjetTags
                 btn_OuvrirDoc.Enabled = true;
                 Document doc = (Document) listBox_doc.SelectedItem;
                 webBrowser_affichageDoc.Navigate(doc.getDoc_path());
-                
+
                 listBox_tags.Items.Clear();
                 List<Tag> tags = daoLien.allTagDoc(doc);
 
@@ -162,15 +160,11 @@ namespace ProjetTags
                     {
                         box.Items.Add(nom);
                     }
-                    //TODO : filtrer sur les fils aussi + fix le problème lorsque l'on réduit la fenêtre
-                    foreach (var tag in tags)
-                    {
-                        if (tag.getNom() == filter)
-                        {
-                            box.Items.Add(nom);
-                        }
-                    }
+
+                    //TODO : fix le problème lorsque l'on réduit la fenêtre
+                    if (tags.Any(tag => MatchTag(filter, tag))) box.Items.Add(nom);
                 }
+
                 listBox_doc.Items.Clear();
                 foreach (var doc in box.Items)
                 {
@@ -178,6 +172,10 @@ namespace ProjetTags
                 }
             }
         }
+
+        private bool MatchTag(string input, Tag tag) => input == tag.getNom() ||
+                                                        tag.getIdt_pere() != 0 && MatchTag(input,
+                                                            daoTag.findByIdt(tag.getIdt_pere()));
 
         private void pictureBox_DelTag_Click(object sender, EventArgs e)
         {
@@ -187,7 +185,7 @@ namespace ProjetTags
             DialogResult result;
 
             TagNode node = (TagNode) treeView_tags.SelectedNode;
-            
+
             if (node == null)
             {
                 message = "Veuillez sélectionner un tag à supprimer";
@@ -200,6 +198,7 @@ namespace ProjetTags
             {
                 // TODO : supprimer aussi les fils  
                 // daoTag.delete(node.getTag());
+                supprimerTag(sender, e);
                 FormMain_Load(sender, e);
             }
         }
@@ -224,7 +223,7 @@ namespace ProjetTags
         }
 
         private void treeView_tags_DoubleClick(object sender, EventArgs e)
-        { 
+        {
             selectTag(sender, e);
         }
 

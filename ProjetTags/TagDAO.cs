@@ -30,7 +30,7 @@ namespace ProjetTags
                     int idt_pere = 0;
                     if (!reader.IsDBNull(3))
                     {
-                        idt_pere = Int32.Parse(reader.GetString(3));
+                        idt_pere = reader.GetInt32(3);
                     }
                     Tag newTag = new Tag(idt_tag, nom, clr,idt_pere);
 
@@ -83,7 +83,7 @@ namespace ProjetTags
                     int idt_pere = 0;
                     if (!reader.IsDBNull(3))
                     {
-                        idt_pere = Int32.Parse(reader.GetString(3));
+                        idt_pere = reader.GetInt32(3);
                     }
                     Tag newTag = new Tag(idt_tag, nom, clr,idt_pere);
                     tags.Add(newTag);
@@ -129,7 +129,8 @@ namespace ProjetTags
                     int idt_tag = Int32.Parse(reader.GetString(0));
                     String nom = reader.GetString(1);
                     String clr = reader.GetString(2);
-                    int idt_pere = Int32.Parse(reader.GetString(3));
+                    int idt_pere = 0;
+                    if (!reader.IsDBNull(3)) idt_pere = reader.GetInt32(3);
 
                     // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
                     tag = new Tag(idt_tag, nom, clr, idt_pere);

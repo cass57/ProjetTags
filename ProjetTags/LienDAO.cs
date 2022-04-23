@@ -123,10 +123,13 @@ namespace ProjetTags
             {
                 var cmd = new MySqlCommand();
 
-                const string commandLine = @"SELECT tag.idt_tag, tag.nom, tag.clr
+                /*const string commandLine = @"SELECT tag.idt_tag, tag.nom, tag.clr, tag.idt_pere
                                        FROM liaison AS liaison 
                                             INNER JOIN tag AS tag ON liaison.idt_tag = tag.idt_tag
-                                       WHERE liaison.idt_doc = @idt_doc;";
+                                       WHERE liaison.idt_doc = @idt_doc;";*/
+
+                const string commandLine =
+                    @"SELECT tag.idt_tag, tag.nom, tag.clr, tag.idt_pere FROM tag, liaison WHERE liaison.idt_tag = tag.idt_tag AND liaison.idt_doc = @idt_doc";
 
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
@@ -139,8 +142,10 @@ namespace ProjetTags
                     int idtTag = int.Parse(reader.GetString(0));
                     string nom = reader.GetString(1);
                     string clr = reader.GetString(2);
+                    int idt_pere = 0;
+                    if (!reader.IsDBNull(3)) idt_pere = reader.GetInt32(3);
 
-                    var newTag = new Tag(idtTag, nom, clr);
+                    var newTag = new Tag(idtTag, nom, clr, idt_pere);
                     tags.Add(newTag);
                 }
 
