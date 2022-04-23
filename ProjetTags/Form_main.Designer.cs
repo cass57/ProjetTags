@@ -32,6 +32,7 @@ namespace ProjetTags
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel_recherche = new System.Windows.Forms.Panel();
             this.btn_ajoutFichier = new System.Windows.Forms.Button();
@@ -51,6 +52,7 @@ namespace ProjetTags
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.listView_tag = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
             this.panel_recherche.SuspendLayout();
             this.panel_resultatRecherche.SuspendLayout();
@@ -131,7 +133,6 @@ namespace ProjetTags
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(884, 4);
             this.label2.TabIndex = 14;
-            this.label2.Text = "label2";
             // 
             // listBox_doc
             // 
@@ -165,6 +166,7 @@ namespace ProjetTags
             // 
             // btn_OuvrirDoc
             // 
+            this.btn_OuvrirDoc.Enabled = false;
             this.btn_OuvrirDoc.Location = new System.Drawing.Point(540, 941);
             this.btn_OuvrirDoc.Margin = new System.Windows.Forms.Padding(6);
             this.btn_OuvrirDoc.Name = "btn_OuvrirDoc";
@@ -200,10 +202,9 @@ namespace ProjetTags
             // 
             this.listBox_tags.FormattingEnabled = true;
             this.listBox_tags.ItemHeight = 25;
-            this.listBox_tags.Location = new System.Drawing.Point(0, -7);
-            this.listBox_tags.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.listBox_tags.Location = new System.Drawing.Point(1, -3);
             this.listBox_tags.Name = "listBox_tags";
-            this.listBox_tags.Size = new System.Drawing.Size(879, 329);
+            this.listBox_tags.Size = new System.Drawing.Size(878, 329);
             this.listBox_tags.TabIndex = 0;
             // 
             // treeView_tags
@@ -260,6 +261,15 @@ namespace ProjetTags
             this.panel1.Size = new System.Drawing.Size(10, 1000);
             this.panel1.TabIndex = 5;
             // 
+            // listView_tag
+            // 
+            this.listView_tag.Items.AddRange(new System.Windows.Forms.ListViewItem[] {listViewItem1});
+            this.listView_tag.Location = new System.Drawing.Point(-1, -7);
+            this.listView_tag.Name = "listView_tag";
+            this.listView_tag.Size = new System.Drawing.Size(879, 311);
+            this.listView_tag.TabIndex = 0;
+            this.listView_tag.UseCompatibleStateImageBehavior = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -273,7 +283,9 @@ namespace ProjetTags
             this.Controls.Add(this.panel_arbo);
             this.Location = new System.Drawing.Point(15, 15);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(2154, 1195);
             this.Name = "FormMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
@@ -285,6 +297,10 @@ namespace ProjetTags
             this.panel_arbo.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.ListView listView_tag;
+
+        private System.Windows.Forms.ListBox listBox_tags;
 
         private System.Windows.Forms.Label label3;
 
@@ -312,6 +328,5 @@ namespace ProjetTags
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TreeView treeView_tags;
         private System.Windows.Forms.ListBox listBox_doc;
-        private System.Windows.Forms.ListBox listBox_tags;
     }
 }

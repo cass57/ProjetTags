@@ -216,19 +216,6 @@ namespace ProjetTags
             selectTag(sender, e);
         }
 
-        private void panel_arbo_Paint(object sender, PaintEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void listBox_doc_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                
-            }
-        }
-
         private void label3_Click(object sender, EventArgs e)
         {
             FormAddTag tag = new FormAddTag();
