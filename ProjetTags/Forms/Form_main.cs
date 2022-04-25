@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using ProjetTags.DAO;
+using ProjetTags.Model;
 
-namespace ProjetTags
+namespace ProjetTags.Forms
 {
     public partial class FormMain : Form
     {
-        private DocumentDAO dao;
-        private LienDAO daoLien;
-        private TagDAO daoTag;
+        private readonly DocumentDAO _daoDocument;
+        private readonly LienDAO _daoLien;
+        private readonly TagDAO _daoTag;
 
         private ContextMenuStrip _listBoxTagsMenu;
         private Tag _selectedDocTag;
@@ -20,59 +21,54 @@ namespace ProjetTags
         public FormMain()
         {
             InitializeComponent();
-            dao = new DocumentDAO();
-            daoLien = new LienDAO();
-            daoTag = new TagDAO();
+            _daoDocument = new DocumentDAO();
+            _daoLien = new LienDAO();
+            _daoTag = new TagDAO();
             treeView_tags.TabStop = false;
         }
 
-        private void btn_ajoutFichier_Click(object sender, EventArgs e)
-        {
-            FormAddDoc doc = new FormAddDoc();
-            doc.Show();
-        }
+        private void btn_ajoutFichier_Click(object sender, EventArgs e) => new FormAddDoc().Show();
 
         private void FormMain_Load(object sender, EventArgs e)
         {
             listBox_doc.Items.Clear();
-            List<Document> docs = dao.AllDoc();
 
-            foreach (var doc in docs) listBox_doc.Items.Add(doc);
+            foreach (var doc in _daoDocument.AllDoc()) listBox_doc.Items.Add(doc);
 
             //Remplissage tag
             treeView_tags.Nodes.Clear();
-            var tags = daoTag.AllTag();
+            var tags = _daoTag.AllTag();
             foreach (var entry in tags.OrderBy(key => key.Key))
                 if (entry.Key == 0)
+                {
                     foreach (var tag in entry.Value)
                         treeView_tags.Nodes.Add(CreateTagNode(tag));
+                }
                 else
                 {
-                    TreeNode[] noeudCourant = treeView_tags.Nodes.Find(entry.Key.ToString(), true);
+                    var noeudCourant = treeView_tags.Nodes.Find(entry.Key.ToString(), true);
                     foreach (var tag in entry.Value) noeudCourant[0].Nodes.Add(CreateTagNode(tag));
                 }
 
             listBox_tags.ContextMenuStrip = new ContextMenuStrip();
             _listBoxTagsMenu = CreateContextMenu(new List<Tuple<string, EventHandler>>
             {
-                Tuple.Create<string, EventHandler>("Ajouter", ajouterTagADoc),
-                Tuple.Create<string, EventHandler>("Supprimer", supprimerTagDeDoc)
+                Tuple.Create<string, EventHandler>("Ajouter", AjouterTagADoc),
+                Tuple.Create<string, EventHandler>("Supprimer", SupprimerTagDeDoc)
             });
         }
 
-        private TagNode CreateTagNode(Tag tag)
-        {
-            return new TagNode(tag)
+        private TagNode CreateTagNode(Tag tag) =>
+            new TagNode(tag)
             {
                 ContextMenuStrip = CreateContextMenu(new List<Tuple<string, EventHandler>>
                 {
-                    Tuple.Create<string, EventHandler>("Modifier", modifTag),
-                    Tuple.Create<string, EventHandler>("Supprimer", supprimerTag)
+                    Tuple.Create<string, EventHandler>("Modifier", ModifTag),
+                    Tuple.Create<string, EventHandler>("Supprimer", SupprimerTag)
                 })
             };
-        }
 
-        private ContextMenuStrip CreateContextMenu(List<Tuple<string, EventHandler>> items)
+        private static ContextMenuStrip CreateContextMenu(List<Tuple<string, EventHandler>> items)
         {
             var tagMenu = new ContextMenuStrip();
             foreach (var item in items)
@@ -104,8 +100,8 @@ namespace ProjetTags
 
         private void pictureBox_DelDoc_Click(object sender, EventArgs e)
         {
-            Document doc = (Document) listBox_doc.SelectedItem;
-            dao.Delete(doc);
+            var doc = (Document) listBox_doc.SelectedItem;
+            _daoDocument.Delete(doc);
             listBox_doc.Items.Remove(doc);
         }
 
@@ -115,11 +111,11 @@ namespace ProjetTags
             {
                 btn_Deldoc.Enabled = true;
                 btn_OuvrirDoc.Enabled = true;
-                Document doc = (Document) listBox_doc.SelectedItem;
+                var doc = (Document) listBox_doc.SelectedItem;
                 webBrowser_affichageDoc.Navigate(doc.doc_path);
 
                 listBox_tags.Items.Clear();
-                List<Tag> tags = daoLien.allTagDoc(doc);
+                var tags = _daoLien.AllTagDoc(doc);
                 foreach (var tag in tags) listBox_tags.Items.Add(tag);
                 if (listBox_doc.SelectedIndex != -1) _selectedDocIndex = listBox_doc.SelectedIndex;
             }
@@ -127,8 +123,8 @@ namespace ProjetTags
 
         private void btn_Deldoc_Click(object sender, EventArgs e)
         {
-            Document doc = (Document) listBox_doc.SelectedItem;
-            dao.Delete(doc);
+            var doc = (Document) listBox_doc.SelectedItem;
+            _daoDocument.Delete(doc);
             listBox_doc.Items.Remove(doc);
             btn_Deldoc.Enabled = false;
             btn_OuvrirDoc.Enabled = false;
@@ -139,7 +135,7 @@ namespace ProjetTags
 
         private void btn_ouvirDoc_Click(object sender, EventArgs e)
         {
-            Document doc = (Document) listBox_doc.SelectedItem;
+            var doc = (Document) listBox_doc.SelectedItem;
             if (doc != null)
             {
                 Process.Start(doc.doc_path);
@@ -151,89 +147,70 @@ namespace ProjetTags
         {
             //TODO : Sortir les méthodes chargementTreeView,chargementListBox
             FormMain_Load(sender, e);
-            ListBox box = new ListBox();
-            List<Tag> tags = new List<Tag>();
+            var box = new ListBox();
             string filter = textBox_recherche.Text;
-            var itemList = listBox_doc.Items;
-            if (itemList.Count > 0)
+            foreach (var nom in listBox_doc.Items)
             {
-                foreach (var nom in itemList)
-                {
-                    Document doc = (Document) nom;
-                    tags = daoLien.allTagDoc(doc);
-                    if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Items.Add(nom);
+                var tags = _daoLien.AllTagDoc(nom as Document);
+                if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Items.Add(nom);
 
-                    //TODO : fix le problème lorsque l'on réduit la fenêtre
-                    if (tags.Any(tag => MatchTag(filter, tag))) box.Items.Add(nom);
-                }
-
-                listBox_doc.Items.Clear();
-                foreach (var doc in box.Items) listBox_doc.Items.Add(doc);
+                //TODO : fix le problème lorsque l'on réduit la fenêtre
+                if (tags.Any(tag => MatchTag(filter, tag))) box.Items.Add(nom);
             }
+
+            listBox_doc.Items.Clear();
+            foreach (var doc in box.Items) listBox_doc.Items.Add(doc);
         }
 
         private bool MatchTag(string input, Tag tag) => input == tag.nom ||
                                                         tag.idt_pere != 0 && MatchTag(input,
-                                                            daoTag.FindByIdt(tag.idt_pere));
+                                                            _daoTag.FindByIdt(tag.idt_pere));
 
         private void pictureBox_DelTag_Click(object sender, EventArgs e)
         {
-            DialogResult result;
-
-            TagNode node = (TagNode) treeView_tags.SelectedNode;
+            var node = (TagNode) treeView_tags.SelectedNode;
 
             if (node == null)
             {
-                var message = "Veuillez sélectionner un tag à supprimer";
-                var caption = "Impossible de continuer";
-                var buttons = MessageBoxButtons.OK;
+                const string message = "Veuillez sélectionner un tag à supprimer";
+                const string caption = "Impossible de continuer";
+                const MessageBoxButtons buttons = MessageBoxButtons.OK;
 
-                result = MessageBox.Show(message, caption, buttons);
+                MessageBox.Show(message, caption, buttons);
             }
             else
             {
-                supprimerTag(sender, e);
+                SupprimerTag(sender, e);
                 FormMain_Load(sender, e);
             }
         }
 
-        private void modifTag(Object sender, EventArgs e)
-        {
-            TagNode tagAModif = (TagNode) treeView_tags.SelectedNode;
-            FormUpdateTag tag = new FormUpdateTag(tagAModif);
-            tag.Show();
-        }
+        private void ModifTag(object sender, EventArgs e) =>
+            new FormUpdateTag((TagNode) treeView_tags.SelectedNode).Show();
 
-        private void selectTag(object sender, EventArgs e)
-        {
-            string filter = treeView_tags.SelectedNode?.Text;
-            textBox_recherche.Text = filter;
-        }
+        private void SelectTag(object sender, EventArgs e) => textBox_recherche.Text = treeView_tags.SelectedNode?.Text;
 
-        private void supprimerTag(object sender, EventArgs e)
+        private void SupprimerTag(object sender, EventArgs e)
         {
-            TagNode node = (TagNode) treeView_tags.SelectedNode;
-            daoTag.DeleteTagWithChildren(node.GetTag());
+            var node = (TagNode) treeView_tags.SelectedNode;
+            _daoTag.DeleteTagWithChildren(node.GetTag());
             treeView_tags.SelectedNode.Remove();
         }
 
-        private void ajouterTagADoc(object sender, EventArgs e)
+        private void AjouterTagADoc(object sender, EventArgs e)
         {
+            // TODO
         }
 
-        private void supprimerTagDeDoc(object sender, EventArgs e)
+        private void SupprimerTagDeDoc(object sender, EventArgs e)
         {
-            var lien = new Lien(_selectedDocTag.idt_tag, ((Document) listBox_doc.Items[_selectedDocIndex]).idt_doc);
-            daoLien.Delete(lien);
+            _daoLien.Delete(
+                new Lien(_selectedDocTag.idt_tag, ((Document) listBox_doc.Items[_selectedDocIndex]).idt_doc));
             listBox_doc.SetSelected(_selectedDocIndex, true);
         }
 
-        private void treeView_tags_DoubleClick(object sender, EventArgs e) => selectTag(sender, e);
+        private void treeView_tags_DoubleClick(object sender, EventArgs e) => SelectTag(sender, e);
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-            FormAddTag tag = new FormAddTag();
-            tag.Show();
-        }
+        private void label3_Click(object sender, EventArgs e) => new FormAddTag().Show();
     }
 }

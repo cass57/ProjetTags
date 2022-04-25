@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using ProjetTags.Model;
 
-namespace ProjetTags
+namespace ProjetTags.DAO
 {
     public class TagDAO : DAO<Tag>
     {
@@ -12,36 +13,30 @@ namespace ProjetTags
             IDictionary<int, List<Tag>> tags = new Dictionary<int, List<Tag>>();
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"SELECT * FROM tag;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    int idt_tag = int.Parse(reader.GetString(0));
-                    String nom = reader.GetString(1);
-                    String clr = reader.GetString(2);
-                    int idt_pere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
-                    Tag newTag = new Tag(idt_tag, nom, clr, idt_pere);
+                    int idtTag = int.Parse(reader.GetString(0));
+                    string nom = reader.GetString(1);
+                    string clr = reader.GetString(2);
+                    int idtPere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
+                    
+                    var newTag = new Tag(idtTag, nom, clr, idtPere);
 
-                    if (tags.ContainsKey(idt_pere))
+                    if (tags.ContainsKey(idtPere))
                     {
-                        List<Tag> Enfants = new List<Tag>();
-                        Enfants = tags[idt_pere];
-                        Enfants.Add(newTag);
-                        tags[idt_pere] = Enfants;
+                        var enfants = tags[idtPere];
+                        enfants.Add(newTag);
+                        tags[idtPere] = enfants;
                     }
                     else
-                    {
-                        List<Tag> noms = new List<Tag>();
-                        noms.Add(newTag);
-                        tags.Add(idt_pere, noms);
-                    }
+                        tags.Add(idtPere, new List<Tag> {newTag});
                 }
 
                 reader.Close();
@@ -55,28 +50,26 @@ namespace ProjetTags
             return tags;
         }
 
-        public List<Tag> allListTag()
+        public List<Tag> AllListTag()
         {
-            List<Tag> tags = new List<Tag>();
+            var tags = new List<Tag>();
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"SELECT * FROM tag;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    int idt_tag = int.Parse(reader.GetString(0));
-                    String nom = reader.GetString(1);
-                    String clr = reader.GetString(2);
-                    int idt_pere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
-                    Tag newTag = new Tag(idt_tag, nom, clr, idt_pere);
-                    tags.Add(newTag);
+                    int idtTag = int.Parse(reader.GetString(0));
+                    string nom = reader.GetString(1);
+                    string clr = reader.GetString(2);
+                    int idtPere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
+                    
+                    tags.Add(new Tag(idtTag, nom, clr, idtPere));
                 }
 
                 reader.Close();
@@ -101,27 +94,25 @@ namespace ProjetTags
             var tag = new Tag();
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"SELECT * FROM tag WHERE idt_tag = @idt_tag;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@idt_tag", idt);
-
+                
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    int idt_tag = Int32.Parse(reader.GetString(0));
-                    String nom = reader.GetString(1);
-                    String clr = reader.GetString(2);
-                    int idt_pere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
+                    int idtTag = int.Parse(reader.GetString(0));
+                    string nom = reader.GetString(1);
+                    string clr = reader.GetString(2);
+                    int idtPere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
 
                     // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
-                    tag = new Tag(idt_tag, nom, clr, idt_pere);
+                    tag = new Tag(idtTag, nom, clr, idtPere);
                 }
 
                 reader.Close();
@@ -144,12 +135,10 @@ namespace ProjetTags
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"INSERT INTO tag (nom, clr, idt_pere) VALUES (@nom, @clr, @idt_pere);";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@nom", obj.nom);
@@ -174,16 +163,14 @@ namespace ProjetTags
         /// </summary>
         /// <param name="obj">Tag à insérer</param>
         /// <returns>Le tag</returns>
-        public Tag insertSansPere(Tag obj)
+        public Tag InsertSansPere(Tag obj)
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"INSERT INTO tag (nom, clr) VALUES (@nom, @clr);";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@nom", obj.nom);
@@ -211,20 +198,18 @@ namespace ProjetTags
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 var commandLine = tag.idt_pere != 0
                     ? @"UPDATE tag SET nom = @nom, clr = @clr, idt_pere = @idt_pere WHERE idt_tag = @idt_tag;"
                     : @"UPDATE tag SET nom = @nom, clr = @clr WHERE idt_tag = @idt_tag;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@idt_tag", tag.idt_tag);
                 cmd.Parameters.AddWithValue("@clr", tag.clr);
                 cmd.Parameters.AddWithValue("@nom", tag.nom);
-                
+
                 if (tag.idt_pere != 0) cmd.Parameters.AddWithValue("@idt_pere", tag.idt_pere);
 
                 cmd.ExecuteNonQuery();
@@ -238,16 +223,14 @@ namespace ProjetTags
             return tag;
         }
 
-        public Tag updateSansPere(Tag obj)
+        public Tag UpdateSansPere(Tag obj)
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"UPDATE tag SET nom = @nom, clr = @clr WHERE idt_tag = @idt_tag;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
@@ -274,12 +257,10 @@ namespace ProjetTags
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine1 = @"DELETE FROM liaison WHERE idt_tag = @idt_tag;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine1;
 
                 cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
@@ -287,7 +268,7 @@ namespace ProjetTags
 
                 const string commandLine2 = @"DELETE FROM tag WHERE idt_tag = @idt_tag;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine2;
 
                 cmd.ExecuteNonQuery();

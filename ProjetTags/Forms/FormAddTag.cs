@@ -1,41 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
+using ProjetTags.DAO;
+using ProjetTags.Model;
 
-namespace ProjetTags
+namespace ProjetTags.Forms
 {
     public partial class FormAddTag : Form
     {
-        private TagDAO daoTag;
-        
+        private readonly TagDAO _daoTag;
+
         public FormAddTag()
         {
             InitializeComponent();
-            daoTag = new TagDAO();
+            _daoTag = new TagDAO();
         }
 
         protected override void OnLoad(EventArgs e)
         {
-           base.OnLoad(e);
-           IDictionary<int, List<Tag>> tags = daoTag.AllTag();
-           foreach (var entry in tags)
-           {
-               foreach (var tag in entry.Value) comboBox_parent.Items.Add(tag);
-           }
+            base.OnLoad(e);
+            var tags = _daoTag.AllTag();
+            foreach (var entry in tags)
+                foreach (var tag in entry.Value)
+                    comboBox_parent.Items.Add(tag);
         }
 
         private void btn_ouvrirPalette_Click(object sender, EventArgs e)
         {
-            ColorDialog MyDialog = new ColorDialog();
-            MyDialog.AllowFullOpen = false;
-            MyDialog.ShowHelp = true;
+            var myDialog = new ColorDialog();
+            myDialog.AllowFullOpen = false;
+            myDialog.ShowHelp = true;
 
-            if (MyDialog.ShowDialog() == DialogResult.OK)
-            {
-                string hex = MyDialog.Color.R.ToString("X2") + MyDialog.Color.G.ToString("X2") +
-                             MyDialog.Color.B.ToString("X2");
-                textBox_couleur.Text = hex;
-            }
+            if (myDialog.ShowDialog() == DialogResult.OK)
+                textBox_couleur.Text = myDialog.Color.R.ToString("X2") + myDialog.Color.G.ToString("X2") +
+                                       myDialog.Color.B.ToString("X2");
         }
 
         private void btn_createTag_Click(object sender, EventArgs e)
@@ -44,7 +41,7 @@ namespace ProjetTags
             string caption;
             MessageBoxButtons buttons;
             DialogResult result;
-            
+
             if (textBox_nomTag.Text == "")
             {
                 message = "Veuillez saisir le nom du tag";
@@ -65,18 +62,14 @@ namespace ProjetTags
             }
             else
             {
-                Tag tag;
                 if (comboBox_parent.SelectedItem != null)
-                { 
-                    Tag pere = (Tag) comboBox_parent.SelectedItem;
-                    tag = new Tag(0, textBox_nomTag.Text, textBox_couleur.Text, pere.idt_tag);
-                    tag = daoTag.Insert(tag);
+                {
+                    var pere = (Tag) comboBox_parent.SelectedItem;
+                    _daoTag.Insert(new Tag(0, textBox_nomTag.Text, textBox_couleur.Text, pere.idt_tag));
                 }
                 else
-                {
-                    tag = new Tag(0, textBox_nomTag.Text, textBox_couleur.Text);
-                    tag = daoTag.insertSansPere(tag);
-                }
+                    _daoTag.InsertSansPere(new Tag(0, textBox_nomTag.Text, textBox_couleur.Text));
+
                 Close();
             }
         }

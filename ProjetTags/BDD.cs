@@ -13,7 +13,6 @@ namespace ProjetTags
             const string connectionString = "SERVER=localhost; DATABASE=etagger; UID=root; PASSWORD=;";
 
             _connection = new MySqlConnection(connectionString);
-
             _commande = new MySqlCommand();
 
             try
@@ -31,7 +30,6 @@ namespace ProjetTags
         public static MySqlConnection get_Connection()
         {
             if (_connection == null) InitConnection();
-
             return _connection;
         }
     }

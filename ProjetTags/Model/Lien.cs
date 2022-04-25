@@ -1,4 +1,4 @@
-﻿namespace ProjetTags
+﻿namespace ProjetTags.Model
 {
     public class Lien
     {

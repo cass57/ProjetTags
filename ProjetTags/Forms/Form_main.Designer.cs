@@ -1,9 +1,6 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+﻿using System.Windows.Forms;
 
-namespace ProjetTags
+namespace ProjetTags.Forms
 {
     partial class FormMain
     {

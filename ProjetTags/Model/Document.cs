@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ProjetTags
+namespace ProjetTags.Model
 {
     public class Document
     {
@@ -23,15 +23,15 @@ namespace ProjetTags
         {
         }
 
-        public Document(int idt_doc, string doc_path)
+        public Document(int idtDoc, string docPath)
         {
-            this.idt_doc = idt_doc;
-            this.doc_path = doc_path;
+            idt_doc = idtDoc;
+            doc_path = docPath;
         }
 
-        public Document(string doc_path)
+        public Document(string docPath)
         {
-            this.doc_path = doc_path;
+            doc_path = docPath;
         }
 
         public override string ToString() => doc_path.Split('\\').Last();

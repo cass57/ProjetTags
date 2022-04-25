@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-
-using MySql.Data.MySqlClient;
-
-
-namespace ProjetTags
+﻿namespace ProjetTags.Forms
 {
 
     partial class FormAddDoc

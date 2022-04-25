@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ProjetTags
+namespace ProjetTags.Forms
 {
     partial class FormAddTag
     {

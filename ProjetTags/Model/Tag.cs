@@ -1,4 +1,4 @@
-﻿namespace ProjetTags
+﻿namespace ProjetTags.Model
 {
     public class Tag
     {
@@ -35,19 +35,19 @@
         {
         }
 
-        public Tag(int idt_tag, string nom, string clr)
+        public Tag(int idtTag, string nom, string clr)
         {
-            this.idt_tag = idt_tag;
+            idt_tag = idtTag;
             this.nom = nom;
             this.clr = clr;
         }
 
-        public Tag(int idt_tag, string nom, string clr, int idt_pere)
+        public Tag(int idtTag, string nom, string clr, int idtPere)
         {
-            this.idt_tag = idt_tag;
+            idt_tag = idtTag;
             this.nom = nom;
             this.clr = clr;
-            this.idt_pere = idt_pere;
+            idt_pere = idtPere;
         }
         
         public override string ToString() => nom;

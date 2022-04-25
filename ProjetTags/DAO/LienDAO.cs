@@ -2,30 +2,25 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using ProjetTags.Model;
 
-namespace ProjetTags
+namespace ProjetTags.DAO
 {
     public class LienDAO : DAO<Lien>
     {
-        /// <summary>
-        /// Trouver les tags d'un document
-        /// </summary>
-        /// <param name="obj">document</param>
-        /// <returns>tags</returns>
-
         public override Lien FindByIdt(int idt)
         {
             var lien = new Lien();
             try
             {
                 var cmd = new MySqlCommand();
-
                 const string commandLine = @"SELECT liaison.idt_doc, liaison.idt_tag
                                        FROM liaison AS liaison
                                        WHERE liaison.idt_tag = @idt_tag;";
 
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
+
                 cmd.Parameters.AddWithValue("@idt_tag", idt);
 
                 var reader = cmd.ExecuteReader();
@@ -55,10 +50,10 @@ namespace ProjetTags
 
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
-                
+
                 cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
                 cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
-                
+
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -75,7 +70,6 @@ namespace ProjetTags
             try
             {
                 var cmd = new MySqlCommand();
-
                 const string commandLine = @"UPDATE tag SET idt_tag = @idt_tag WHERE idt_doc = @idt_doc;";
 
                 cmd.Connection = BDD.get_Connection();
@@ -107,6 +101,7 @@ namespace ProjetTags
 
                 cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
                 cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
+
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -116,18 +111,12 @@ namespace ProjetTags
             }
         }
 
-        public List<Tag> allTagDoc(Document doc)
+        public List<Tag> AllTagDoc(Document doc)
         {
             var tags = new List<Tag>();
             try
             {
                 var cmd = new MySqlCommand();
-
-                /*const string commandLine = @"SELECT tag.idt_tag, tag.nom, tag.clr, tag.idt_pere
-                                       FROM liaison AS liaison 
-                                            INNER JOIN tag AS tag ON liaison.idt_tag = tag.idt_tag
-                                       WHERE liaison.idt_doc = @idt_doc;";*/
-
                 const string commandLine =
                     @"SELECT tag.idt_tag, tag.nom, tag.clr, tag.idt_pere FROM tag, liaison WHERE liaison.idt_tag = tag.idt_tag AND liaison.idt_doc = @idt_doc";
 
@@ -142,11 +131,9 @@ namespace ProjetTags
                     int idtTag = int.Parse(reader.GetString(0));
                     string nom = reader.GetString(1);
                     string clr = reader.GetString(2);
-                    int idt_pere = 0;
-                    if (!reader.IsDBNull(3)) idt_pere = reader.GetInt32(3);
+                    var idtPere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
 
-                    var newTag = new Tag(idtTag, nom, clr, idt_pere);
-                    tags.Add(newTag);
+                    tags.Add(new Tag(idtTag, nom, clr, idtPere));
                 }
 
                 reader.Close();

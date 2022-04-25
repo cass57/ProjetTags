@@ -2,37 +2,33 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using ProjetTags.Model;
 
-
-namespace ProjetTags
+namespace ProjetTags.DAO
 {
     public class DocumentDAO : DAO<Document>
     {
         public List<Document> AllDoc()
         {
-            List<Document> docs = new List<Document>();
+            var docs = new List<Document>();
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"SELECT * FROM document;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
-                
+
                 var reader = cmd.ExecuteReader();
 
-                while(reader.Read())
+                while (reader.Read())
                 {
-                    int idt_doc = Int32.Parse(reader.GetString(0));
-                    string doc_path = reader.GetString(1);
+                    int idtDoc = int.Parse(reader.GetString(0));
+                    string docPath = reader.GetString(1);
 
-                    Document newDoc = new Document(idt_doc, doc_path);
-
-                    docs.Add(newDoc);
+                    docs.Add(new Document(idtDoc, docPath));
                 }
-                
+
                 reader.Close();
             }
             catch (SqlException e)
@@ -43,28 +39,21 @@ namespace ProjetTags
 
             return docs;
         }
-        
+
         public int LastIdtDoc()
         {
             int idtDoc = 0;
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-                MySqlDataReader reader;
-                
+                var cmd = new MySqlCommand();
                 const string commandLine = @"SELECT MAX(idt_doc) FROM document;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
-                
-                reader = cmd.ExecuteReader();
 
-                while(reader.Read())
-                {
-                    idtDoc = int.Parse(reader.GetString(0));
-                }
-                
+                var reader = cmd.ExecuteReader();
+                while (reader.Read()) idtDoc = int.Parse(reader.GetString(0));
+
                 reader.Close();
             }
             catch (SqlException e)
@@ -75,34 +64,29 @@ namespace ProjetTags
 
             return idtDoc;
         }
+
         public override Document FindByIdt(int idt)
         {
             var doc = new Document();
 
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"SELECT * FROM document WHERE idt_doc = @idt_doc;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
-                
-                cmd.Parameters.AddWithValue("@idt_doc", idt);
 
+                cmd.Parameters.AddWithValue("@idt_doc", idt);
                 var reader = cmd.ExecuteReader();
 
-                while(reader.Read())
+                while (reader.Read())
                 {
-                    int idt_doc = int.Parse(reader.GetString(0));
-                    string doc_path = reader.GetString(1);
-
                     // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
-                    doc.idt_doc = idt_doc;
-                    doc.doc_path = doc_path;
+                    doc.idt_doc = int.Parse(reader.GetString(0));
+                    doc.doc_path = reader.GetString(1);
                 }
-                
+
                 reader.Close();
             }
             catch (SqlException e)
@@ -118,14 +102,12 @@ namespace ProjetTags
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-                
+                var cmd = new MySqlCommand();
                 const string commandLine = @"INSERT INTO document (doc_path) VALUES (@doc_path);";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
-                
+
                 cmd.Parameters.AddWithValue("@doc_path", obj.doc_path);
 
                 // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_doc ?
@@ -145,12 +127,10 @@ namespace ProjetTags
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"UPDATE document SET doc_path = @doc_path WHERE idt_doc = @idt_doc;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@idt_doc", tag.idt_doc);
@@ -171,12 +151,10 @@ namespace ProjetTags
         {
             try
             {
-                MySqlConnection co = BDD.get_Connection();
-                MySqlCommand cmd = new MySqlCommand();
-
+                var cmd = new MySqlCommand();
                 const string commandLine = @"DELETE FROM document WHERE idt_doc = @idt_doc;";
 
-                cmd.Connection = co;
+                cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);

@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
+using ProjetTags.DAO;
+using ProjetTags.Model;
 
-namespace ProjetTags
+namespace ProjetTags.Forms
 {
     public partial class FormAddDoc : Form
     {
-        private DocumentDAO docDao;
-        private TagDAO tagDao;
-        private LienDAO lienDao;
+        private readonly DocumentDAO _docDao;
+        private readonly TagDAO _tagDao;
+        private readonly LienDAO _lienDao;
 
         public FormAddDoc()
         {
             InitializeComponent();
-            docDao = new DocumentDAO();
-            tagDao = new TagDAO();
-            lienDao = new LienDAO();
+            _docDao = new DocumentDAO();
+            _tagDao = new TagDAO();
+            _lienDao = new LienDAO();
         }
 
         private void tf_path_DragDrop(object sender, DragEventArgs e)
@@ -48,31 +49,25 @@ namespace ProjetTags
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            string path = tf_path.Text;
-            Document doc = new Document(path);
-            docDao.Insert(doc);
+            var doc = new Document(tf_path.Text);
+            _docDao.Insert(doc);
             foreach (var itemChecked in Clist_tags.CheckedItems)
             {
                 var tag = (Tag) itemChecked;
-                Tag currentTag = new Tag(tag.idt_tag, tag.nom, tag.clr, tag.idt_pere);
-                Lien lien = new Lien(currentTag.idt_tag, docDao.LastIdtDoc());
-                lienDao.Insert(lien);
+                var currentTag = new Tag(tag.idt_tag, tag.nom, tag.clr, tag.idt_pere);
+                var lien = new Lien(currentTag.idt_tag, _docDao.LastIdtDoc());
+                _lienDao.Insert(lien);
             }
 
             Hide();
         }
 
-        private void btn_addTag_Click(object sender, EventArgs e)
-        {
-            FormAddTag tag = new FormAddTag();
-            tag.Show();
-        }
+        private void btn_addTag_Click(object sender, EventArgs e) => new FormAddTag().Show();
 
         private void FormAddDoc_Activated(object sender, EventArgs e)
         {
-            List<Tag> tags = tagDao.allListTag();
             Clist_tags.ValueMember = null;
-            Clist_tags.DataSource = tags;
+            Clist_tags.DataSource = _tagDao.AllListTag();
         }
     }
 }

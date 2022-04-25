@@ -1,4 +1,4 @@
-﻿namespace ProjetTags
+﻿namespace ProjetTags.DAO
 {
     public abstract class DAO<T>
     {
