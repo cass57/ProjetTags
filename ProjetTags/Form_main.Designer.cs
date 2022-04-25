@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace ProjetTags
@@ -206,6 +207,7 @@ namespace ProjetTags
             this.listBox_tags.Name = "listBox_tags";
             this.listBox_tags.Size = new System.Drawing.Size(878, 329);
             this.listBox_tags.TabIndex = 0;
+            this.listBox_tags.MouseDown += new MouseEventHandler(this.listBox_tagsClick);
             // 
             // treeView_tags
             // 
