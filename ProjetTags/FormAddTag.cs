@@ -16,14 +16,11 @@ namespace ProjetTags
 
         protected override void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-            IDictionary<int, List<Tag>> tags = daoTag.allTag();
-           foreach (KeyValuePair<int, List<Tag>> entry in tags)
+           base.OnLoad(e);
+           IDictionary<int, List<Tag>> tags = daoTag.AllTag();
+           foreach (var entry in tags)
            {
-               for (int i = 0; i < entry.Value.Count; i++)
-               {
-                   comboBox_parent.Items.Add(entry.Value[i]);
-               }
+               foreach (var tag in entry.Value) comboBox_parent.Items.Add(tag);
            }
         }
 
@@ -43,9 +40,9 @@ namespace ProjetTags
 
         private void btn_createTag_Click(object sender, EventArgs e)
         {
-            string message = "Veuillez saisir le nom du tag";
-            string caption = "Impossible de continuer";
-            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            string message;
+            string caption;
+            MessageBoxButtons buttons;
             DialogResult result;
             
             if (textBox_nomTag.Text == "")
@@ -55,10 +52,7 @@ namespace ProjetTags
                 buttons = MessageBoxButtons.OK;
 
                 result = MessageBox.Show(message, caption, buttons);
-                if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                    textBox_nomTag.Focus();
-                }
+                if (result == DialogResult.OK) textBox_nomTag.Focus();
             }
             else if (textBox_couleur.Text == "")
             {
@@ -67,10 +61,7 @@ namespace ProjetTags
                 buttons = MessageBoxButtons.OK;
 
                 result = MessageBox.Show(message, caption, buttons);
-                if (result == System.Windows.Forms.DialogResult.OK)
-                {
-                    textBox_couleur.Focus();
-                }
+                if (result == DialogResult.OK) textBox_couleur.Focus();
             }
             else
             {
@@ -78,15 +69,15 @@ namespace ProjetTags
                 if (comboBox_parent.SelectedItem != null)
                 { 
                     Tag pere = (Tag) comboBox_parent.SelectedItem;
-                    tag = new Tag(0, textBox_nomTag.Text, textBox_couleur.Text, pere.getIdt_tag());
-                    tag = daoTag.insert(tag);
+                    tag = new Tag(0, textBox_nomTag.Text, textBox_couleur.Text, pere.idt_tag);
+                    tag = daoTag.Insert(tag);
                 }
                 else
                 {
                     tag = new Tag(0, textBox_nomTag.Text, textBox_couleur.Text);
                     tag = daoTag.insertSansPere(tag);
                 }
-                this.Close();
+                Close();
             }
         }
     }

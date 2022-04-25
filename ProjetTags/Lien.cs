@@ -5,20 +5,24 @@
         private int _idtDoc;
         private int _idtTag;
 
+        public int idt_doc
+        {
+            get => _idtDoc;
+            set => _idtDoc = value;
+        }
+
+        public int idt_tag
+        {
+            get => _idtTag;
+            set => _idtTag = value;
+        }
+
         public Lien() {}
 
         public Lien(int idtTag, int idtDoc)
         {
-            _idtTag = idtTag;
-            _idtDoc = idtDoc;
+            idt_tag = idtTag;
+            idt_doc = idtDoc;
         }
-
-        public int getIdt_tag() => _idtTag;
-
-        public void setIdt_tag(int i) => _idtTag = i;
-
-        public int getIdt_doc() => _idtDoc;
-
-        public void setIdt_doc(int i) => _idtDoc = i;
     }
 }

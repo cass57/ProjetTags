@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
@@ -9,26 +8,25 @@ namespace ProjetTags
 {
     public class DocumentDAO : DAO<Document>
     {
-        public List<Document> allDoc()
+        public List<Document> AllDoc()
         {
             List<Document> docs = new List<Document>();
             try
             {
                 MySqlConnection co = BDD.get_Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                MySqlDataReader reader;
-                
-                String commandLine = @"SELECT * FROM document;";
+
+                const string commandLine = @"SELECT * FROM document;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
                 
-                reader = cmd.ExecuteReader();
+                var reader = cmd.ExecuteReader();
 
                 while(reader.Read())
                 {
                     int idt_doc = Int32.Parse(reader.GetString(0));
-                    String doc_path = reader.GetString(1);
+                    string doc_path = reader.GetString(1);
 
                     Document newDoc = new Document(idt_doc, doc_path);
 
@@ -46,7 +44,7 @@ namespace ProjetTags
             return docs;
         }
         
-        public int lastIdt_doc()
+        public int LastIdtDoc()
         {
             int idtDoc = 0;
             try
@@ -55,7 +53,7 @@ namespace ProjetTags
                 MySqlCommand cmd = new MySqlCommand();
                 MySqlDataReader reader;
                 
-                String commandLine = @"SELECT MAX(idt_doc) FROM document;";
+                const string commandLine = @"SELECT MAX(idt_doc) FROM document;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
@@ -64,7 +62,7 @@ namespace ProjetTags
 
                 while(reader.Read())
                 {
-                    idtDoc = Int32.Parse(reader.GetString(0));
+                    idtDoc = int.Parse(reader.GetString(0));
                 }
                 
                 reader.Close();
@@ -77,7 +75,7 @@ namespace ProjetTags
 
             return idtDoc;
         }
-        public override Document findByIdt(int idt)
+        public override Document FindByIdt(int idt)
         {
             var doc = new Document();
 
@@ -85,24 +83,24 @@ namespace ProjetTags
             {
                 MySqlConnection co = BDD.get_Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                MySqlDataReader reader;
 
-                String commandLine = @"SELECT * FROM document WHERE idt_doc = @idt_doc;";
+                const string commandLine = @"SELECT * FROM document WHERE idt_doc = @idt_doc;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
                 
                 cmd.Parameters.AddWithValue("@idt_doc", idt);
 
-                reader = cmd.ExecuteReader();
+                var reader = cmd.ExecuteReader();
 
                 while(reader.Read())
                 {
-                    int idt_doc = Int32.Parse(reader.GetString(0));
-                    String doc_path = reader.GetString(1);
+                    int idt_doc = int.Parse(reader.GetString(0));
+                    string doc_path = reader.GetString(1);
 
                     // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
-                    doc = new Document(idt_doc, doc_path);
+                    doc.idt_doc = idt_doc;
+                    doc.doc_path = doc_path;
                 }
                 
                 reader.Close();
@@ -116,19 +114,19 @@ namespace ProjetTags
             return doc;
         }
 
-        public override Document insert(Document obj)
+        public override Document Insert(Document obj)
         {
             try
             {
                 MySqlConnection co = BDD.get_Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 
-                String commandLine = @"INSERT INTO document (doc_path) VALUES (@doc_path);";
+                const string commandLine = @"INSERT INTO document (doc_path) VALUES (@doc_path);";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
                 
-                cmd.Parameters.AddWithValue("@doc_path", obj.getDoc_path());
+                cmd.Parameters.AddWithValue("@doc_path", obj.doc_path);
 
                 // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_doc ?
 
@@ -143,21 +141,20 @@ namespace ProjetTags
             return obj;
         }
 
-        public override Document update(Document obj)
+        public override Document Update(Document tag)
         {
             try
             {
                 MySqlConnection co = BDD.get_Connection();
                 MySqlCommand cmd = new MySqlCommand();
 
-                String commandLine =
-                    @"UPDATE document SET doc_path = @doc_path WHERE idt_doc = @idt_doc;";
+                const string commandLine = @"UPDATE document SET doc_path = @doc_path WHERE idt_doc = @idt_doc;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
 
-                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
-                cmd.Parameters.AddWithValue("@doc_path", obj.getDoc_path());
+                cmd.Parameters.AddWithValue("@idt_doc", tag.idt_doc);
+                cmd.Parameters.AddWithValue("@doc_path", tag.doc_path);
 
                 cmd.ExecuteNonQuery();
             }
@@ -167,22 +164,22 @@ namespace ProjetTags
                 Console.WriteLine(Environment.StackTrace);
             }
 
-            return obj;
+            return tag;
         }
 
-        public override void delete(Document obj)
+        public override void Delete(Document obj)
         {
             try
             {
                 MySqlConnection co = BDD.get_Connection();
                 MySqlCommand cmd = new MySqlCommand();
 
-                String commandLine = @"DELETE FROM document WHERE idt_doc = @idt_doc;";
+                const string commandLine = @"DELETE FROM document WHERE idt_doc = @idt_doc;";
 
                 cmd.Connection = co;
                 cmd.CommandText = commandLine;
 
-                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
+                cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
 
                 cmd.ExecuteNonQuery();
             }

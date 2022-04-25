@@ -1,9 +1,23 @@
-﻿namespace ProjetTags
+﻿using System.Linq;
+
+namespace ProjetTags
 {
     public class Document
     {
-        private string doc_path;
-        private int idt_doc;
+        private int _idtDoc;
+        private string _docPath;
+
+        public string doc_path
+        {
+            get => _docPath;
+            set => _docPath = value;
+        }
+
+        public int idt_doc
+        {
+            get => _idtDoc;
+            set => _idtDoc = value;
+        }
 
         public Document()
         {
@@ -20,30 +34,6 @@
             this.doc_path = doc_path;
         }
 
-        public int getIdt_doc()
-        {
-            return idt_doc;
-        }
-
-        public void setIdt_doc(int i)
-        {
-            idt_doc = i;
-        }
-
-        public string getDoc_path()
-        {
-            return doc_path;
-        }
-
-        public void setDoc_path(string p)
-        {
-            doc_path = p;
-        }
-
-        public override string ToString()
-        {
-            var nom = doc_path.Split('\\');
-            return nom[nom.Length - 1];
-        }
+        public override string ToString() => doc_path.Split('\\').Last();
     }
 }

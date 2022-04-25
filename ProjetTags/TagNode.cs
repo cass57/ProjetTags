@@ -1,23 +1,20 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace ProjetTags
 {
-    public class TagNode : System.Windows.Forms.TreeNode {
-        Tag tag;
+    public class TagNode : TreeNode {
+        private Tag tag;
 
         public TagNode(Tag tag)
         {
             this.tag = tag;
-            this.Text = tag.getNom();
-            this.Name = tag.getIdt_tag().ToString();
-            Color color = (Color) ColorTranslator.FromHtml("#"+this.tag.getClr());
-            this.BackColor = color;
+            Text = tag.nom;
+            Name = tag.idt_tag.ToString();
+            Color color = ColorTranslator.FromHtml("#"+this.tag.clr);
+            BackColor = color;
         }
 
-        public Tag getTag()
-        {
-            return (this.tag);
-
-        }
+        public Tag GetTag() => tag;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace ProjetTags
@@ -23,7 +22,9 @@ namespace ProjetTags
         {
             var fileList = (string[]) e.Data.GetData(DataFormats.FileDrop, false);
             var filePath = "";
-            for (var i = 0; i < fileList.Length; i++) filePath += fileList[i];
+            foreach (var f in fileList)
+                filePath += f;
+
             tf_path.Text = filePath;
         }
 
@@ -42,25 +43,20 @@ namespace ProjetTags
             }
         }
 
-        private void tf_path_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-        }
+        private void tf_path_DragEnter(object sender, DragEventArgs e) => e.Effect =
+            e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            String path = tf_path.Text;
+            string path = tf_path.Text;
             Document doc = new Document(path);
-            docDao.insert(doc);
+            docDao.Insert(doc);
             foreach (var itemChecked in Clist_tags.CheckedItems)
             {
                 var tag = (Tag) itemChecked;
-                Tag currentTag = new Tag(tag.getIdt_tag(), tag.getNom(), tag.getClr(), tag.getIdt_pere());
-                Lien lien = new Lien(currentTag.getIdt_tag(), docDao.lastIdt_doc());
-                lienDao.insert(lien);
+                Tag currentTag = new Tag(tag.idt_tag, tag.nom, tag.clr, tag.idt_pere);
+                Lien lien = new Lien(currentTag.idt_tag, docDao.LastIdtDoc());
+                lienDao.Insert(lien);
             }
 
             Hide();

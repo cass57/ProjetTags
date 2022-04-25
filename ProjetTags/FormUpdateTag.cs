@@ -7,41 +7,35 @@ namespace ProjetTags
     {
         private TagDAO daoTag;
         private Tag tag;
+
         public FormUpdateTag(TagNode tagAModif)
         {
             InitializeComponent();
             daoTag = new TagDAO();
-            tag = tagAModif.getTag();
+            tag = tagAModif.GetTag();
         }
-        
+
 
         private void btn_ouvrirPalette_Click(object sender, EventArgs e)
         {
-            ColorDialog MyDialog = new ColorDialog();
-            MyDialog.AllowFullOpen = false;
-            MyDialog.ShowHelp = true;
+            ColorDialog myDialog = new ColorDialog();
+            myDialog.AllowFullOpen = false;
+            myDialog.ShowHelp = true;
 
-            if (MyDialog.ShowDialog() == DialogResult.OK)
+            if (myDialog.ShowDialog() == DialogResult.OK)
             {
-                string hex = MyDialog.Color.R.ToString("X2") + MyDialog.Color.G.ToString("X2") +
-                             MyDialog.Color.B.ToString("X2");
+                string hex = myDialog.Color.R.ToString("X2") + myDialog.Color.G.ToString("X2") +
+                             myDialog.Color.B.ToString("X2");
                 textBox_couleur.Text = hex;
             }
         }
 
         private void btn_createTag_Click(object sender, EventArgs e)
         {
-            Tag ancienTag = this.tag;
-            ancienTag.setNom(textBox_nomTag.Text);
-            ancienTag.setClr(textBox_couleur.Text);
-            if (ancienTag.getIdt_pere() == 0)
-            {
-                daoTag.updateSansPere(ancienTag);
-            }
-            else
-            {
-                daoTag.update(ancienTag); 
-            }
+            Tag ancienTag = tag;
+            if (textBox_nomTag.Text != "") ancienTag.nom = textBox_nomTag.Text;
+            if (textBox_couleur.Text != "") ancienTag.clr = textBox_couleur.Text;
+            daoTag.Update(ancienTag);
             Hide();
         }
     }

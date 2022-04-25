@@ -2,10 +2,34 @@
 {
     public class Tag
     {
-        private string clr;
-        private int idt_pere;
-        private int idt_tag;
-        private string nom;
+        public string clr
+        {
+            get => _clr;
+            set => _clr = value;
+        }
+
+        public int idt_pere
+        {
+            get => _idtPere;
+            set => _idtPere = value;
+        }
+
+        public int idt_tag
+        {
+            get => _idtTag;
+            set => _idtTag = value;
+        }
+
+        public string nom
+        {
+            get => _nom;
+            set => _nom = value;
+        }
+
+        private int _idtPere;
+        private int _idtTag;
+        private string _nom;
+        private string _clr;
 
         public Tag()
         {
@@ -25,50 +49,7 @@
             this.clr = clr;
             this.idt_pere = idt_pere;
         }
-
-        public int getIdt_tag()
-        {
-            return idt_tag;
-        }
-
-        public void setIdt_tag(int i)
-        {
-            idt_tag = i;
-        }
-
-        public string getNom()
-        {
-            return nom;
-        }
-
-        public void setNom(string n)
-        {
-            nom = n;
-        }
-
-        public string getClr()
-        {
-            return clr;
-        }
-
-        public void setClr(string c)
-        {
-            clr = c;
-        }
-
-        public int getIdt_pere()
-        {
-            return idt_pere;
-        }
-
-        public void setIdt_pere(int p)
-        {
-            idt_pere = p;
-        }
         
-        public override string ToString()
-        {
-            return nom;
-        }
+        public override string ToString() => nom;
     }
 }

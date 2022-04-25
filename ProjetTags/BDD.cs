@@ -10,7 +10,7 @@ namespace ProjetTags
 
         private static void InitConnection()
         {
-            var connectionString = "SERVER=localhost; DATABASE=etagger; UID=root; PASSWORD=;";
+            const string connectionString = "SERVER=localhost; DATABASE=etagger; UID=root; PASSWORD=;";
 
             _connection = new MySqlConnection(connectionString);
 
@@ -23,8 +23,8 @@ namespace ProjetTags
             }
             catch (NullReferenceException e)
             {
-                Console.Write("Erreur : {0}", e);
-                throw e;
+                Console.Write($@"Erreur : {e}");
+                throw;
             }
         }
 

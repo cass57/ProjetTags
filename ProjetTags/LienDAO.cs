@@ -13,7 +13,7 @@ namespace ProjetTags
         /// <param name="obj">document</param>
         /// <returns>tags</returns>
 
-        public override Lien findByIdt(int idt)
+        public override Lien FindByIdt(int idt)
         {
             var lien = new Lien();
             try
@@ -32,8 +32,8 @@ namespace ProjetTags
 
                 while (reader.Read())
                 {
-                    lien.setIdt_doc(int.Parse(reader.GetString(0)));
-                    lien.setIdt_tag(int.Parse(reader.GetString(1)));
+                    lien.idt_doc = int.Parse(reader.GetString(0));
+                    lien.idt_tag = int.Parse(reader.GetString(1));
                 }
 
                 reader.Close();
@@ -46,7 +46,7 @@ namespace ProjetTags
             return lien;
         }
 
-        public override Lien insert(Lien obj)
+        public override Lien Insert(Lien obj)
         {
             try
             {
@@ -56,8 +56,8 @@ namespace ProjetTags
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
                 
-                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
-                cmd.Parameters.AddWithValue("@idt_tag", obj.getIdt_tag());
+                cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
+                cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
                 
                 cmd.ExecuteNonQuery();
             }
@@ -70,7 +70,7 @@ namespace ProjetTags
             return obj;
         }
 
-        public override Lien update(Lien obj)
+        public override Lien Update(Lien tag)
         {
             try
             {
@@ -81,8 +81,8 @@ namespace ProjetTags
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
-                cmd.Parameters.AddWithValue("@idt_tag", obj.getIdt_tag());
-                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
+                cmd.Parameters.AddWithValue("@idt_tag", tag.idt_tag);
+                cmd.Parameters.AddWithValue("@idt_doc", tag.idt_doc);
 
                 cmd.ExecuteNonQuery();
             }
@@ -92,10 +92,10 @@ namespace ProjetTags
                 Console.WriteLine(Environment.StackTrace);
             }
 
-            return obj;
+            return tag;
         }
 
-        public override void delete(Lien obj)
+        public override void Delete(Lien obj)
         {
             try
             {
@@ -105,8 +105,8 @@ namespace ProjetTags
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine1;
 
-                cmd.Parameters.AddWithValue("@idt_doc", obj.getIdt_doc());
-                cmd.Parameters.AddWithValue("@idt_tag", obj.getIdt_tag());
+                cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
+                cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
@@ -133,7 +133,7 @@ namespace ProjetTags
 
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
-                cmd.Parameters.AddWithValue("@idt_doc", doc.getIdt_doc());
+                cmd.Parameters.AddWithValue("@idt_doc", doc.idt_doc);
 
                 var reader = cmd.ExecuteReader();
 

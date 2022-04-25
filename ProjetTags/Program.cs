@@ -13,7 +13,9 @@ namespace ProjetTags
         [STAThread]
         private static void Main(string[] args)
         {
-           
+            /*var test = new TagDAO();
+            var truc = test.AllTag();
+            if (!truc.ContainsKey(6)) return;*/
             Document doc = new Document(10, "Nou");
             LienDAO dao = new LienDAO();
             //dao.insertSansPere(tag);
