@@ -98,13 +98,6 @@ namespace ProjetTags.Forms
             }
         }
 
-        private void pictureBox_DelDoc_Click(object sender, EventArgs e)
-        {
-            var doc = (Document) listBox_doc.SelectedItem;
-            _daoDocument.Delete(doc);
-            listBox_doc.Items.Remove(doc);
-        }
-
         private void listBox_doc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox_doc.SelectedItem != null)
@@ -129,6 +122,7 @@ namespace ProjetTags.Forms
             btn_Deldoc.Enabled = false;
             btn_OuvrirDoc.Enabled = false;
             webBrowser_affichageDoc.Navigate("");
+            listBox_tags.Items.Clear();
         }
 
         private void FormMain_Activated(object sender, EventArgs e) => FormMain_Load(sender, e);

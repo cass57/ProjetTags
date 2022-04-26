@@ -152,7 +152,7 @@ namespace ProjetTags.DAO
             try
             {
                 var cmd = new MySqlCommand();
-                const string commandLine = @"DELETE FROM document WHERE idt_doc = @idt_doc;";
+                const string commandLine = @"DELETE FROM liaison WHERE idt_doc = @idt_doc;";
 
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
@@ -160,6 +160,16 @@ namespace ProjetTags.DAO
                 cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
 
                 cmd.ExecuteNonQuery();
+
+                var cmd2 = new MySqlCommand();
+                const string commandLine2 = @"DELETE FROM document WHERE idt_doc = @idt_doc;";
+
+                cmd2.Connection = BDD.get_Connection();
+                cmd2.CommandText = commandLine2;
+
+                cmd2.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
+
+                cmd2.ExecuteNonQuery();
             }
             catch (SqlException e)
             {
