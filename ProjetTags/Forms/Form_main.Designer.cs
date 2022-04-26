@@ -38,7 +38,7 @@ namespace ProjetTags.Forms
             this.textBox_recherche = new System.Windows.Forms.TextBox();
             this.panel_resultatRecherche = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox_doc = new System.Windows.Forms.ListBox();
+            this.listView_doc = new System.Windows.Forms.ListView();
             this.panel_apercu = new System.Windows.Forms.Panel();
             this.webBrowser_affichageDoc = new System.Windows.Forms.WebBrowser();
             this.btn_OuvrirDoc = new System.Windows.Forms.Button();
@@ -118,7 +118,7 @@ namespace ProjetTags.Forms
             // panel_resultatRecherche
             // 
             this.panel_resultatRecherche.Controls.Add(this.label2);
-            this.panel_resultatRecherche.Controls.Add(this.listBox_doc);
+            this.panel_resultatRecherche.Controls.Add(this.listView_doc);
             this.panel_resultatRecherche.Location = new System.Drawing.Point(337, 117);
             this.panel_resultatRecherche.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel_resultatRecherche.Name = "panel_resultatRecherche";
@@ -134,14 +134,16 @@ namespace ProjetTags.Forms
             // 
             // listBox_doc
             // 
-            this.listBox_doc.FormattingEnabled = true;
-            this.listBox_doc.ItemHeight = 25;
-            this.listBox_doc.Location = new System.Drawing.Point(1, -1);
-            this.listBox_doc.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.listBox_doc.Name = "listBox_doc";
-            this.listBox_doc.Size = new System.Drawing.Size(896, 704);
-            this.listBox_doc.TabIndex = 0;
-            this.listBox_doc.SelectedIndexChanged += new System.EventHandler(this.listBox_doc_SelectedIndexChanged);
+            this.listView_doc.Columns.Add("Document", -2, HorizontalAlignment.Left);
+            this.listView_doc.FullRowSelect = true;
+            this.listView_doc.GridLines = true;
+            this.listView_doc.View = System.Windows.Forms.View.List;
+            this.listView_doc.Location = new System.Drawing.Point(1, -1);
+            this.listView_doc.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.listView_doc.Name = "listView_doc";
+            this.listView_doc.Size = new System.Drawing.Size(896, 704);
+            this.listView_doc.TabIndex = 0;
+            this.listView_doc.SelectedIndexChanged += new System.EventHandler(this.listBox_doc_SelectedIndexChanged);
             // 
             // panel_apercu
             // 
@@ -326,6 +328,6 @@ namespace ProjetTags.Forms
         private System.Windows.Forms.Panel panel_tags;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TreeView treeView_tags;
-        private System.Windows.Forms.ListBox listBox_doc;
+        private System.Windows.Forms.ListView listView_doc;
     }
 }

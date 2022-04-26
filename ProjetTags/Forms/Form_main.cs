@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ProjetTags.DAO;
@@ -29,11 +30,14 @@ namespace ProjetTags.Forms
 
         private void btn_ajoutFichier_Click(object sender, EventArgs e) => new FormAddDoc().Show();
 
+        private ImageList icons = new ImageList();
         private void FormMain_Load(object sender, EventArgs e)
         {
-            listBox_doc.Items.Clear();
+            listView_doc.Items.Clear();
+            icons.Images.Add(Image.FromFile(@"C:\Users\pierr\RiderProjects\ProjetTags\ProjetTags\Resources\jpg_icon.jpg"));
+            listView_doc.SmallImageList = icons;
 
-            foreach (var doc in _daoDocument.AllDoc()) listBox_doc.Items.Add(doc);
+            foreach (var doc in _daoDocument.AllDoc()) listView_doc.Items.Add(new ListViewItem{ImageIndex = 0, Tag = doc, Text = doc.ToString()});
 
             //Remplissage tag
             treeView_tags.Nodes.Clear();
@@ -100,25 +104,26 @@ namespace ProjetTags.Forms
 
         private void listBox_doc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox_doc.SelectedItem != null)
+            if (listView_doc.SelectedItems.Count > 0)
             {
                 btn_Deldoc.Enabled = true;
                 btn_OuvrirDoc.Enabled = true;
-                var doc = (Document) listBox_doc.SelectedItem;
+                var doc = (Document) listView_doc.SelectedItems[0].Tag;
                 webBrowser_affichageDoc.Navigate(doc.doc_path);
 
                 listBox_tags.Items.Clear();
                 var tags = _daoLien.AllTagDoc(doc);
                 foreach (var tag in tags) listBox_tags.Items.Add(tag);
-                if (listBox_doc.SelectedIndex != -1) _selectedDocIndex = listBox_doc.SelectedIndex;
+                if (listView_doc.SelectedIndices[0] != -1) _selectedDocIndex = listView_doc.SelectedIndices[0];
             }
         }
 
         private void btn_Deldoc_Click(object sender, EventArgs e)
         {
-            var doc = (Document) listBox_doc.SelectedItem;
+            var selection = listView_doc.SelectedItems[0];
+            var doc = (Document) selection.Tag;
             _daoDocument.Delete(doc);
-            listBox_doc.Items.Remove(doc);
+            listView_doc.Items.Remove(selection);
             btn_Deldoc.Enabled = false;
             btn_OuvrirDoc.Enabled = false;
             webBrowser_affichageDoc.Navigate("");
@@ -129,7 +134,7 @@ namespace ProjetTags.Forms
 
         private void btn_ouvirDoc_Click(object sender, EventArgs e)
         {
-            var doc = (Document) listBox_doc.SelectedItem;
+            var doc = (Document) listView_doc.SelectedItems[0].Tag;
             if (doc != null)
             {
                 Process.Start(doc.doc_path);
@@ -143,7 +148,7 @@ namespace ProjetTags.Forms
             FormMain_Load(sender, e);
             var box = new ListBox();
             string filter = textBox_recherche.Text;
-            foreach (var nom in listBox_doc.Items)
+            foreach (var nom in listView_doc.Items)
             {
                 var tags = _daoLien.AllTagDoc(nom as Document);
                 if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Items.Add(nom);
@@ -152,8 +157,8 @@ namespace ProjetTags.Forms
                 if (tags.Any(tag => MatchTag(filter, tag))) box.Items.Add(nom);
             }
 
-            listBox_doc.Items.Clear();
-            foreach (var doc in box.Items) listBox_doc.Items.Add(doc);
+            listView_doc.Items.Clear();
+            foreach (var doc in box.Items) listView_doc.Items.Add(new ListViewItem{Tag = doc, Text = doc.ToString()});
         }
 
         private bool MatchTag(string input, Tag tag) => input == tag.nom ||
@@ -199,8 +204,8 @@ namespace ProjetTags.Forms
         private void SupprimerTagDeDoc(object sender, EventArgs e)
         {
             _daoLien.Delete(
-                new Lien(_selectedDocTag.idt_tag, ((Document) listBox_doc.Items[_selectedDocIndex]).idt_doc));
-            listBox_doc.SetSelected(_selectedDocIndex, true);
+                new Lien(_selectedDocTag.idt_tag, ((Document) listView_doc.Items[_selectedDocIndex].Tag).idt_doc));
+            //listView_doc.SetSelected(_selectedDocIndex, true);
         }
 
         private void treeView_tags_DoubleClick(object sender, EventArgs e) => SelectTag(sender, e);
