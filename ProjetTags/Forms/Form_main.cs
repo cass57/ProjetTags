@@ -34,10 +34,17 @@ namespace ProjetTags.Forms
         private void FormMain_Load(object sender, EventArgs e)
         {
             listView_doc.Items.Clear();
-            icons.Images.Add(Image.FromFile(@"C:\Users\pierr\RiderProjects\ProjetTags\ProjetTags\Resources\jpg_icon.jpg"));
+            icons.Images.Add(Image.FromFile(@"..\..\Resources\jpg_icon.jpg"));
+            icons.Images.Add(Image.FromFile(@"..\..\Resources\pdf_icon.jpg"));
             listView_doc.SmallImageList = icons;
 
-            foreach (var doc in _daoDocument.AllDoc()) listView_doc.Items.Add(new ListViewItem{ImageIndex = 0, Tag = doc, Text = doc.ToString()});
+            foreach (var doc in _daoDocument.AllDoc())
+            {
+                int index;
+                if (doc.doc_path.Substring(doc.doc_path.Length-3) == "pdf") index = 1;
+                else index = 0;
+                listView_doc.Items.Add(new ListViewItem{ImageIndex = index, Tag = doc, Text = doc.ToString()});
+            }
 
             //Remplissage tag
             treeView_tags.Nodes.Clear();
