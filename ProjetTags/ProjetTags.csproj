@@ -135,6 +135,7 @@
         <Compile Include="Forms\Form_main.Designer.cs">
           <DependentUpon>Form_main.cs</DependentUpon>
         </Compile>
+        <Compile Include="Forms\ListViewTag.cs" />
         <Compile Include="Forms\TagNode.cs" />
         <Compile Include="Model\Document.cs" />
         <Compile Include="Model\Lien.cs" />

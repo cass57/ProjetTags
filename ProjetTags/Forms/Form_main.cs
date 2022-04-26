@@ -61,7 +61,7 @@ namespace ProjetTags.Forms
                     foreach (var tag in entry.Value) noeudCourant[0].Nodes.Add(CreateTagNode(tag));
                 }
 
-            listBox_tags.ContextMenuStrip = new ContextMenuStrip();
+            listView_tags.ContextMenuStrip = new ContextMenuStrip();
             _listBoxTagsMenu = CreateContextMenu(new List<Tuple<string, EventHandler>>
             {
                 Tuple.Create<string, EventHandler>("Ajouter", AjouterTagADoc),
@@ -93,19 +93,20 @@ namespace ProjetTags.Forms
             return tagMenu;
         }
 
-        private void listBox_tagsClick(object sender, MouseEventArgs e)
+        private void listView_tagsClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                var index = listBox_tags.IndexFromPoint(e.Location);
+                // TODO : clic droit sur un item pour ouvrir menu ? 
+                /*var index = listView_tags.IndexFromPoint(e.Location);
                 if (index != ListBox.NoMatches)
                 {
-                    _selectedDocTag = (Tag) listBox_tags.Items[index];
+                    _selectedDocTag = (Tag) listView_tags.Items[index];
                     _listBoxTagsMenu.Show(Cursor.Position);
                     _listBoxTagsMenu.Visible = true;
                 }
                 else
-                    _listBoxTagsMenu.Visible = false;
+                    _listBoxTagsMenu.Visible = false;*/
             }
         }
 
@@ -118,9 +119,9 @@ namespace ProjetTags.Forms
                 var doc = (Document) listView_doc.SelectedItems[0].Tag;
                 webBrowser_affichageDoc.Navigate(doc.doc_path);
 
-                listBox_tags.Items.Clear();
+                listView_tags.Items.Clear();
                 var tags = _daoLien.AllTagDoc(doc);
-                foreach (var tag in tags) listBox_tags.Items.Add(tag);
+                foreach (var tag in tags) listView_tags.Items.Add(new ListViewTag(tag));
                 if (listView_doc.SelectedIndices[0] != -1) _selectedDocIndex = listView_doc.SelectedIndices[0];
             }
         }
@@ -134,7 +135,7 @@ namespace ProjetTags.Forms
             btn_Deldoc.Enabled = false;
             btn_OuvrirDoc.Enabled = false;
             webBrowser_affichageDoc.Navigate("");
-            listBox_tags.Items.Clear();
+            listView_tags.Items.Clear();
         }
 
         private void FormMain_Activated(object sender, EventArgs e) => FormMain_Load(sender, e);
@@ -172,25 +173,6 @@ namespace ProjetTags.Forms
                                                         tag.idt_pere != 0 && MatchTag(input,
                                                             _daoTag.FindByIdt(tag.idt_pere));
 
-        private void pictureBox_DelTag_Click(object sender, EventArgs e)
-        {
-            var node = (TagNode) treeView_tags.SelectedNode;
-
-            if (node == null)
-            {
-                const string message = "Veuillez sélectionner un tag à supprimer";
-                const string caption = "Impossible de continuer";
-                const MessageBoxButtons buttons = MessageBoxButtons.OK;
-
-                MessageBox.Show(message, caption, buttons);
-            }
-            else
-            {
-                SupprimerTag(sender, e);
-                FormMain_Load(sender, e);
-            }
-        }
-
         private void ModifTag(object sender, EventArgs e) =>
             new FormUpdateTag((TagNode) treeView_tags.SelectedNode).Show();
 
@@ -206,6 +188,7 @@ namespace ProjetTags.Forms
         private void AjouterTagADoc(object sender, EventArgs e)
         {
             // TODO
+            // TODO si aucun tag comment en ajouter ?
         }
 
         private void SupprimerTagDeDoc(object sender, EventArgs e)
