@@ -98,15 +98,15 @@ namespace ProjetTags.Forms
             if (e.Button == MouseButtons.Right)
             {
                 // TODO : clic droit sur un item pour ouvrir menu ? 
-                /*var index = listView_tags.IndexFromPoint(e.Location);
-                if (index != ListBox.NoMatches)
+                var item = listView_tags.GetItemAt(e.X, e.Y);
+                if (item != null)
                 {
-                    _selectedDocTag = (Tag) listView_tags.Items[index];
+                    _selectedDocTag = (Tag) item.Tag;
                     _listBoxTagsMenu.Show(Cursor.Position);
                     _listBoxTagsMenu.Visible = true;
                 }
                 else
-                    _listBoxTagsMenu.Visible = false;*/
+                    _listBoxTagsMenu.Visible = false;
             }
         }
 
