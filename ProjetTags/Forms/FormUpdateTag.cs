@@ -15,8 +15,25 @@ namespace ProjetTags.Forms
             InitializeComponent();
             _daoTag = new TagDAO();
             _tag = tagAModif.GetTag();
+            if (DarkTheme.Active) DarkMode();
         }
 
+        public void DarkMode()
+        {
+            lbl_tag.BackColor = DarkTheme.MainDark;
+            label1.BackColor = DarkTheme.MainDark;
+            textBox_couleur.BackColor = DarkTheme.Darkest;
+            textBox_couleur.ForeColor = DarkTheme.LightColor;
+            label2.BackColor = DarkTheme.MainDark;
+            btn_ouvrirPalette.BackColor = DarkTheme.Darkest;
+            btn_ouvrirPalette.ForeColor = DarkTheme.LightColor;
+            btn_createTag.BackColor = DarkTheme.Darkest;
+            btn_createTag.ForeColor = DarkTheme.LightColor;
+            textBox_nomTag.BackColor = DarkTheme.Darkest;
+            textBox_nomTag.ForeColor = DarkTheme.LightColor;
+            BackColor = DarkTheme.MainDark;
+            ForeColor = DarkTheme.LightColor;
+        }
 
         private void btn_ouvrirPalette_Click(object sender, EventArgs e)
         {

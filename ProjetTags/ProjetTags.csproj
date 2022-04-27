@@ -111,6 +111,7 @@
         <Compile Include="DAO\DocumentDAO.cs" />
         <Compile Include="DAO\LienDAO.cs" />
         <Compile Include="DAO\TagDAO.cs" />
+        <Compile Include="Forms\DarkTheme.cs" />
         <Compile Include="Forms\Form1.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -135,6 +136,7 @@
         <Compile Include="Forms\Form_main.Designer.cs">
           <DependentUpon>Form_main.cs</DependentUpon>
         </Compile>
+        <Compile Include="Forms\ListViewDoc.cs" />
         <Compile Include="Forms\ListViewTag.cs" />
         <Compile Include="Forms\TagNode.cs" />
         <Compile Include="Model\Document.cs" />

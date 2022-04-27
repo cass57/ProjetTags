@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using ProjetTags.DAO;
 using ProjetTags.Model;
@@ -17,6 +18,22 @@ namespace ProjetTags.Forms
             _docDao = new DocumentDAO();
             _tagDao = new TagDAO();
             _lienDao = new LienDAO();
+            if (DarkTheme.Active) DarkMode();
+        }
+
+        public void DarkMode()
+        {
+            tf_path.BackColor = DarkTheme.LightColor;
+            btn_explorateur.BackColor = DarkTheme.Darkest;
+            btn_explorateur.ForeColor = DarkTheme.LightColor;
+            btn_valider.BackColor = DarkTheme.Darkest;
+            btn_valider.ForeColor = DarkTheme.LightColor;
+            Clist_tags.BackColor = DarkTheme.LightColor;
+            lbl_tags.BackColor = DarkTheme.Darkest;
+            lbl_tags.ForeColor = DarkTheme.LightColor;
+            btn_addTag.BackColor = DarkTheme.Darkest;
+            btn_addTag.ForeColor = DarkTheme.LightColor;
+            BackColor = DarkTheme.MainDark;
         }
 
         private void tf_path_DragDrop(object sender, DragEventArgs e)

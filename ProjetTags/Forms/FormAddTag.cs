@@ -13,6 +13,27 @@ namespace ProjetTags.Forms
         {
             InitializeComponent();
             _daoTag = new TagDAO();
+            if (DarkTheme.Active) DarkMode();
+        }
+
+        public void DarkMode()
+        {
+            labelNomTag.BackColor = DarkTheme.MainDark;
+            textBox_nomTag.BackColor = DarkTheme.Darkest;
+            textBox_nomTag.ForeColor = DarkTheme.LightColor;
+            labelCouleurTag.BackColor = DarkTheme.MainDark;
+            btn_createTag.BackColor = DarkTheme.Darkest;
+            btn_createTag.ForeColor = DarkTheme.LightColor;
+            btn_ouvrirPalette.BackColor = DarkTheme.Darkest;
+            btn_ouvrirPalette.ForeColor = DarkTheme.LightColor;
+            textBox_couleur.BackColor = DarkTheme.Darkest;
+            textBox_couleur.ForeColor = DarkTheme.LightColor;
+            comboBox_parent.BackColor = DarkTheme.Darkest;
+            comboBox_parent.ForeColor = DarkTheme.LightColor;
+            label1.BackColor = DarkTheme.MainDark;
+            label2.BackColor = DarkTheme.MainDark;
+            BackColor = DarkTheme.MainDark;
+            ForeColor = DarkTheme.LightColor;
         }
 
         protected override void OnLoad(EventArgs e)
