@@ -34,6 +34,7 @@ namespace ProjetTags.Forms
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel_recherche = new System.Windows.Forms.Panel();
+            this.btn_DarkMode = new System.Windows.Forms.Label();
             this.btn_ajoutFichier = new System.Windows.Forms.Button();
             this.btn_recherche = new System.Windows.Forms.Button();
             this.textBox_recherche = new System.Windows.Forms.TextBox();
@@ -62,10 +63,10 @@ namespace ProjetTags.Forms
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ProjetTags.Properties.Resources.logoProjetDotNet;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 5);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(2, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(165, 68);
+            this.pictureBox1.Size = new System.Drawing.Size(124, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -73,23 +74,38 @@ namespace ProjetTags.Forms
             // panel_recherche
             // 
             this.panel_recherche.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel_recherche.Controls.Add(this.btn_DarkMode);
             this.panel_recherche.Controls.Add(this.pictureBox1);
             this.panel_recherche.Controls.Add(this.btn_ajoutFichier);
             this.panel_recherche.Controls.Add(this.btn_recherche);
             this.panel_recherche.Controls.Add(this.textBox_recherche);
             this.panel_recherche.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel_recherche.Location = new System.Drawing.Point(0, 0);
-            this.panel_recherche.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel_recherche.Margin = new System.Windows.Forms.Padding(2);
             this.panel_recherche.Name = "panel_recherche";
-            this.panel_recherche.Size = new System.Drawing.Size(1419, 74);
+            this.panel_recherche.Size = new System.Drawing.Size(1064, 60);
             this.panel_recherche.TabIndex = 7;
+            // 
+            // btn_DarkMode
+            // 
+            this.btn_DarkMode.BackColor = System.Drawing.SystemColors.Desktop;
+            this.btn_DarkMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btn_DarkMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btn_DarkMode.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_DarkMode.Location = new System.Drawing.Point(132, 22);
+            this.btn_DarkMode.Name = "btn_DarkMode";
+            this.btn_DarkMode.Size = new System.Drawing.Size(30, 22);
+            this.btn_DarkMode.TabIndex = 5;
+            this.btn_DarkMode.Text = "☾";
+            this.btn_DarkMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btn_DarkMode.Click += new System.EventHandler(this.btn_DarkMode_Click);
             // 
             // btn_ajoutFichier
             // 
-            this.btn_ajoutFichier.Location = new System.Drawing.Point(1280, 26);
-            this.btn_ajoutFichier.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_ajoutFichier.Location = new System.Drawing.Point(960, 21);
+            this.btn_ajoutFichier.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ajoutFichier.Name = "btn_ajoutFichier";
-            this.btn_ajoutFichier.Size = new System.Drawing.Size(112, 28);
+            this.btn_ajoutFichier.Size = new System.Drawing.Size(84, 23);
             this.btn_ajoutFichier.TabIndex = 4;
             this.btn_ajoutFichier.Text = "Nouveau";
             this.btn_ajoutFichier.UseVisualStyleBackColor = true;
@@ -97,21 +113,21 @@ namespace ProjetTags.Forms
             // 
             // btn_recherche
             // 
-            this.btn_recherche.Location = new System.Drawing.Point(1152, 26);
-            this.btn_recherche.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_recherche.Location = new System.Drawing.Point(864, 21);
+            this.btn_recherche.Margin = new System.Windows.Forms.Padding(2);
             this.btn_recherche.Name = "btn_recherche";
-            this.btn_recherche.Size = new System.Drawing.Size(112, 28);
+            this.btn_recherche.Size = new System.Drawing.Size(84, 23);
             this.btn_recherche.TabIndex = 1;
             this.btn_recherche.Text = "Rechercher";
             this.btn_recherche.UseVisualStyleBackColor = true;
             // 
             // textBox_recherche
             // 
-            this.textBox_recherche.Location = new System.Drawing.Point(199, 27);
-            this.textBox_recherche.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_recherche.Location = new System.Drawing.Point(168, 22);
+            this.textBox_recherche.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_recherche.Multiline = true;
             this.textBox_recherche.Name = "textBox_recherche";
-            this.textBox_recherche.Size = new System.Drawing.Size(927, 25);
+            this.textBox_recherche.Size = new System.Drawing.Size(677, 21);
             this.textBox_recherche.TabIndex = 0;
             this.textBox_recherche.TextChanged += new System.EventHandler(this.textBox_recherche_TextChanged);
             // 
@@ -119,27 +135,28 @@ namespace ProjetTags.Forms
             // 
             this.panel_resultatRecherche.Controls.Add(this.label2);
             this.panel_resultatRecherche.Controls.Add(this.listView_doc);
-            this.panel_resultatRecherche.Location = new System.Drawing.Point(224, 75);
-            this.panel_resultatRecherche.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel_resultatRecherche.Location = new System.Drawing.Point(169, 60);
+            this.panel_resultatRecherche.Margin = new System.Windows.Forms.Padding(2);
             this.panel_resultatRecherche.Name = "panel_resultatRecherche";
-            this.panel_resultatRecherche.Size = new System.Drawing.Size(587, 450);
+            this.panel_resultatRecherche.Size = new System.Drawing.Size(440, 366);
             this.panel_resultatRecherche.TabIndex = 8;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(1, 442);
+            this.label2.Location = new System.Drawing.Point(1, 359);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(589, 2);
+            this.label2.Size = new System.Drawing.Size(442, 2);
             this.label2.TabIndex = 14;
             // 
             // listView_doc
             // 
             this.listView_doc.FullRowSelect = true;
             this.listView_doc.GridLines = true;
-            this.listView_doc.Location = new System.Drawing.Point(0, -1);
-            this.listView_doc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listView_doc.Location = new System.Drawing.Point(-1, -1);
+            this.listView_doc.Margin = new System.Windows.Forms.Padding(2);
             this.listView_doc.Name = "listView_doc";
-            this.listView_doc.Size = new System.Drawing.Size(599, 452);
+            this.listView_doc.Size = new System.Drawing.Size(448, 368);
             this.listView_doc.TabIndex = 0;
             this.listView_doc.UseCompatibleStateImageBehavior = false;
             this.listView_doc.View = System.Windows.Forms.View.List;
@@ -150,28 +167,27 @@ namespace ProjetTags.Forms
             this.panel_apercu.Controls.Add(this.webBrowser_affichageDoc);
             this.panel_apercu.Controls.Add(this.btn_OuvrirDoc);
             this.panel_apercu.Controls.Add(this.btn_Deldoc);
-            this.panel_apercu.Location = new System.Drawing.Point(816, 75);
-            this.panel_apercu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel_apercu.Location = new System.Drawing.Point(612, 61);
+            this.panel_apercu.Margin = new System.Windows.Forms.Padding(2);
             this.panel_apercu.Name = "panel_apercu";
-            this.panel_apercu.Size = new System.Drawing.Size(603, 640);
+            this.panel_apercu.Size = new System.Drawing.Size(452, 520);
             this.panel_apercu.TabIndex = 9;
             // 
             // webBrowser_affichageDoc
             // 
-            this.webBrowser_affichageDoc.Location = new System.Drawing.Point(3, -2);
-            this.webBrowser_affichageDoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.webBrowser_affichageDoc.MinimumSize = new System.Drawing.Size(13, 12);
+            this.webBrowser_affichageDoc.Location = new System.Drawing.Point(2, -2);
+            this.webBrowser_affichageDoc.Margin = new System.Windows.Forms.Padding(2);
+            this.webBrowser_affichageDoc.MinimumSize = new System.Drawing.Size(10, 10);
             this.webBrowser_affichageDoc.Name = "webBrowser_affichageDoc";
-            this.webBrowser_affichageDoc.Size = new System.Drawing.Size(597, 583);
+            this.webBrowser_affichageDoc.Size = new System.Drawing.Size(448, 474);
             this.webBrowser_affichageDoc.TabIndex = 13;
             // 
             // btn_OuvrirDoc
             // 
             this.btn_OuvrirDoc.Enabled = false;
-            this.btn_OuvrirDoc.Location = new System.Drawing.Point(360, 602);
-            this.btn_OuvrirDoc.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_OuvrirDoc.Location = new System.Drawing.Point(270, 489);
             this.btn_OuvrirDoc.Name = "btn_OuvrirDoc";
-            this.btn_OuvrirDoc.Size = new System.Drawing.Size(192, 25);
+            this.btn_OuvrirDoc.Size = new System.Drawing.Size(144, 20);
             this.btn_OuvrirDoc.TabIndex = 12;
             this.btn_OuvrirDoc.Text = "Ouvrir ce document";
             this.btn_OuvrirDoc.UseVisualStyleBackColor = true;
@@ -180,10 +196,9 @@ namespace ProjetTags.Forms
             // btn_Deldoc
             // 
             this.btn_Deldoc.Enabled = false;
-            this.btn_Deldoc.Location = new System.Drawing.Point(40, 602);
-            this.btn_Deldoc.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_Deldoc.Location = new System.Drawing.Point(30, 489);
             this.btn_Deldoc.Name = "btn_Deldoc";
-            this.btn_Deldoc.Size = new System.Drawing.Size(192, 25);
+            this.btn_Deldoc.Size = new System.Drawing.Size(144, 20);
             this.btn_Deldoc.TabIndex = 11;
             this.btn_Deldoc.Text = "Supprimer ce document";
             this.btn_Deldoc.UseVisualStyleBackColor = true;
@@ -193,18 +208,17 @@ namespace ProjetTags.Forms
             // 
             this.panel_tags.BackColor = System.Drawing.SystemColors.Window;
             this.panel_tags.Controls.Add(this.listView_tags);
-            this.panel_tags.Location = new System.Drawing.Point(225, 521);
-            this.panel_tags.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel_tags.Location = new System.Drawing.Point(169, 423);
+            this.panel_tags.Margin = new System.Windows.Forms.Padding(2);
             this.panel_tags.Name = "panel_tags";
-            this.panel_tags.Size = new System.Drawing.Size(585, 194);
+            this.panel_tags.Size = new System.Drawing.Size(439, 158);
             this.panel_tags.TabIndex = 10;
             // 
             // listView_tags
             // 
             this.listView_tags.Location = new System.Drawing.Point(-1, -4);
-            this.listView_tags.Margin = new System.Windows.Forms.Padding(4);
             this.listView_tags.Name = "listView_tags";
-            this.listView_tags.Size = new System.Drawing.Size(589, 198);
+            this.listView_tags.Size = new System.Drawing.Size(443, 163);
             this.listView_tags.TabIndex = 0;
             this.listView_tags.UseCompatibleStateImageBehavior = false;
             this.listView_tags.View = System.Windows.Forms.View.List;
@@ -213,10 +227,10 @@ namespace ProjetTags.Forms
             // treeView_tags
             // 
             this.treeView_tags.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeView_tags.Location = new System.Drawing.Point(0, 28);
-            this.treeView_tags.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.treeView_tags.Location = new System.Drawing.Point(0, 23);
+            this.treeView_tags.Margin = new System.Windows.Forms.Padding(2);
             this.treeView_tags.Name = "treeView_tags";
-            this.treeView_tags.Size = new System.Drawing.Size(224, 645);
+            this.treeView_tags.Size = new System.Drawing.Size(170, 524);
             this.treeView_tags.TabIndex = 5;
             this.treeView_tags.DoubleClick += new System.EventHandler(this.treeView_tags_DoubleClick);
             // 
@@ -227,10 +241,10 @@ namespace ProjetTags.Forms
             this.panel_arbo.Controls.Add(this.label1);
             this.panel_arbo.Controls.Add(this.panel1);
             this.panel_arbo.Controls.Add(this.treeView_tags);
-            this.panel_arbo.Location = new System.Drawing.Point(0, 75);
-            this.panel_arbo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel_arbo.Location = new System.Drawing.Point(0, 61);
+            this.panel_arbo.Margin = new System.Windows.Forms.Padding(2);
             this.panel_arbo.Name = "panel_arbo";
-            this.panel_arbo.Size = new System.Drawing.Size(227, 641);
+            this.panel_arbo.Size = new System.Drawing.Size(170, 521);
             this.panel_arbo.TabIndex = 5;
             // 
             // label3
@@ -238,9 +252,10 @@ namespace ProjetTags.Forms
             this.label3.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label3.Location = new System.Drawing.Point(187, 1);
+            this.label3.Location = new System.Drawing.Point(140, 1);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 25);
+            this.label3.Size = new System.Drawing.Size(22, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "+";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -250,8 +265,9 @@ namespace ProjetTags.Forms
             // 
             this.label1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.label1.Location = new System.Drawing.Point(0, -1);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(220, 27);
+            this.label1.Size = new System.Drawing.Size(165, 22);
             this.label1.TabIndex = 5;
             this.label1.Text = "Mes tags";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -259,26 +275,26 @@ namespace ProjetTags.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Desktop;
-            this.panel1.Location = new System.Drawing.Point(220, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(166, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(7, 640);
+            this.panel1.Size = new System.Drawing.Size(5, 520);
             this.panel1.TabIndex = 5;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1419, 719);
+            this.ClientSize = new System.Drawing.Size(1064, 584);
             this.Controls.Add(this.panel_tags);
             this.Controls.Add(this.panel_apercu);
             this.Controls.Add(this.panel_resultatRecherche);
             this.Controls.Add(this.panel_recherche);
             this.Controls.Add(this.panel_arbo);
             this.Location = new System.Drawing.Point(15, 15);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(1283, 676);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(966, 557);
             this.Name = "FormMain";
             this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -292,6 +308,8 @@ namespace ProjetTags.Forms
             this.panel_arbo.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label btn_DarkMode;
 
         private System.Windows.Forms.ListView listView_tags;
 

@@ -243,5 +243,10 @@ namespace ProjetTags.Forms
         private void treeView_tags_DoubleClick(object sender, EventArgs e) => SelectTag(sender, e);
 
         private void label3_Click(object sender, EventArgs e) => new FormAddTag().Show();
+
+        private void btn_DarkMode_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
