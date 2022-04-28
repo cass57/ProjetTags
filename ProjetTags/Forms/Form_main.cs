@@ -30,6 +30,38 @@ namespace ProjetTags.Forms
             if (DarkTheme.Active) DarkMode();
         }
 
+        public void LightMode()
+        {
+            pictureBox1.BackColor = LightTheme.Lightest;
+            panel_recherche.BackColor = LightTheme.Lightest;
+            btn_ajoutFichier.BackColor = LightTheme.Lightest;
+            btn_ajoutFichier.ForeColor = Color.Black;
+            btn_recherche.BackColor = LightTheme.Lightest;
+            btn_recherche.ForeColor = Color.Black;
+            textBox_recherche.BackColor = LightTheme.LightColor;
+            textBox_recherche.ForeColor = Color.Black;
+            panel_resultatRecherche.BackColor = LightTheme.Lightest;
+            label2.BackColor = LightTheme.Lightest;
+            listView_doc.BackColor = LightTheme.MainLight;
+            panel_apercu.BackColor = LightTheme.Lightest;
+            webBrowser_affichageDoc.BackColor = LightTheme.Lightest;
+            btn_OuvrirDoc.BackColor = LightTheme.Lightest;
+            btn_OuvrirDoc.ForeColor = Color.Black;
+            btn_Deldoc.BackColor = LightTheme.Lightest;
+            btn_Deldoc.ForeColor = Color.Black;
+            panel_tags.BackColor = LightTheme.Lightest;
+            listView_tags.BackColor = LightTheme.MainLight;
+            treeView_tags.BackColor = LightTheme.MainLight;
+            panel_arbo.BackColor = LightTheme.Lightest;
+            label3.BackColor = LightTheme.Lightest;
+            label1.BackColor = LightTheme.GreyTags;
+            BackColor = SystemColors.ScrollBar;
+            ForeColor = Color.Black;
+
+            listView_doc.ForeColor = Color.Black;
+            /*webBrowser_affichageDoc.Visible = false;*/
+        }
+        
         public void DarkMode()
         {
             pictureBox1.BackColor = DarkTheme.Darkest;
@@ -40,7 +72,7 @@ namespace ProjetTags.Forms
             btn_recherche.ForeColor = DarkTheme.LightColor;
             textBox_recherche.BackColor = DarkTheme.LightColor;
             textBox_recherche.ForeColor = DarkTheme.Darkest;
-            panel_resultatRecherche.BackColor = DarkTheme.Darkest;
+            panel_resultatRecherche.BackColor = DarkTheme.MainDark;
             label2.BackColor = DarkTheme.Darkest;
             listView_doc.BackColor = DarkTheme.MainDark;
             panel_apercu.BackColor = DarkTheme.MediumGrey;
@@ -49,18 +81,17 @@ namespace ProjetTags.Forms
             btn_OuvrirDoc.ForeColor = DarkTheme.LightColor;
             btn_Deldoc.BackColor = DarkTheme.Darkest;
             btn_Deldoc.ForeColor = DarkTheme.LightColor;
-            panel_tags.BackColor = DarkTheme.Darkest;
+            panel_tags.BackColor = DarkTheme.MainDark;
             listView_tags.BackColor = DarkTheme.MainDark;
             treeView_tags.BackColor = DarkTheme.MainDark;
-            panel_arbo.BackColor = DarkTheme.Darkest;
+            panel_arbo.BackColor = DarkTheme.MediumGrey;
             label3.BackColor = DarkTheme.Darkest;
             label1.BackColor = DarkTheme.MainDark;
-            panel1.BackColor = DarkTheme.Darkest;
             BackColor = Color.Black;
             ForeColor = DarkTheme.LightColor;
 
             listView_doc.ForeColor = DarkTheme.LightColor;
-            webBrowser_affichageDoc.Visible = false;
+            /*webBrowser_affichageDoc.Visible = false;*/
         }
 
         private void btn_ajoutFichier_Click(object sender, EventArgs e) => new FormAddDoc().Show();
@@ -246,7 +277,18 @@ namespace ProjetTags.Forms
 
         private void btn_DarkMode_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (btn_DarkMode.Text == "☾")
+            {
+                DarkMode();
+                btn_DarkMode.Text = "☼";
+                
+            }
+            else
+            {
+                LightMode();
+                btn_DarkMode.Text = "☾";
+                
+            }
         }
     }
 }

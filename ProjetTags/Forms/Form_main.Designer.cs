@@ -133,12 +133,13 @@ namespace ProjetTags.Forms
             // 
             // panel_resultatRecherche
             // 
+            this.panel_resultatRecherche.BackColor = System.Drawing.SystemColors.Window;
             this.panel_resultatRecherche.Controls.Add(this.label2);
             this.panel_resultatRecherche.Controls.Add(this.listView_doc);
             this.panel_resultatRecherche.Location = new System.Drawing.Point(169, 60);
             this.panel_resultatRecherche.Margin = new System.Windows.Forms.Padding(2);
             this.panel_resultatRecherche.Name = "panel_resultatRecherche";
-            this.panel_resultatRecherche.Size = new System.Drawing.Size(440, 366);
+            this.panel_resultatRecherche.Size = new System.Drawing.Size(440, 359);
             this.panel_resultatRecherche.TabIndex = 8;
             // 
             // label2
@@ -153,10 +154,10 @@ namespace ProjetTags.Forms
             // 
             this.listView_doc.FullRowSelect = true;
             this.listView_doc.GridLines = true;
-            this.listView_doc.Location = new System.Drawing.Point(-1, -1);
+            this.listView_doc.Location = new System.Drawing.Point(-3, -1);
             this.listView_doc.Margin = new System.Windows.Forms.Padding(2);
             this.listView_doc.Name = "listView_doc";
-            this.listView_doc.Size = new System.Drawing.Size(448, 368);
+            this.listView_doc.Size = new System.Drawing.Size(446, 368);
             this.listView_doc.TabIndex = 0;
             this.listView_doc.UseCompatibleStateImageBehavior = false;
             this.listView_doc.View = System.Windows.Forms.View.List;
@@ -211,14 +212,14 @@ namespace ProjetTags.Forms
             this.panel_tags.Location = new System.Drawing.Point(169, 423);
             this.panel_tags.Margin = new System.Windows.Forms.Padding(2);
             this.panel_tags.Name = "panel_tags";
-            this.panel_tags.Size = new System.Drawing.Size(439, 158);
+            this.panel_tags.Size = new System.Drawing.Size(441, 158);
             this.panel_tags.TabIndex = 10;
             // 
             // listView_tags
             // 
-            this.listView_tags.Location = new System.Drawing.Point(-1, -4);
+            this.listView_tags.Location = new System.Drawing.Point(-5, -4);
             this.listView_tags.Name = "listView_tags";
-            this.listView_tags.Size = new System.Drawing.Size(443, 163);
+            this.listView_tags.Size = new System.Drawing.Size(448, 172);
             this.listView_tags.TabIndex = 0;
             this.listView_tags.UseCompatibleStateImageBehavior = false;
             this.listView_tags.View = System.Windows.Forms.View.List;
@@ -285,7 +286,7 @@ namespace ProjetTags.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(1064, 584);
             this.Controls.Add(this.panel_tags);
             this.Controls.Add(this.panel_apercu);

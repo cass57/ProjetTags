@@ -142,6 +142,7 @@
         <Compile Include="Forms\Form_main.Designer.cs">
           <DependentUpon>Form_main.cs</DependentUpon>
         </Compile>
+        <Compile Include="Forms\LightTheme.cs" />
         <Compile Include="Forms\ListViewDoc.cs" />
         <Compile Include="Forms\ListViewTag.cs" />
         <Compile Include="Forms\TagNode.cs" />
