@@ -227,14 +227,15 @@ namespace ProjetTags.Forms
 
         private void AjouterTagADoc(object sender, EventArgs e)
         {
-            // TODO
             // TODO si aucun tag comment en ajouter ?
+            var idt_doc = ((ListViewDoc) listView_doc.Items[_selectedDocIndex])._doc.idt_doc;
+            new FormAddTagToDoc(idt_doc).Show();
         }
 
         private void SupprimerTagDeDoc(object sender, EventArgs e)
         {
             _daoLien.Delete(
-                new Lien(_selectedDocTag.idt_tag, ((Document) listView_doc.Items[_selectedDocIndex].Tag).idt_doc));
+                new Lien(_selectedDocTag.idt_tag, ((ListViewDoc) listView_doc.Items[_selectedDocIndex])._doc.idt_doc));
             listView_doc.Items[_selectedDocIndex].Selected = false;
             listView_doc.Items[_selectedDocIndex].Selected = true;
         }
