@@ -40,20 +40,20 @@ namespace ProjetTags.Forms
             // tf_path
             // 
             this.tf_path.AllowDrop = true;
-            this.tf_path.Location = new System.Drawing.Point(44, 57);
-            this.tf_path.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tf_path.Location = new System.Drawing.Point(33, 46);
+            this.tf_path.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tf_path.Name = "tf_path";
-            this.tf_path.Size = new System.Drawing.Size(513, 22);
+            this.tf_path.Size = new System.Drawing.Size(386, 20);
             this.tf_path.TabIndex = 0;
             this.tf_path.DragDrop += new System.Windows.Forms.DragEventHandler(this.tf_path_DragDrop);
             this.tf_path.DragEnter += new System.Windows.Forms.DragEventHandler(this.tf_path_DragEnter);
             // 
             // btn_explorateur
             // 
-            this.btn_explorateur.Location = new System.Drawing.Point(564, 54);
-            this.btn_explorateur.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_explorateur.Location = new System.Drawing.Point(423, 45);
+            this.btn_explorateur.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_explorateur.Name = "btn_explorateur";
-            this.btn_explorateur.Size = new System.Drawing.Size(117, 23);
+            this.btn_explorateur.Size = new System.Drawing.Size(90, 23);
             this.btn_explorateur.TabIndex = 1;
             this.btn_explorateur.Text = "Explorateur";
             this.btn_explorateur.UseVisualStyleBackColor = true;
@@ -61,10 +61,9 @@ namespace ProjetTags.Forms
             // 
             // btn_valider
             // 
-            this.btn_valider.Location = new System.Drawing.Point(637, 385);
-            this.btn_valider.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_valider.Location = new System.Drawing.Point(237, 309);
             this.btn_valider.Name = "btn_valider";
-            this.btn_valider.Size = new System.Drawing.Size(128, 31);
+            this.btn_valider.Size = new System.Drawing.Size(96, 25);
             this.btn_valider.TabIndex = 2;
             this.btn_valider.Text = "Valider";
             this.btn_valider.UseVisualStyleBackColor = true;
@@ -73,42 +72,45 @@ namespace ProjetTags.Forms
             // Clist_tags
             // 
             this.Clist_tags.FormattingEnabled = true;
-            this.Clist_tags.Location = new System.Drawing.Point(44, 125);
+            this.Clist_tags.Location = new System.Drawing.Point(33, 102);
+            this.Clist_tags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Clist_tags.Name = "Clist_tags";
-            this.Clist_tags.Size = new System.Drawing.Size(266, 106);
+            this.Clist_tags.Size = new System.Drawing.Size(200, 79);
             this.Clist_tags.TabIndex = 3;
             this.Clist_tags.CheckOnClick = true;
             // 
             // lbl_tags
             // 
-            this.lbl_tags.Location = new System.Drawing.Point(44, 99);
+            this.lbl_tags.Location = new System.Drawing.Point(33, 80);
+            this.lbl_tags.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_tags.Name = "lbl_tags";
-            this.lbl_tags.Size = new System.Drawing.Size(171, 23);
+            this.lbl_tags.Size = new System.Drawing.Size(128, 19);
             this.lbl_tags.TabIndex = 4;
             this.lbl_tags.Text = "Liste des tags à ajouter:";
             // 
             // btn_addTag
             // 
-            this.btn_addTag.Location = new System.Drawing.Point(316, 203);
+            this.btn_addTag.Location = new System.Drawing.Point(237, 102);
+            this.btn_addTag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_addTag.Name = "btn_addTag";
-            this.btn_addTag.Size = new System.Drawing.Size(175, 28);
+            this.btn_addTag.Size = new System.Drawing.Size(27, 23);
             this.btn_addTag.TabIndex = 5;
-            this.btn_addTag.Text = "Ajouter nouveau tag";
+            this.btn_addTag.Text = "+";
             this.btn_addTag.UseVisualStyleBackColor = true;
             this.btn_addTag.Click += new System.EventHandler(this.btn_addTag_Click);
             // 
             // FormAddDoc
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 446);
+            this.ClientSize = new System.Drawing.Size(592, 362);
             this.Controls.Add(this.btn_addTag);
             this.Controls.Add(this.lbl_tags);
             this.Controls.Add(this.Clist_tags);
             this.Controls.Add(this.btn_valider);
             this.Controls.Add(this.btn_explorateur);
             this.Controls.Add(this.tf_path);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormAddDoc";
             this.Text = "E-Tagger";
             this.Activated += new System.EventHandler(this.FormAddDoc_Activated);

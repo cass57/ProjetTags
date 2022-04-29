@@ -90,14 +90,14 @@ namespace ProjetTags.Forms
             // 
             this.btn_DarkMode.BackColor = System.Drawing.SystemColors.Desktop;
             this.btn_DarkMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btn_DarkMode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_DarkMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.btn_DarkMode.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_DarkMode.Location = new System.Drawing.Point(132, 22);
+            this.btn_DarkMode.ForeColor = System.Drawing.Color.LightYellow;
+            this.btn_DarkMode.Location = new System.Drawing.Point(133, 16);
             this.btn_DarkMode.Name = "btn_DarkMode";
-            this.btn_DarkMode.Size = new System.Drawing.Size(30, 22);
+            this.btn_DarkMode.Size = new System.Drawing.Size(30, 30);
             this.btn_DarkMode.TabIndex = 5;
             this.btn_DarkMode.Text = "🌙";
-            btn_DarkMode.ForeColor = Color.LightYellow;
             this.btn_DarkMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btn_DarkMode.Click += new System.EventHandler(this.btn_DarkMode_Click);
             // 
@@ -155,7 +155,7 @@ namespace ProjetTags.Forms
             // 
             this.listView_doc.FullRowSelect = true;
             this.listView_doc.GridLines = true;
-            this.listView_doc.Location = new System.Drawing.Point(-3, -1);
+            this.listView_doc.Location = new System.Drawing.Point(-2, -1);
             this.listView_doc.Margin = new System.Windows.Forms.Padding(2);
             this.listView_doc.Name = "listView_doc";
             this.listView_doc.Size = new System.Drawing.Size(446, 368);
@@ -218,7 +218,7 @@ namespace ProjetTags.Forms
             // 
             // listView_tags
             // 
-            this.listView_tags.Location = new System.Drawing.Point(-5, -4);
+            this.listView_tags.Location = new System.Drawing.Point(-2, -2);
             this.listView_tags.Name = "listView_tags";
             this.listView_tags.Size = new System.Drawing.Size(448, 172);
             this.listView_tags.TabIndex = 0;
