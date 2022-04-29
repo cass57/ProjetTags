@@ -40,6 +40,38 @@ namespace ProjetTags.DAO
 
             return lien;
         }
+        
+        public List<int> FindAllDocByIdtTag(int idt)
+        {
+            var docs = new List<int>();
+            try
+            {
+                var cmd = new MySqlCommand();
+                const string commandLine = @"SELECT liaison.idt_doc
+                                       FROM liaison AS liaison
+                                       WHERE liaison.idt_tag = @idt_tag;";
+
+                cmd.Connection = BDD.get_Connection();
+                cmd.CommandText = commandLine;
+
+                cmd.Parameters.AddWithValue("@idt_tag", idt);
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    docs.Add(int.Parse(reader.GetString(0)));
+                }
+
+                reader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return docs;
+        }
 
         public override Lien Insert(Lien tag)
         {
