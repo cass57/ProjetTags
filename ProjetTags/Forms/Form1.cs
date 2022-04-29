@@ -63,11 +63,24 @@ namespace ProjetTags.Forms
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            _docDao.Insert(new Document(tf_path.Text));
-            foreach (var itemChecked in Clist_tags.CheckedItems)
-                _lienDao.Insert(new Lien(new Tag((Tag) itemChecked).idt_tag, _docDao.LastIdtDoc()));
+            if (tf_path.Text == "")
+            {
+                 string message = "Vous devez upload un document";
+                string caption = "Impossible de continuer";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBox.Show(message, caption, buttons);
+            }
+            else
+            {
+                
+                _docDao.Insert(new Document(tf_path.Text));
+                            foreach (var itemChecked in Clist_tags.CheckedItems)
+                                _lienDao.Insert(new Lien(new Tag((Tag) itemChecked).idt_tag, _docDao.LastIdtDoc()));
+                
+                            Hide();
+            }
 
-            Hide();
+            
         }
 
         private void btn_addTag_Click(object sender, EventArgs e) => new FormAddTag().Show();
