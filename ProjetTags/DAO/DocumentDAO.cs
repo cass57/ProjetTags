@@ -82,7 +82,6 @@ namespace ProjetTags.DAO
 
                 while (reader.Read())
                 {
-                    // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
                     doc.idt_doc = int.Parse(reader.GetString(0));
                     doc.doc_path = reader.GetString(1);
                 }
@@ -109,9 +108,7 @@ namespace ProjetTags.DAO
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@doc_path", tag.doc_path);
-
-                // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_doc ?
-
+                
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e)

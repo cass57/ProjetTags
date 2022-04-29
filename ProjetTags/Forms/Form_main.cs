@@ -236,7 +236,6 @@ namespace ProjetTags.Forms
 
         private void TextBoxSearch(object sender, EventArgs e)
         {
-            //TODO : Sortir les méthodes chargementTreeView,chargementListBox
             LoadDocuments();
             var box = new List<Document>();
             string filter = textBox_recherche.Text.Trim();
@@ -244,8 +243,7 @@ namespace ProjetTags.Forms
             {
                 //filter matches doc name
                 if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Add(nom._doc);
-
-                //TODO : fix le problème lorsque l'on réduit la fenêtre
+                
                 //filter matches tag name
                 if (_daoLien.AllTagDoc(nom._doc).Any(tag => MatchTag(filter, tag))) box.Add(nom._doc);
             }

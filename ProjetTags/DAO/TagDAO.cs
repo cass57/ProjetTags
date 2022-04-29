@@ -109,8 +109,7 @@ namespace ProjetTags.DAO
                     string nom = reader.GetString(1);
                     string clr = reader.GetString(2);
                     int idtPere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
-
-                    // TODO : à voir : est-ce qu'on recréé vraiment un DTO?
+                    
                     tag = new Tag(idtTag, nom, clr, idtPere);
                 }
 
@@ -145,9 +144,7 @@ namespace ProjetTags.DAO
                 cmd.Parameters.AddWithValue("@nom", tag.nom);
                 cmd.Parameters.AddWithValue("@clr", tag.clr);
                 if(tag.idt_pere!=0)cmd.Parameters.AddWithValue("@idt_pere", tag.idt_pere);
-
-                // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_tag ?
-
+                
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException e)
