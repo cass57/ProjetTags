@@ -321,14 +321,17 @@ namespace ProjetTags.Forms
         {
             LoadDocuments();
             var box = new List<Document>();
+            TagNode idTag = (TagNode) treeView_tags.SelectedNode;
+            int id = idTag.GetTag().idt_tag;
+            List<int> listeDoc = _daoLien.FindAllDocByIdtTag(id);
             string filter = textBox_recherche.Text.Trim();
             foreach (ListViewDoc nom in listView_doc.Items)
             {
                 //filter matches doc name
                 if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Add(nom._doc);
                 
-                //filter matches tag name
-                if (_daoLien.AllTagDoc(nom._doc).Any(tag => MatchTag(filter, tag))) box.Add(nom._doc);
+                //filter matches link between tag id and doc
+                if (listeDoc.Contains(nom._doc.idt_doc)) box.Add(nom._doc);
             }
 
             listView_doc.Items.Clear();

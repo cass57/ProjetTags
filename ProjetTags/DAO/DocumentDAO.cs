@@ -8,6 +8,10 @@ namespace ProjetTags.DAO
 {
     public class DocumentDAO : DAO<Document>
     {
+        /// <summary>
+        /// Renvoie une liste avec tous les documents
+        /// </summary>
+        /// <returns></returns>
         public List<Document> AllDoc()
         {
             var docs = new List<Document>();
@@ -40,6 +44,10 @@ namespace ProjetTags.DAO
             return docs;
         }
 
+        /// <summary>
+        /// Renvoie le document avec le plus grand identifiant (le dernier créé)
+        /// </summary>
+        /// <returns></returns>
         public int LastIdtDoc()
         {
             int idtDoc = 0;
@@ -65,6 +73,7 @@ namespace ProjetTags.DAO
             return idtDoc;
         }
 
+        
         public override Document FindByIdt(int idt)
         {
             var doc = new Document();

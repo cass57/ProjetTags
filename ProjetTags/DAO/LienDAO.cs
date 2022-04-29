@@ -40,6 +40,43 @@ namespace ProjetTags.DAO
 
             return lien;
         }
+        
+        /// <summary>
+        /// Renvoie tous les documents liés à l'identifiant d'un tag
+        /// </summary>
+        /// <param name="idt"></param>
+        /// <returns></returns>
+        public List<int> FindAllDocByIdtTag(int idt)
+        {
+            var docs = new List<int>();
+            try
+            {
+                var cmd = new MySqlCommand();
+                const string commandLine = @"SELECT liaison.idt_doc
+                                       FROM liaison AS liaison
+                                       WHERE liaison.idt_tag = @idt_tag;";
+
+                cmd.Connection = BDD.get_Connection();
+                cmd.CommandText = commandLine;
+
+                cmd.Parameters.AddWithValue("@idt_tag", idt);
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    docs.Add(int.Parse(reader.GetString(0)));
+                }
+
+                reader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return docs;
+        }
 
         public override Lien Insert(Lien tag)
         {
@@ -111,6 +148,11 @@ namespace ProjetTags.DAO
             }
         }
 
+        /// <summary>
+        /// Renvoie tous les tags d'un document
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public List<Tag> AllTagDoc(Document doc)
         {
             var tags = new List<Tag>();
