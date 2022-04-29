@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetTags", "ProjetTags\ProjetTags.csproj", "{FE5AA4A6-E0D1-4AA3-9BB8-009616E9FBA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARIOLI_HENSELMANN_MEKHILEF", "ARIOLI_HENSELMANN_MEKHILEF\ARIOLI_HENSELMANN_MEKHILEF.csproj", "{FE5AA4A6-E0D1-4AA3-9BB8-009616E9FBA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
