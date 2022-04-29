@@ -208,6 +208,7 @@
         <None Include="Resources\retour.png" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Rapport\Rapport_ARIOLI_HENSELMANN_MEKHILEF.pdf" />
       <Content Include="Resources\jpg_icon.jpg" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
