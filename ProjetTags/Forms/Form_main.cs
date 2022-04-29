@@ -248,22 +248,27 @@ namespace ProjetTags.Forms
                 if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Add(nom._doc);
                 
                 //filter matches link between tag id and doc
-                if (listeDoc.Contains(nom._doc.idt_doc)) box.Add(nom._doc);
+                //if (listeDoc.Contains(nom._doc.idt_doc)) box.Add(nom._doc);
+                if (_daoLien.AllTagDoc(nom._doc).Any(tag => MatchTag(id, tag))) box.Add(nom._doc);
             }
 
             listView_doc.Items.Clear();
             foreach (var doc in box) listView_doc.Items.Add(new ListViewDoc(doc));
         }
 
-        private bool MatchTag(string input, Tag tag) =>
-            string.Equals(input, tag.nom, StringComparison.CurrentCultureIgnoreCase) ||
+        private bool MatchTag(int input, Tag tag) =>
+            Equals(input, tag.idt_tag) ||
             tag.idt_pere != 0 && MatchTag(input,
                 _daoTag.FindByIdt(tag.idt_pere));
 
         private void ModifTag(object sender, EventArgs e) =>
             new FormUpdateTag((TagNode) treeView_tags.SelectedNode).Show();
 
-        private void SelectTag() => textBox_recherche.Text = treeView_tags.SelectedNode?.Text;
+        private void SelectTag()
+        {
+            textBox_recherche.Text = "";
+            textBox_recherche.Text = treeView_tags.SelectedNode?.Text;
+        }
 
         private void SupprimerTag(object sender, EventArgs e)
         {
