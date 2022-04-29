@@ -8,6 +8,10 @@ namespace ProjetTags.DAO
 {
     public class TagDAO : DAO<Tag>
     {
+        /// <summary>
+        /// Renvoie un dictionnaire avec tous les tags et leurs hiérarchie
+        /// </summary>
+        /// <returns></returns>
         public IDictionary<int, List<Tag>> AllTag()
         {
             IDictionary<int, List<Tag>> tags = new Dictionary<int, List<Tag>>();
@@ -50,6 +54,10 @@ namespace ProjetTags.DAO
             return tags;
         }
 
+        /// <summary>
+        /// Renvoie tous les tags
+        /// </summary>
+        /// <returns></returns>
         public List<Tag> AllListTag()
         {
             var tags = new List<Tag>();
@@ -221,6 +229,10 @@ namespace ProjetTags.DAO
             }
         }
 
+        /// <summary>
+        /// Supression de tous les enfants du tag et du tag
+        /// </summary>
+        /// <param name="tag"></param>
         public void DeleteTagWithChildren(Tag tag)
         {
             var allTags = AllTag();

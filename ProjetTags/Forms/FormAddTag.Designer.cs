@@ -44,28 +44,26 @@ namespace ProjetTags.Forms
             // 
             // labelNomTag
             // 
-            this.labelNomTag.Location = new System.Drawing.Point(5, 10);
-            this.labelNomTag.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNomTag.Location = new System.Drawing.Point(7, 12);
             this.labelNomTag.Name = "labelNomTag";
-            this.labelNomTag.Size = new System.Drawing.Size(68, 12);
+            this.labelNomTag.Size = new System.Drawing.Size(91, 15);
             this.labelNomTag.TabIndex = 0;
             this.labelNomTag.Text = "Nom :";
             this.labelNomTag.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_nomTag
             // 
-            this.textBox_nomTag.Location = new System.Drawing.Point(76, 9);
-            this.textBox_nomTag.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_nomTag.Location = new System.Drawing.Point(101, 11);
+            this.textBox_nomTag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_nomTag.Name = "textBox_nomTag";
-            this.textBox_nomTag.Size = new System.Drawing.Size(218, 20);
+            this.textBox_nomTag.Size = new System.Drawing.Size(289, 22);
             this.textBox_nomTag.TabIndex = 1;
             // 
             // labelCouleurTag
             // 
-            this.labelCouleurTag.Location = new System.Drawing.Point(7, 46);
-            this.labelCouleurTag.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCouleurTag.Location = new System.Drawing.Point(9, 57);
             this.labelCouleurTag.Name = "labelCouleurTag";
-            this.labelCouleurTag.Size = new System.Drawing.Size(66, 17);
+            this.labelCouleurTag.Size = new System.Drawing.Size(88, 21);
             this.labelCouleurTag.TabIndex = 2;
             this.labelCouleurTag.Text = "Couleur :";
             this.labelCouleurTag.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -73,10 +71,10 @@ namespace ProjetTags.Forms
             // btn_createTag
             // 
             this.btn_createTag.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_createTag.Location = new System.Drawing.Point(130, 111);
-            this.btn_createTag.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_createTag.Location = new System.Drawing.Point(173, 137);
+            this.btn_createTag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_createTag.Name = "btn_createTag";
-            this.btn_createTag.Size = new System.Drawing.Size(62, 29);
+            this.btn_createTag.Size = new System.Drawing.Size(83, 36);
             this.btn_createTag.TabIndex = 3;
             this.btn_createTag.Text = "Valider";
             this.btn_createTag.UseVisualStyleBackColor = true;
@@ -85,10 +83,10 @@ namespace ProjetTags.Forms
             // btn_ouvrirPalette
             // 
             this.btn_ouvrirPalette.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_ouvrirPalette.Location = new System.Drawing.Point(252, 43);
-            this.btn_ouvrirPalette.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ouvrirPalette.Location = new System.Drawing.Point(336, 53);
+            this.btn_ouvrirPalette.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_ouvrirPalette.Name = "btn_ouvrirPalette";
-            this.btn_ouvrirPalette.Size = new System.Drawing.Size(42, 21);
+            this.btn_ouvrirPalette.Size = new System.Drawing.Size(56, 26);
             this.btn_ouvrirPalette.TabIndex = 4;
             this.btn_ouvrirPalette.Text = "C";
             this.btn_ouvrirPalette.UseVisualStyleBackColor = true;
@@ -96,45 +94,43 @@ namespace ProjetTags.Forms
             // 
             // textBox_couleur
             // 
-            this.textBox_couleur.Location = new System.Drawing.Point(91, 43);
-            this.textBox_couleur.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_couleur.Location = new System.Drawing.Point(121, 53);
+            this.textBox_couleur.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_couleur.Name = "textBox_couleur";
-            this.textBox_couleur.Size = new System.Drawing.Size(157, 20);
+            this.textBox_couleur.Size = new System.Drawing.Size(208, 22);
             this.textBox_couleur.TabIndex = 5;
             // 
             // comboBox_parent
             // 
             this.comboBox_parent.FormattingEnabled = true;
-            this.comboBox_parent.Location = new System.Drawing.Point(76, 79);
-            this.comboBox_parent.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox_parent.Location = new System.Drawing.Point(101, 97);
+            this.comboBox_parent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_parent.Name = "comboBox_parent";
-            this.comboBox_parent.Size = new System.Drawing.Size(218, 21);
+            this.comboBox_parent.Size = new System.Drawing.Size(289, 24);
             this.comboBox_parent.TabIndex = 6;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(5, 82);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(7, 101);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 16);
+            this.label1.Size = new System.Drawing.Size(91, 20);
             this.label1.TabIndex = 7;
             this.label1.Text = "Tag parent :";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(76, 46);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(101, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(11, 16);
+            this.label2.Size = new System.Drawing.Size(15, 20);
             this.label2.TabIndex = 8;
             this.label2.Text = "#";
             // 
             // FormAddTag
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(305, 151);
+            this.ClientSize = new System.Drawing.Size(407, 186);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox_parent);
@@ -144,9 +140,9 @@ namespace ProjetTags.Forms
             this.Controls.Add(this.labelCouleurTag);
             this.Controls.Add(this.textBox_nomTag);
             this.Controls.Add(this.labelNomTag);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormAddTag";
-            this.Text = "FormAddTag";
+            this.Text = "Création d\'un nouveau tag";
             this.ResumeLayout(false);
             this.PerformLayout();
         }

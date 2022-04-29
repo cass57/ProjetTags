@@ -41,6 +41,11 @@ namespace ProjetTags.DAO
             return lien;
         }
         
+        /// <summary>
+        /// Renvoie tous les documents liés à l'identifiant d'un tag
+        /// </summary>
+        /// <param name="idt"></param>
+        /// <returns></returns>
         public List<int> FindAllDocByIdtTag(int idt)
         {
             var docs = new List<int>();
@@ -143,6 +148,11 @@ namespace ProjetTags.DAO
             }
         }
 
+        /// <summary>
+        /// Renvoie tous les tags d'un document
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public List<Tag> AllTagDoc(Document doc)
         {
             var tags = new List<Tag>();

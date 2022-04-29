@@ -7,6 +7,7 @@ namespace ProjetTags.Forms
 {
     public partial class FormAddTag : Form
     {
+        //DAO
         private readonly TagDAO _daoTag;
 
         public FormAddTag()
@@ -36,6 +37,10 @@ namespace ProjetTags.Forms
             ForeColor = DarkTheme.LightColor;
         }
 
+        /// <summary>
+        /// Récupération de tous les tags dans la comboBox afin de choisir un éventuel parent
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -44,6 +49,11 @@ namespace ProjetTags.Forms
                     comboBox_parent.Items.Add(tag);
         }
 
+        /// <summary>
+        /// Permet le choix de la couleur dans un popUp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_ouvrirPalette_Click(object sender, EventArgs e)
         {
             var myDialog = new ColorDialog {AllowFullOpen = true, ShowHelp = true};
@@ -53,6 +63,11 @@ namespace ProjetTags.Forms
                                        myDialog.Color.B.ToString("X2");
         }
 
+        /// <summary>
+        /// Crée le tag si aucune information n'est manquante
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_createTag_Click(object sender, EventArgs e)
         {
             string message;

@@ -39,28 +39,27 @@ namespace ProjetTags.Forms
             // 
             // lbl_tags
             // 
-            this.lbl_tags.Location = new System.Drawing.Point(9, 15);
-            this.lbl_tags.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_tags.Location = new System.Drawing.Point(12, 18);
             this.lbl_tags.Name = "lbl_tags";
-            this.lbl_tags.Size = new System.Drawing.Size(202, 19);
+            this.lbl_tags.Size = new System.Drawing.Size(269, 23);
             this.lbl_tags.TabIndex = 5;
             this.lbl_tags.Text = "Liste des tags à ajouter au document:";
             // 
             // Clist_tags
             // 
             this.Clist_tags.FormattingEnabled = true;
-            this.Clist_tags.Location = new System.Drawing.Point(9, 36);
-            this.Clist_tags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Clist_tags.Location = new System.Drawing.Point(12, 44);
+            this.Clist_tags.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Clist_tags.Name = "Clist_tags";
-            this.Clist_tags.Size = new System.Drawing.Size(200, 79);
+            this.Clist_tags.Size = new System.Drawing.Size(265, 89);
             this.Clist_tags.TabIndex = 6;
             // 
             // btn_addTag
             // 
-            this.btn_addTag.Location = new System.Drawing.Point(215, 36);
-            this.btn_addTag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_addTag.Location = new System.Drawing.Point(287, 44);
+            this.btn_addTag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_addTag.Name = "btn_addTag";
-            this.btn_addTag.Size = new System.Drawing.Size(29, 23);
+            this.btn_addTag.Size = new System.Drawing.Size(39, 28);
             this.btn_addTag.TabIndex = 7;
             this.btn_addTag.Text = "+";
             this.btn_addTag.UseVisualStyleBackColor = true;
@@ -68,9 +67,10 @@ namespace ProjetTags.Forms
             // 
             // btn_valider
             // 
-            this.btn_valider.Location = new System.Drawing.Point(148, 197);
+            this.btn_valider.Location = new System.Drawing.Point(197, 242);
+            this.btn_valider.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_valider.Name = "btn_valider";
-            this.btn_valider.Size = new System.Drawing.Size(96, 25);
+            this.btn_valider.Size = new System.Drawing.Size(128, 31);
             this.btn_valider.TabIndex = 8;
             this.btn_valider.Text = "Valider";
             this.btn_valider.UseVisualStyleBackColor = true;
@@ -78,16 +78,16 @@ namespace ProjetTags.Forms
             // 
             // FormAddTagToDoc
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 234);
+            this.ClientSize = new System.Drawing.Size(516, 288);
             this.Controls.Add(this.btn_valider);
             this.Controls.Add(this.btn_addTag);
             this.Controls.Add(this.Clist_tags);
             this.Controls.Add(this.lbl_tags);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormAddTagToDoc";
-            this.Text = "FormAddTagToDoc";
+            this.Text = "Ajout d\'un tag au document";
             this.Activated += new System.EventHandler(this.FormAddTagToDoc_Activated);
             this.ResumeLayout(false);
         }
