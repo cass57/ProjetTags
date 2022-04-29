@@ -5,11 +5,19 @@ using ProjetTags.Model;
 
 namespace ProjetTags.Forms
 {
+    /// <summary>
+    /// Formulaire de modification d'un tag
+    /// </summary>
     public partial class FormUpdateTag : Form
     {
+        /// <summary>DAO et TAG</summary>
         private readonly TagDAO _daoTag;
         private readonly Tag _tag;
 
+        /// <summary>
+        /// Création du formulaire 
+        /// </summary>
+        /// <param name="tagAModif">Tag à modifier</param>
         public FormUpdateTag(TagNode tagAModif)
         {
             InitializeComponent();
@@ -18,6 +26,9 @@ namespace ProjetTags.Forms
             if (DarkTheme.Active) DarkMode();
         }
 
+        /// <summary>
+        /// Initialisation du DarkMode
+        /// </summary>
         public void DarkMode()
         {
             lbl_tag.BackColor = DarkTheme.MainDark;
@@ -35,6 +46,11 @@ namespace ProjetTags.Forms
             ForeColor = DarkTheme.LightColor;
         }
 
+        /// <summary>
+        /// Permet d'ouvrir la palette de couleur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_ouvrirPalette_Click(object sender, EventArgs e)
         {
             var myDialog = new ColorDialog {AllowFullOpen = false, ShowHelp = true};
@@ -44,6 +60,11 @@ namespace ProjetTags.Forms
                                        myDialog.Color.B.ToString("X2");
         }
 
+        /// <summary>
+        /// Création du tag
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_createTag_Click(object sender, EventArgs e)
         {
             if (textBox_nomTag.Text != "") _tag.nom = textBox_nomTag.Text;

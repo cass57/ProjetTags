@@ -41,7 +41,7 @@ namespace ProjetTags.Forms
             // 
             this.tf_path.AllowDrop = true;
             this.tf_path.Location = new System.Drawing.Point(33, 46);
-            this.tf_path.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tf_path.Margin = new System.Windows.Forms.Padding(2);
             this.tf_path.Name = "tf_path";
             this.tf_path.Size = new System.Drawing.Size(386, 20);
             this.tf_path.TabIndex = 0;
@@ -51,7 +51,7 @@ namespace ProjetTags.Forms
             // btn_explorateur
             // 
             this.btn_explorateur.Location = new System.Drawing.Point(423, 45);
-            this.btn_explorateur.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_explorateur.Margin = new System.Windows.Forms.Padding(2);
             this.btn_explorateur.Name = "btn_explorateur";
             this.btn_explorateur.Size = new System.Drawing.Size(90, 23);
             this.btn_explorateur.TabIndex = 1;
@@ -71,13 +71,13 @@ namespace ProjetTags.Forms
             // 
             // Clist_tags
             // 
+            this.Clist_tags.CheckOnClick = true;
             this.Clist_tags.FormattingEnabled = true;
             this.Clist_tags.Location = new System.Drawing.Point(33, 102);
-            this.Clist_tags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Clist_tags.Margin = new System.Windows.Forms.Padding(2);
             this.Clist_tags.Name = "Clist_tags";
             this.Clist_tags.Size = new System.Drawing.Size(200, 79);
             this.Clist_tags.TabIndex = 3;
-            this.Clist_tags.CheckOnClick = true;
             // 
             // lbl_tags
             // 
@@ -91,7 +91,7 @@ namespace ProjetTags.Forms
             // btn_addTag
             // 
             this.btn_addTag.Location = new System.Drawing.Point(237, 102);
-            this.btn_addTag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_addTag.Margin = new System.Windows.Forms.Padding(2);
             this.btn_addTag.Name = "btn_addTag";
             this.btn_addTag.Size = new System.Drawing.Size(27, 23);
             this.btn_addTag.TabIndex = 5;
@@ -110,9 +110,9 @@ namespace ProjetTags.Forms
             this.Controls.Add(this.btn_valider);
             this.Controls.Add(this.btn_explorateur);
             this.Controls.Add(this.tf_path);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormAddDoc";
-            this.Text = "E-Tagger";
+            this.Text = "Ajout d\'un nouveau document";
             this.Activated += new System.EventHandler(this.FormAddDoc_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();

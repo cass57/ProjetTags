@@ -298,6 +298,7 @@ namespace ProjetTags.Forms
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(966, 557);
             this.Name = "FormMain";
+            this.Text = "E-TAGGER";
             this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_tagsClick);
