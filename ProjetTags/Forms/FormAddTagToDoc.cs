@@ -39,11 +39,8 @@ namespace ProjetTags.Forms
 
         private void FormAddTagToDoc_Activated(object sender, EventArgs e)
         {
-            var doc = _docDao.FindByIdt(_idtDoc);
-            var tagsDoc = _lienDao.AllTagDoc(doc);
+            var tagsDoc = _lienDao.AllTagDoc(_docDao.FindByIdt(_idtDoc));
             var allTags = _tagDao.AllListTag();
-            //TODO Except ne fonctionne pas avec la comparaison d'objet. Trouver un moyen d'enlever les tags associés au doc à la liste possible de tag
-            //TODO En fait c'est réparé non ?
             Clist_tags.ValueMember = null;
             Clist_tags.DataSource = allTags.Except(tagsDoc).ToList();
         }
@@ -52,7 +49,7 @@ namespace ProjetTags.Forms
         {
             foreach (var itemChecked in Clist_tags.CheckedItems)
                 _lienDao.Insert(new Lien(new Tag((Tag) itemChecked).idt_tag, _idtDoc));
-
+            ((FormMain) Owner).ReselectDoc();
             Hide();
         }
     }

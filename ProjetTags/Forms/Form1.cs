@@ -63,9 +63,12 @@ namespace ProjetTags.Forms
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            _docDao.Insert(new Document(tf_path.Text));
-            foreach (var itemChecked in Clist_tags.CheckedItems)
-                _lienDao.Insert(new Lien(new Tag((Tag) itemChecked).idt_tag, _docDao.LastIdtDoc()));
+            if (tf_path.Text != "")
+            {
+                _docDao.Insert(new Document(tf_path.Text));
+                foreach (var itemChecked in Clist_tags.CheckedItems)
+                    _lienDao.Insert(new Lien(new Tag((Tag) itemChecked).idt_tag, _docDao.LastIdtDoc()));
+            }
 
             Hide();
         }

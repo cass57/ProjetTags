@@ -237,7 +237,7 @@ namespace ProjetTags.Forms
         private void TextBoxSearch(object sender, EventArgs e)
         {
             //TODO : Sortir les méthodes chargementTreeView,chargementListBox
-            FormMain_Load(sender, e);
+            LoadDocuments();
             var box = new List<Document>();
             string filter = textBox_recherche.Text.Trim();
             foreach (ListViewDoc nom in listView_doc.Items)
@@ -271,7 +271,7 @@ namespace ProjetTags.Forms
         }
 
         private void AjouterTagADoc(object sender, EventArgs e) =>
-            new FormAddTagToDoc(((ListViewDoc) listView_doc.Items[_selectedDocIndex])._doc.idt_doc).Show();
+            new FormAddTagToDoc(((ListViewDoc) listView_doc.Items[_selectedDocIndex])._doc.idt_doc).Show(this);
 
         private void SupprimerTagDeDoc(object sender, EventArgs e)
         {
@@ -280,7 +280,7 @@ namespace ProjetTags.Forms
             ReselectDoc();
         }
 
-        private void ReselectDoc()
+        public void ReselectDoc()
         {
             listView_doc.Items[_selectedDocIndex].Selected = false;
             listView_doc.Items[_selectedDocIndex].Selected = true;

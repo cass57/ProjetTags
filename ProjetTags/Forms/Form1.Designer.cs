@@ -1,4 +1,6 @@
-﻿namespace ProjetTags.Forms
+﻿using System.Windows.Forms;
+
+namespace ProjetTags.Forms
 {
 
     partial class FormAddDoc
@@ -75,6 +77,7 @@
             this.Clist_tags.Name = "Clist_tags";
             this.Clist_tags.Size = new System.Drawing.Size(266, 106);
             this.Clist_tags.TabIndex = 3;
+            this.Clist_tags.CheckOnClick = true;
             // 
             // lbl_tags
             // 
