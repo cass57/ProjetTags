@@ -96,7 +96,8 @@ namespace ProjetTags.Forms
             this.btn_DarkMode.Name = "btn_DarkMode";
             this.btn_DarkMode.Size = new System.Drawing.Size(30, 22);
             this.btn_DarkMode.TabIndex = 5;
-            this.btn_DarkMode.Text = "☾";
+            this.btn_DarkMode.Text = "🌙";
+            btn_DarkMode.ForeColor = Color.LightYellow;
             this.btn_DarkMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btn_DarkMode.Click += new System.EventHandler(this.btn_DarkMode_Click);
             // 
@@ -129,7 +130,7 @@ namespace ProjetTags.Forms
             this.textBox_recherche.Name = "textBox_recherche";
             this.textBox_recherche.Size = new System.Drawing.Size(677, 21);
             this.textBox_recherche.TabIndex = 0;
-            this.textBox_recherche.TextChanged += new System.EventHandler(this.textBox_recherche_TextChanged);
+            this.textBox_recherche.TextChanged += new System.EventHandler(this.TextBoxSearch);
             // 
             // panel_resultatRecherche
             // 

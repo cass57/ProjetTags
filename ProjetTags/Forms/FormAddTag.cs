@@ -39,17 +39,14 @@ namespace ProjetTags.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            var tags = _daoTag.AllTag();
-            foreach (var entry in tags)
+            foreach (var entry in _daoTag.AllTag())
                 foreach (var tag in entry.Value)
                     comboBox_parent.Items.Add(tag);
         }
 
         private void btn_ouvrirPalette_Click(object sender, EventArgs e)
         {
-            var myDialog = new ColorDialog();
-            myDialog.AllowFullOpen = false;
-            myDialog.ShowHelp = true;
+            var myDialog = new ColorDialog {AllowFullOpen = true, ShowHelp = true};
 
             if (myDialog.ShowDialog() == DialogResult.OK)
                 textBox_couleur.Text = myDialog.Color.R.ToString("X2") + myDialog.Color.G.ToString("X2") +
@@ -84,12 +81,10 @@ namespace ProjetTags.Forms
             else
             {
                 if (comboBox_parent.SelectedItem != null)
-                {
-                    var pere = (Tag) comboBox_parent.SelectedItem;
-                    _daoTag.Insert(new Tag(0, textBox_nomTag.Text, textBox_couleur.Text, pere.idt_tag));
-                }
+                    _daoTag.Insert(new Tag(0, textBox_nomTag.Text, textBox_couleur.Text,
+                        ((Tag) comboBox_parent.SelectedItem).idt_tag));
                 else
-                    _daoTag.InsertSansPere(new Tag(0, textBox_nomTag.Text, textBox_couleur.Text));
+                    _daoTag.Insert(new Tag(0, textBox_nomTag.Text, textBox_couleur.Text));
 
                 Close();
             }

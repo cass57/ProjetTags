@@ -14,6 +14,7 @@ namespace ProjetTags.Forms
             Text = tag.nom;
             Name = tag.idt_tag.ToString();
             BackColor = ColorTranslator.FromHtml("#" + _tag.clr);
+            ForeColor = Utils.Contrast(BackColor, Color.Black) > Utils.Contrast(BackColor, Color.White) ? Color.Black : Color.White;
         }
 
         public Tag GetTag() => _tag;

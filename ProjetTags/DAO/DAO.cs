@@ -8,9 +8,9 @@
         public abstract T FindByIdt(int idt);
 
         /// <summary>Permet d'insérer une instance de l'objet dans la bdd</summary>
-        /// <param name="obj">Objet à insérer</param>
+        /// <param name="tag">Objet à insérer</param>
         /// <returns>l'objet</returns>
-        public abstract T Insert(T obj);
+        public abstract T Insert(T tag);
 
         /// <summary>Permet de mettre à jour un objet dans la bdd</summary>
         /// <param name="tag">Objet à mettre à jour</param>
@@ -18,7 +18,7 @@
         public abstract T Update(T tag);
 
         /// <summary>Permet de supprimer un objet de la bdd</summary>
-        /// <param name="obj">Objet à supprimer</param>
-        public abstract void Delete(T obj);
+        /// <param name="tag">Objet à supprimer</param>
+        public abstract void Delete(T tag);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using ProjetTags.DAO;
 using ProjetTags.Model;
@@ -48,17 +47,15 @@ namespace ProjetTags.Forms
 
         private void btn_explorateur_Click(object sender, EventArgs e)
         {
-            using (var openFileDialog = new OpenFileDialog())
+            var openFileDialog = new OpenFileDialog
             {
-                openFileDialog.InitialDirectory = "c:\\";
-                //Filtre 
-                openFileDialog.Filter = @"JPEG(*.jpg)|*.jpg|PDF Files(*.pdf)|*.pdf|Cassandra(*.jpg,pdf)|*.jpg;*.pdf";
-                //On commence sur le filtre double par défaut
-                openFileDialog.FilterIndex = 3;
-                openFileDialog.RestoreDirectory = true;
+                InitialDirectory = "c:\\",
+                Filter = @"JPEG(*.jpg)|*.jpg|PDF Files(*.pdf)|*.pdf|Cassandra(*.jpg,pdf)|*.jpg;*.pdf",
+                FilterIndex = 3,
+                RestoreDirectory = true
+            };
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK) tf_path.Text = openFileDialog.FileName;
-            }
+            if (openFileDialog.ShowDialog() == DialogResult.OK) tf_path.Text = openFileDialog.FileName;
         }
 
         private void tf_path_DragEnter(object sender, DragEventArgs e) => e.Effect =
@@ -66,15 +63,9 @@ namespace ProjetTags.Forms
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            var doc = new Document(tf_path.Text);
-            _docDao.Insert(doc);
+            _docDao.Insert(new Document(tf_path.Text));
             foreach (var itemChecked in Clist_tags.CheckedItems)
-            {
-                var tag = (Tag) itemChecked;
-                var currentTag = new Tag(tag.idt_tag, tag.nom, tag.clr, tag.idt_pere);
-                var lien = new Lien(currentTag.idt_tag, _docDao.LastIdtDoc());
-                _lienDao.Insert(lien);
-            }
+                _lienDao.Insert(new Lien(new Tag((Tag) itemChecked).idt_tag, _docDao.LastIdtDoc()));
 
             Hide();
         }

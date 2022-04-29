@@ -14,7 +14,7 @@ namespace ProjetTags.Forms
         private readonly DocumentDAO _daoDocument;
         private readonly LienDAO _daoLien;
         private readonly TagDAO _daoTag;
-
+        private readonly ImageList _icons = new ImageList();
         private ContextMenuStrip _listViewDocTagsMenu;
         private ContextMenuStrip _listViewTagsMenu;
         private Tag _selectedDocTag;
@@ -59,9 +59,11 @@ namespace ProjetTags.Forms
             ForeColor = Color.Black;
 
             listView_doc.ForeColor = Color.Black;
-            /*webBrowser_affichageDoc.Visible = false;*/
+            btn_DarkMode.Text = @"🌙";
+            btn_DarkMode.ForeColor = Color.LightYellow;
+            SwitchTheme();
         }
-        
+
         public void DarkMode()
         {
             pictureBox1.BackColor = DarkTheme.Darkest;
@@ -91,44 +93,54 @@ namespace ProjetTags.Forms
             ForeColor = DarkTheme.LightColor;
 
             listView_doc.ForeColor = DarkTheme.LightColor;
-            /*webBrowser_affichageDoc.Visible = false;*/
+            btn_DarkMode.Text = @"☀";
+            btn_DarkMode.ForeColor = Color.Yellow;
+            SwitchTheme();
         }
 
-        private void btn_ajoutFichier_Click(object sender, EventArgs e) => new FormAddDoc().Show();
-
-        private ImageList icons = new ImageList();
+        private static void SwitchTheme() => DarkTheme.Active = !DarkTheme.Active;
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            LoadIcons();
+            LoadDocuments();
+            LoadTreeView();
+            LoadMenus();
+        }
+
+        private void LoadIcons()
+        {
+            _icons.Images.Add(Image.FromFile(@"..\..\Resources\jpg_icon.jpg"));
+            _icons.Images.Add(Image.FromFile(@"..\..\Resources\pdf_icon.jpg"));
+        }
+
+        private void LoadDocuments()
+        {
+            listView_doc.SmallImageList = _icons;
             listView_doc.Items.Clear();
-            icons.Images.Add(Image.FromFile(@"..\..\Resources\jpg_icon.jpg"));
-            icons.Images.Add(Image.FromFile(@"..\..\Resources\pdf_icon.jpg"));
-            listView_doc.SmallImageList = icons;
-
             foreach (var doc in _daoDocument.AllDoc()) listView_doc.Items.Add(new ListViewDoc(doc));
+        }
 
-            //Remplissage tag
+        private void LoadTreeView()
+        {
             treeView_tags.Nodes.Clear();
-            var tags = _daoTag.AllTag();
-            foreach (var entry in tags.OrderBy(key => key.Key))
+            foreach (var entry in _daoTag.AllTag().OrderBy(key => key.Key))
+            foreach (var tag in entry.Value)
                 if (entry.Key == 0)
-                {
-                    foreach (var tag in entry.Value)
-                        treeView_tags.Nodes.Add(CreateTagNode(tag));
-                }
+                    treeView_tags.Nodes.Add(CreateTagNode(tag));
                 else
-                {
-                    var noeudCourant = treeView_tags.Nodes.Find(entry.Key.ToString(), true);
-                    foreach (var tag in entry.Value) noeudCourant[0].Nodes.Add(CreateTagNode(tag));
-                }
+                    treeView_tags.Nodes.Find(entry.Key.ToString(), true)[0].Nodes.Add(CreateTagNode(tag));
+        }
 
+        private void LoadMenus()
+        {
             listView_tags.ContextMenuStrip = new ContextMenuStrip();
-            _listViewDocTagsMenu = CreateContextMenu(new List<Tuple<string, EventHandler>>
+            _listViewDocTagsMenu = Utils.CreateContextMenu(new List<Tuple<string, EventHandler>>
             {
                 Tuple.Create<string, EventHandler>("Ajouter", AjouterTagADoc),
                 Tuple.Create<string, EventHandler>("Supprimer", SupprimerTagDeDoc)
             });
-            _listViewTagsMenu = CreateContextMenu(new List<Tuple<string, EventHandler>>
+            _listViewTagsMenu = Utils.CreateContextMenu(new List<Tuple<string, EventHandler>>
             {
                 Tuple.Create<string, EventHandler>("Ajouter", AjouterTagADoc)
             });
@@ -137,26 +149,12 @@ namespace ProjetTags.Forms
         private TagNode CreateTagNode(Tag tag) =>
             new TagNode(tag)
             {
-                ContextMenuStrip = CreateContextMenu(new List<Tuple<string, EventHandler>>
+                ContextMenuStrip = Utils.CreateContextMenu(new List<Tuple<string, EventHandler>>
                 {
                     Tuple.Create<string, EventHandler>("Modifier", ModifTag),
                     Tuple.Create<string, EventHandler>("Supprimer", SupprimerTag)
                 })
             };
-
-        private static ContextMenuStrip CreateContextMenu(List<Tuple<string, EventHandler>> items)
-        {
-            var tagMenu = new ContextMenuStrip();
-            foreach (var item in items)
-            {
-                var label = new ToolStripMenuItem();
-                label.Text = item.Item1;
-                label.Click += item.Item2;
-                tagMenu.Items.Add(label);
-            }
-
-            return tagMenu;
-        }
 
         private void listView_tagsClick(object sender, MouseEventArgs e)
         {
@@ -183,37 +181,52 @@ namespace ProjetTags.Forms
         {
             if (listView_doc.SelectedItems.Count > 0)
             {
-                btn_Deldoc.Enabled = true;
-                btn_OuvrirDoc.Enabled = true;
                 var doc = ((ListViewDoc) listView_doc.SelectedItems[0])._doc;
-                webBrowser_affichageDoc.Navigate(doc.doc_path);
-                webBrowser_affichageDoc.Visible = true; //darkmode
-
-                listView_tags.Items.Clear();
-                var tags = _daoLien.AllTagDoc(doc);
-                foreach (var tag in tags) listView_tags.Items.Add(new ListViewTag(tag));
+                LoadPreview(doc);
+                LoadListViewTag(doc);
                 if (listView_doc.SelectedIndices.Count > 0) _selectedDocIndex = listView_doc.SelectedIndices[0];
             }
+        }
+
+        private void LoadListViewTag(Document doc)
+        {
+            listView_tags.Items.Clear();
+            var tags = _daoLien.AllTagDoc(doc);
+            foreach (var tag in tags) listView_tags.Items.Add(new ListViewTag(tag));
+        }
+
+        private void LoadPreview(Document doc)
+        {
+            EnablePreviewButtons(true);
+            webBrowser_affichageDoc.Navigate(doc.doc_path);
+        }
+
+        private void EnablePreviewButtons(bool enable)
+        {
+            btn_Deldoc.Enabled = enable;
+            btn_OuvrirDoc.Enabled = enable;
         }
 
         private void btn_Deldoc_Click(object sender, EventArgs e)
         {
             var selection = (ListViewDoc) listView_doc.SelectedItems[0];
-            var doc = selection._doc;
-            _daoDocument.Delete(doc);
+            _daoDocument.Delete(selection._doc);
             listView_doc.Items.Remove(selection);
-            btn_Deldoc.Enabled = false;
-            btn_OuvrirDoc.Enabled = false;
-            webBrowser_affichageDoc.Navigate("");
             listView_tags.Items.Clear();
-            webBrowser_affichageDoc.Visible = false; //darkmode
+            ClosePreview();
+        }
+
+        private void ClosePreview()
+        {
+            EnablePreviewButtons(false);
+            webBrowser_affichageDoc.Navigate("");
         }
 
         private void FormMain_Activated(object sender, EventArgs e) => FormMain_Load(sender, e);
 
         private void btn_ouvirDoc_Click(object sender, EventArgs e)
         {
-            var doc = (Document) listView_doc.SelectedItems[0].Tag;
+            var doc = ((ListViewDoc) listView_doc.SelectedItems[0])._doc;
             if (doc != null)
             {
                 Process.Start(doc.doc_path);
@@ -221,74 +234,70 @@ namespace ProjetTags.Forms
             }
         }
 
-        private void textBox_recherche_TextChanged(object sender, EventArgs e)
+        private void TextBoxSearch(object sender, EventArgs e)
         {
             //TODO : Sortir les méthodes chargementTreeView,chargementListBox
             FormMain_Load(sender, e);
             var box = new List<Document>();
-            string filter = textBox_recherche.Text;
+            string filter = textBox_recherche.Text.Trim();
             foreach (ListViewDoc nom in listView_doc.Items)
             {
-                var tags = _daoLien.AllTagDoc(nom._doc);
+                //filter matches doc name
                 if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Add(nom._doc);
 
                 //TODO : fix le problème lorsque l'on réduit la fenêtre
-                if (tags.Any(tag => MatchTag(filter, tag))) box.Add(nom._doc);
+                //filter matches tag name
+                if (_daoLien.AllTagDoc(nom._doc).Any(tag => MatchTag(filter, tag))) box.Add(nom._doc);
             }
 
             listView_doc.Items.Clear();
             foreach (var doc in box) listView_doc.Items.Add(new ListViewDoc(doc));
         }
 
-        private bool MatchTag(string input, Tag tag) => input == tag.nom ||
-                                                        tag.idt_pere != 0 && MatchTag(input,
-                                                            _daoTag.FindByIdt(tag.idt_pere));
+        private bool MatchTag(string input, Tag tag) =>
+            string.Equals(input, tag.nom, StringComparison.CurrentCultureIgnoreCase) ||
+            tag.idt_pere != 0 && MatchTag(input,
+                _daoTag.FindByIdt(tag.idt_pere));
 
         private void ModifTag(object sender, EventArgs e) =>
             new FormUpdateTag((TagNode) treeView_tags.SelectedNode).Show();
 
-        private void SelectTag(object sender, EventArgs e) => textBox_recherche.Text = treeView_tags.SelectedNode?.Text;
+        private void SelectTag() => textBox_recherche.Text = treeView_tags.SelectedNode?.Text;
 
         private void SupprimerTag(object sender, EventArgs e)
         {
-            var node = (TagNode) treeView_tags.SelectedNode;
-            _daoTag.DeleteTagWithChildren(node.GetTag());
+            _daoTag.DeleteTagWithChildren(((TagNode) treeView_tags.SelectedNode).GetTag());
             treeView_tags.SelectedNode.Remove();
         }
 
-        private void AjouterTagADoc(object sender, EventArgs e)
-        {
-            // TODO si aucun tag comment en ajouter ?
-            var idt_doc = ((ListViewDoc) listView_doc.Items[_selectedDocIndex])._doc.idt_doc;
-            new FormAddTagToDoc(idt_doc).Show();
-        }
+        private void AjouterTagADoc(object sender, EventArgs e) =>
+            new FormAddTagToDoc(((ListViewDoc) listView_doc.Items[_selectedDocIndex])._doc.idt_doc).Show();
 
         private void SupprimerTagDeDoc(object sender, EventArgs e)
         {
             _daoLien.Delete(
                 new Lien(_selectedDocTag.idt_tag, ((ListViewDoc) listView_doc.Items[_selectedDocIndex])._doc.idt_doc));
+            ReselectDoc();
+        }
+
+        private void ReselectDoc()
+        {
             listView_doc.Items[_selectedDocIndex].Selected = false;
             listView_doc.Items[_selectedDocIndex].Selected = true;
         }
 
-        private void treeView_tags_DoubleClick(object sender, EventArgs e) => SelectTag(sender, e);
+        private void treeView_tags_DoubleClick(object sender, EventArgs e) => SelectTag();
 
         private void label3_Click(object sender, EventArgs e) => new FormAddTag().Show();
 
+        private void btn_ajoutFichier_Click(object sender, EventArgs e) => new FormAddDoc().Show();
+
         private void btn_DarkMode_Click(object sender, EventArgs e)
         {
-            if (btn_DarkMode.Text == "☾")
-            {
+            if (btn_DarkMode.Text == @"🌙")
                 DarkMode();
-                btn_DarkMode.Text = "☼";
-                
-            }
             else
-            {
                 LightMode();
-                btn_DarkMode.Text = "☾";
-                
-            }
         }
     }
 }

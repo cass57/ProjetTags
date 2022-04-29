@@ -98,7 +98,7 @@ namespace ProjetTags.DAO
             return doc;
         }
 
-        public override Document Insert(Document obj)
+        public override Document Insert(Document tag)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace ProjetTags.DAO
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
-                cmd.Parameters.AddWithValue("@doc_path", obj.doc_path);
+                cmd.Parameters.AddWithValue("@doc_path", tag.doc_path);
 
                 // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_doc ?
 
@@ -120,7 +120,7 @@ namespace ProjetTags.DAO
                 Console.WriteLine(Environment.StackTrace);
             }
 
-            return obj;
+            return tag;
         }
 
         public override Document Update(Document tag)
@@ -147,7 +147,7 @@ namespace ProjetTags.DAO
             return tag;
         }
 
-        public override void Delete(Document obj)
+        public override void Delete(Document tag)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace ProjetTags.DAO
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
-                cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
+                cmd.Parameters.AddWithValue("@idt_doc", tag.idt_doc);
 
                 cmd.ExecuteNonQuery();
 
@@ -167,7 +167,7 @@ namespace ProjetTags.DAO
                 cmd2.Connection = BDD.get_Connection();
                 cmd2.CommandText = commandLine2;
 
-                cmd2.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
+                cmd2.Parameters.AddWithValue("@idt_doc", tag.idt_doc);
 
                 cmd2.ExecuteNonQuery();
             }

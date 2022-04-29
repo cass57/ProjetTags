@@ -37,6 +37,10 @@ namespace ProjetTags.Model
         {
         }
 
+        public Tag(Tag tag) : this(tag.idt_tag, tag._nom, tag._clr, tag.idt_pere)
+        {
+        }
+
         public Tag(int idtTag, string nom, string clr)
         {
             idt_tag = idtTag;
@@ -57,9 +61,9 @@ namespace ProjetTags.Model
             if (other is null) return false;
             return (_idtTag == other.idt_tag && _nom == other._nom);
         }
-        
+
         public override bool Equals(object obj) => Equals(obj as Tag);
-        
+
         public override int GetHashCode() => (_idtTag, _nom).GetHashCode();
 
         public override string ToString() => nom;

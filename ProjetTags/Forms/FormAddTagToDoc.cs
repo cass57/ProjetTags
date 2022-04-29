@@ -1,30 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ProjetTags.DAO;
-using ProjetTags.Forms;
 using ProjetTags.Model;
 
-namespace ProjetTags
+namespace ProjetTags.Forms
 {
     public partial class FormAddTagToDoc : Form
     {
         private readonly DocumentDAO _docDao;
         private readonly TagDAO _tagDao;
         private readonly LienDAO _lienDao;
-        private readonly int idt_doc;
-        
+        private readonly int _idtDoc;
+
         public FormAddTagToDoc(int idtDoc)
         {
             InitializeComponent();
             _docDao = new DocumentDAO();
             _tagDao = new TagDAO();
             _lienDao = new LienDAO();
-            idt_doc = idtDoc;
+            _idtDoc = idtDoc;
             if (DarkTheme.Active) DarkMode();
         }
-        
+
         public void DarkMode()
         {
             Clist_tags.BackColor = DarkTheme.LightColor;
@@ -41,26 +39,19 @@ namespace ProjetTags
 
         private void FormAddTagToDoc_Activated(object sender, EventArgs e)
         {
-            Document doc = _docDao.FindByIdt(idt_doc);
-            List<Tag> tagsDoc = _lienDao.AllTagDoc(doc);
-            List<Tag> allTags = _tagDao.AllListTag();
-            List<Tag> affiche = new List<Tag>();
+            var doc = _docDao.FindByIdt(_idtDoc);
+            var tagsDoc = _lienDao.AllTagDoc(doc);
+            var allTags = _tagDao.AllListTag();
             //TODO Except ne fonctionne pas avec la comparaison d'objet. Trouver un moyen d'enlever les tags associés au doc à la liste possible de tag
-            affiche = allTags.Except(tagsDoc).ToList();
+            //TODO En fait c'est réparé non ?
             Clist_tags.ValueMember = null;
-            Clist_tags.DataSource = affiche;
-            
+            Clist_tags.DataSource = allTags.Except(tagsDoc).ToList();
         }
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
             foreach (var itemChecked in Clist_tags.CheckedItems)
-            {
-                var tag = (Tag) itemChecked;
-                var currentTag = new Tag(tag.idt_tag, tag.nom, tag.clr, tag.idt_pere);
-                var lien = new Lien(currentTag.idt_tag, idt_doc);
-                _lienDao.Insert(lien);
-            }
+                _lienDao.Insert(new Lien(new Tag((Tag) itemChecked).idt_tag, _idtDoc));
 
             Hide();
         }

@@ -4,7 +4,6 @@ namespace ProjetTags.Forms
 {
     public static class LightTheme
     {
-        public static bool Active = true;
         public static Color Lightest = SystemColors.ScrollBar;
         public static Color MainLight = SystemColors.Window;
         public static Color LightColor = SystemColors.Window;

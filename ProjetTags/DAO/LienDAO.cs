@@ -41,7 +41,7 @@ namespace ProjetTags.DAO
             return lien;
         }
 
-        public override Lien Insert(Lien obj)
+        public override Lien Insert(Lien tag)
         {
             try
             {
@@ -51,8 +51,8 @@ namespace ProjetTags.DAO
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
-                cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
-                cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
+                cmd.Parameters.AddWithValue("@idt_doc", tag.idt_doc);
+                cmd.Parameters.AddWithValue("@idt_tag", tag.idt_tag);
 
                 cmd.ExecuteNonQuery();
             }
@@ -62,7 +62,7 @@ namespace ProjetTags.DAO
                 Console.WriteLine(Environment.StackTrace);
             }
 
-            return obj;
+            return tag;
         }
 
         public override Lien Update(Lien tag)
@@ -89,7 +89,7 @@ namespace ProjetTags.DAO
             return tag;
         }
 
-        public override void Delete(Lien obj)
+        public override void Delete(Lien tag)
         {
             try
             {
@@ -99,8 +99,8 @@ namespace ProjetTags.DAO
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine1;
 
-                cmd.Parameters.AddWithValue("@idt_doc", obj.idt_doc);
-                cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
+                cmd.Parameters.AddWithValue("@idt_doc", tag.idt_doc);
+                cmd.Parameters.AddWithValue("@idt_tag", tag.idt_tag);
 
                 cmd.ExecuteNonQuery();
             }

@@ -26,7 +26,7 @@ namespace ProjetTags.DAO
                     string nom = reader.GetString(1);
                     string clr = reader.GetString(2);
                     int idtPere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
-                    
+
                     var newTag = new Tag(idtTag, nom, clr, idtPere);
 
                     if (tags.ContainsKey(idtPere))
@@ -68,7 +68,7 @@ namespace ProjetTags.DAO
                     string nom = reader.GetString(1);
                     string clr = reader.GetString(2);
                     int idtPere = !reader.IsDBNull(3) ? reader.GetInt32(3) : 0;
-                    
+
                     tags.Add(new Tag(idtTag, nom, clr, idtPere));
                 }
 
@@ -101,7 +101,6 @@ namespace ProjetTags.DAO
                 cmd.CommandText = commandLine;
 
                 cmd.Parameters.AddWithValue("@idt_tag", idt);
-                
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -129,21 +128,23 @@ namespace ProjetTags.DAO
         /// <summary>
         /// Insert un tag avec tous les attributs
         /// </summary>
-        /// <param name="obj">Tag à insérer</param>
+        /// <param name="tag">Tag à insérer</param>
         /// <returns>Le tag</returns>
-        public override Tag Insert(Tag obj)
+        public override Tag Insert(Tag tag)
         {
             try
             {
                 var cmd = new MySqlCommand();
-                const string commandLine = @"INSERT INTO tag (nom, clr, idt_pere) VALUES (@nom, @clr, @idt_pere);";
+                var commandLine = tag.idt_pere != 0
+                    ? @"INSERT INTO tag (nom, clr, idt_pere) VALUES (@nom, @clr, @idt_pere);"
+                    : @"INSERT INTO tag (nom, clr) VALUES (@nom, @clr);";
 
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine;
 
-                cmd.Parameters.AddWithValue("@nom", obj.nom);
-                cmd.Parameters.AddWithValue("@clr", obj.clr);
-                cmd.Parameters.AddWithValue("@idt_pere", obj.idt_pere);
+                cmd.Parameters.AddWithValue("@nom", tag.nom);
+                cmd.Parameters.AddWithValue("@clr", tag.clr);
+                if(tag.idt_pere!=0)cmd.Parameters.AddWithValue("@idt_pere", tag.idt_pere);
 
                 // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_tag ?
 
@@ -155,38 +156,7 @@ namespace ProjetTags.DAO
                 Console.WriteLine(Environment.StackTrace);
             }
 
-            return obj;
-        }
-
-        /// <summary>
-        /// Insert un tag sans idt_pere
-        /// </summary>
-        /// <param name="obj">Tag à insérer</param>
-        /// <returns>Le tag</returns>
-        public Tag InsertSansPere(Tag obj)
-        {
-            try
-            {
-                var cmd = new MySqlCommand();
-                const string commandLine = @"INSERT INTO tag (nom, clr) VALUES (@nom, @clr);";
-
-                cmd.Connection = BDD.get_Connection();
-                cmd.CommandText = commandLine;
-
-                cmd.Parameters.AddWithValue("@nom", obj.nom);
-                cmd.Parameters.AddWithValue("@clr", obj.clr);
-
-                // TODO : les idt sont en auto-incrémente, donc on doit le mettre à jour sur le DTO ? donc à la création du DTO pas de idt_tag ?
-
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e);
-                Console.WriteLine(Environment.StackTrace);
-            }
-
-            return obj;
+            return tag;
         }
 
         /// <summary>
@@ -223,37 +193,11 @@ namespace ProjetTags.DAO
             return tag;
         }
 
-        public Tag UpdateSansPere(Tag obj)
-        {
-            try
-            {
-                var cmd = new MySqlCommand();
-                const string commandLine = @"UPDATE tag SET nom = @nom, clr = @clr WHERE idt_tag = @idt_tag;";
-
-                cmd.Connection = BDD.get_Connection();
-                cmd.CommandText = commandLine;
-
-                cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
-                cmd.Parameters.AddWithValue("@clr", obj.clr);
-                cmd.Parameters.AddWithValue("@nom", obj.nom);
-
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e);
-                Console.WriteLine(Environment.StackTrace);
-            }
-
-            return obj;
-        }
-
-
         /// <summary>
         /// Delete le tag
         /// </summary>
-        /// <param name="obj">le tag a supprimer</param>
-        public override void Delete(Tag obj)
+        /// <param name="tag">le tag a supprimer</param>
+        public override void Delete(Tag tag)
         {
             try
             {
@@ -263,7 +207,7 @@ namespace ProjetTags.DAO
                 cmd.Connection = BDD.get_Connection();
                 cmd.CommandText = commandLine1;
 
-                cmd.Parameters.AddWithValue("@idt_tag", obj.idt_tag);
+                cmd.Parameters.AddWithValue("@idt_tag", tag.idt_tag);
                 cmd.ExecuteNonQuery();
 
                 const string commandLine2 = @"DELETE FROM tag WHERE idt_tag = @idt_tag;";
