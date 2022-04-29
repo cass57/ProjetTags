@@ -331,23 +331,23 @@ namespace ProjetTags.Forms
                 if (nom.ToString().ToLower().Contains(filter.ToLower())) box.Add(nom._doc);
                 
                 //filter matches link between tag id and doc
-                if (listeDoc.Contains(nom._doc.idt_doc)) box.Add(nom._doc);
+                if (_daoLien.AllTagDoc(nom._doc).Any(tag => MatchTag(id, tag))) box.Add(nom._doc);
             }
 
             listView_doc.Items.Clear();
             foreach (var doc in box) listView_doc.Items.Add(new ListViewDoc(doc));
         }
-
+        
         /// <summary>
-        /// Match d'un tag et d'un nom
+        /// Match d'un tag et d'un id
         /// </summary>
         /// <param name="input"></param>
         /// <param name="tag"></param>
         /// <returns></returns>
-        private bool MatchTag(string input, Tag tag) =>
-            string.Equals(input, tag.nom, StringComparison.CurrentCultureIgnoreCase) ||
-            tag.idt_pere != 0 && MatchTag(input,
+        private bool MatchTag(int input, Tag tag) =>
+            Equals(input, tag.idt_tag) || tag.idt_pere != 0 && MatchTag(input,
                 _daoTag.FindByIdt(tag.idt_pere));
+
 
         /// <summary>
         /// Ouverture du formulaire de modification d'un tag
@@ -360,7 +360,11 @@ namespace ProjetTags.Forms
         /// <summary>
         /// Sélection d'un tag pour une recherche
         /// </summary>
-        private void SelectTag() => textBox_recherche.Text = treeView_tags.SelectedNode?.Text;
+        private void SelectTag()
+        {
+            textBox_recherche.Text = "";
+            textBox_recherche.Text = treeView_tags.SelectedNode?.Text;
+        }
 
         /// <summary>
         /// Suppression d'un tag
